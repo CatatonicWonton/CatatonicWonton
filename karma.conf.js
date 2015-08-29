@@ -7,12 +7,18 @@ module.exports = function(config){
     files : [
       'client/app/bower_components/angular/angular.js',
       'client/app/bower_components/angular-ui-router/release/angular-ui-router.js',
-      'client/app/**/**/*Spec.js'
+      'client/app/bower_components/angular-mocks/angular-mocks.js',
+      'client/app/app.js',
+      'client/app/*/*.js'
     ],
 
     autoWatch : true,
 
     frameworks: ['jasmine'],
+
+    exclude: [
+      'karma.conf.js'
+    ],
 
     browsers : ['Chrome'],
 
@@ -22,10 +28,11 @@ module.exports = function(config){
             'karma-jasmine'
             ],
 
-    junitReporter : {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
-    }
+    // junitReporter : {
+    //   outputFile: 'test_out/unit.xml',
+    //   suite: 'unit'
+    // }
+    singleRun: true
 
   });
 };
