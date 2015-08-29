@@ -3,37 +3,37 @@ angular.module('app', ['ui.router'])
   $stateProvider
     .state("landing", {
         url: "/",
-        templateUrl: "landing/landingView.html",
+        templateUrl: "app/landing/landingView.html",
         controller: "landingCtrl"
     })
     .state("login", {
         url: "/login",
-        templateUrl: "login/loginView.html",
+        templateUrl: "app/login/loginView.html",
         controller: "loginCtrl"
     })
     .state("studentHome", {
         url: "/studentHome",
-        templateUrl: "studentHome/studentHomeView.html",
+        templateUrl: "app/studentHome/studentHomeView.html",
         controller: "studentHomeCtrl"
     })
     .state("studentProject", {
         url: "/studentProject",
-        templateUrl: "studentProject/studentProjectView.html",
+        templateUrl: "app/studentProject/studentProjectView.html",
         controller: "studentProjectCtrl"
     })
     .state("teacherClass", {
         url: "/teacherClass",
-        templateUrl: "teacherClass/teacherClassView.html",
+        templateUrl: "app/teacherClass/teacherClassView.html",
         controller: "teacherClassCtrl"
     })
     .state("teacherHome", {
         url: "/teacherHome",
-        templateUrl: "teacherHome/teacherHomeView.html",
+        templateUrl: "app/teacherHome/teacherHomeView.html",
         controller: "teacherHomeCtrl"
     })
     .state("teacherProject", {
         url: "/teacherProject",
-        templateUrl: "teacherProject/teacherProjectView.html",
+        templateUrl: "app/teacherProject/teacherProjectView.html",
         controller: "teacherProjectCtrl"
     });
 
