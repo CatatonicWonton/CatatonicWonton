@@ -1,0 +1,24 @@
+{
+  "name": "CatatonicWonton",
+  "version": "0.0.0",
+  "homepage": "https://github.com/CatatonicWonton/CatatonicWonton",
+  "authors": [
+    "Devon Koch <devon.r.koch@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "directory": "public/",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-ui-router": "~0.2.15"
+  }
+}

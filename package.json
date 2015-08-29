@@ -1,0 +1,22 @@
+{
+  "name": "catatonic-wonton",
+  "version": "1.0.0",
+  "description": "an ed-tech spa",
+  "main": "index.js",
+  "scripts": {
+    "test": "// something related to gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CatatonicWonton/CatatonicWonton.git"
+  },
+  "author": "Jeff Plourd, Adnan Pirzada, Mychael Zuniga, Devon Koch",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CatatonicWonton/CatatonicWonton/issues"
+  },
+  "homepage": "https://github.com/CatatonicWonton/CatatonicWonton#readme",
+  "dependencies": {
+    "bower": "^1.5.2"
+  }
+}
