@@ -8,7 +8,7 @@
   "moduleType": [
     "node"
   ],
-  "directory": "public/",
+  "directory": "client/",
   "license": "MIT",
   "ignore": [
     "**/.*",
