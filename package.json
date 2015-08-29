@@ -15,5 +15,17 @@
   "bugs": {
     "url": "https://github.com/CatatonicWonton/CatatonicWonton/issues"
   },
-  "homepage": "https://github.com/CatatonicWonton/CatatonicWonton#readme"
+  "homepage": "https://github.com/CatatonicWonton/CatatonicWonton#readme",
+  "dependencies": {
+    "bower": "^1.5.2",
+    "http-server": "^0.6.1",
+    "jasmine-core": "^2.3.4",
+    "karma": "~0.12",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-jasmine": "^0.3.5",
+    "karma-junit-reporter": "^0.2.2",
+    "protractor": "^2.1.0",
+    "shelljs": "^0.2.6"
+  }
 }
