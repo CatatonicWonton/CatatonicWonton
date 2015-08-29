@@ -15,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/CatatonicWonton/CatatonicWonton/issues"
   },
-  "homepage": "https://github.com/CatatonicWonton/CatatonicWonton#readme",
-  "dependencies": {
-    "bower": "^1.5.2"
-  }
+  "homepage": "https://github.com/CatatonicWonton/CatatonicWonton#readme"
 }
