@@ -1,0 +1,3 @@
+describe('studentProjectCtrl', function(){
+
+});

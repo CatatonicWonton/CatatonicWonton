@@ -5,9 +5,9 @@ module.exports = function(config){
 
     // when you finish a test, add it to the files array
     files : [
-      'public/bower_components/angular/angular.js',
-      'public/bower_components/angular-ui-router/release/angular-ui-router.js',
-      'public/**/**/*Spec.js'
+      'client/app/bower_components/angular/angular.js',
+      'client/app/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'client/app/**/**/*Spec.js'
     ],
 
     autoWatch : true,
