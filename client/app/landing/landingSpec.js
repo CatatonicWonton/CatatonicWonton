@@ -1,0 +1,3 @@
+describe('landingCtrl', function(){
+
+});
