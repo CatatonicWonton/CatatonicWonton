@@ -1,4 +1,4 @@
 angular.module('app')
-  .controller('loginCtrl', function(){
-    
+  .controller('loginCtrl', function($scope){
+    $scope.test = 'hey';
   });
