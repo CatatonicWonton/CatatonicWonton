@@ -1,3 +1,15 @@
 <div>
-  Test - studentHomeView
+  <div ng-repeat="project in projects">
+    <ul>
+        <li>name: {{project.name}}</li>
+        <li>subject: {{project.subject}}</li>
+        <li>author: {{project.author}}</li>
+        <li>pages:</li>
+        <ul>
+          <div ng-repeat="page in project.pages">
+            <li>Page Title: {{page.title}}</li>
+          </div>
+        </ul>
+    </ul>
+  </div>
 </div>
