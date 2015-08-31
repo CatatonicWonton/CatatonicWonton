@@ -13,5 +13,5 @@ describe('landingCtrl', function(){
       var controller = $controller('landingCtrl', { $scope : $scope});
       expect($scope.test).toEqual('test');
     })
-  })
+  });
 });
