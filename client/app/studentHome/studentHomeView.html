@@ -1,15 +1,21 @@
 <div>
   <div ng-repeat="project in projects">
-    <ul>
-        <li>name: {{project.name}}</li>
-        <li>subject: {{project.subject}}</li>
-        <li>author: {{project.author}}</li>
-        <li>pages:</li>
-        <ul>
-          <div ng-repeat="page in project.pages">
-            <li>Page Title: {{page.title}}</li>
-          </div>
-        </ul>
-    </ul>
+    <div class ="project-tile">
+      <div class = "project-tile-title-box {{project.subject}}-box">
+        <span class= "project-tile-title-text"><strong>{{project.subject}}</strong>: {{project.name}}</span>
+      </div>
+      <div class="project-tile-author"><strong>Author: </strong>{{project.author}}</div>
+      
+    </div>
   </div>
 </div>
+
+
+<!-- 
+name
+subject
+author
+pages
+  title
+
+ -->

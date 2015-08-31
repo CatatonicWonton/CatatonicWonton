@@ -1,0 +1,83 @@
+.project-tile {
+  width: 300px;
+  height: 150px;
+  margin: 15px;
+  border: 2px solid black;
+  background-color: white;
+  float:left;
+}
+
+.project-tile-title-box {
+  width: 100%;
+  height: 30px;
+  padding-top: 4px;
+}
+
+.project-tile-author {
+  font-family: Verdana;
+  margin: 10px;
+}
+
+.Science-box {
+  background-color: #674ea7;
+}
+
+.English-box{
+  background-color: #990000;
+}
+
+.project-tile-title-text {
+  color: white;
+  font-family: Verdana;
+  margin-left: 8px;
+}
+
+
+/* START TEMPORARY navbar: should delete this after final navbar*/
+* {
+  margin: 0;
+  padding: 0;
+}
+nav {
+  margin: 50px;
+}
+ 
+ul {
+  overflow: auto;
+  list-style-type: none;
+}
+ 
+li {
+  height: 25px;
+  float: left;
+  margin-right: 0px;
+  border-right: 1px solid #aaa;
+  padding: 0 20px;
+}
+ 
+li:last-child {
+  border-right: none;
+}
+ 
+li a {
+  text-decoration: none;
+  color: #ccc;
+  font: Verdana;
+  text-transform: uppercase;
+ 
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+ 
+li a:hover {
+  color: #666;
+}
+ 
+li.active a {
+  font-weight: bold;
+  color: #333;
+}
+/* END TEMPORARY NAVBAR*/
