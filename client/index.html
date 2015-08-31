@@ -3,7 +3,18 @@
     <title></title>
   </head>
   <body ng-app="app">
-    <h1>Toolbar</h2>
+
+    <nav>
+        <ul>
+            <li><a ui-sref='login'>Login</a></li>
+            <li><a ui-sref='studentHome'>studentHome</a></li>
+            <li><a ui-sref='studentProject'>studentProject</a></li>
+            <li><a ui-sref='teacherClass'>teacherClass</a></li>
+            <li><a ui-sref='teacherHome'>teacherHome</a></li>
+            <li><a ui-sref='teacherProject'>teacherProject</a></li>
+        </ul>
+    </nav>
+
     <ui-view></ui-view>
     <script src="app/bower_components/angular/angular.min.js"></script>
     <script src="app/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -16,13 +27,7 @@
     <script src="app/teacherClass/teacherClassCtrl.js"></script>
     <script src="app/teacherHome/teacherHomeCtrl.js"></script>
     <script src="app/teacherProject/teacherProjectCtrl.js"></script>
-    <ul>
-        <li><a ui-sref='login'>Login</a></li>
-        <li><a ui-sref='studentHome'>studentHome</a></li>
-        <li><a ui-sref='studentProject'>studentProject</a></li>
-        <li><a ui-sref='teacherClass'>teacherClass</a></li>
-        <li><a ui-sref='teacherHome'>teacherHome</a></li>
-        <li><a ui-sref='teacherProject'>teacherProject</a></li>
-    </ul>
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+
   </body>
 </html>

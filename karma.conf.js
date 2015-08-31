@@ -9,7 +9,8 @@ module.exports = function(config){
       'client/app/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/app/bower_components/angular-mocks/angular-mocks.js',
       'client/app/app.js',
-      'client/app/*/*.js'
+      'client/app/*/*.js',
+      'client/app/factories/*/*.js'
     ],
 
     autoWatch : true,
