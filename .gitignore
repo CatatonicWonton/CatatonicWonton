@@ -4,10 +4,6 @@
 azure.err
 iisnode.yml
 client/app/bower_components/
-server/dataSchema.js
-server/dbTest.js
-server/index.html
-server/makeData.js
 
 # Icon must ends with two \r.
 Icon
