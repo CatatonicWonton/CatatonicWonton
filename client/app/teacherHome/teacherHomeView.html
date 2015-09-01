@@ -5,5 +5,9 @@
   <h1 ng-click="addProject()">Projects+</h1>
 </div>
 <div ng-repeat="project in teacherProjects">
-  
+  {{project.name}}
+  {{project.subject}}
+  {{project.author}}
+  <div ng-click="editProject($index)"> Edit </div>
 </div>
+
