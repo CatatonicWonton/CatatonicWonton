@@ -8,7 +8,7 @@ angular.module('app')
     $scope.newComponentHtml = '';
     $scope.isTextEditorVisible = false;
     $scope.froalaOptions = {
-        placeholder: 'hey there',
+        placeholder: 'Add text, images, videos, and links here',
         inlineMode: false
     }
 
