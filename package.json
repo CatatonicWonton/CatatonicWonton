@@ -17,20 +17,20 @@
   },
   "homepage": "https://github.com/CatatonicWonton/CatatonicWonton#readme",
   "dependencies": {
+    "bluebird": "^2.9.34",
+    "body-parser": "^1.13.3",
     "bower": "^1.5.2",
+    "express": "^4.13.3",
     "http-server": "^0.6.1",
     "jasmine-core": "^2.3.4",
     "karma": "~0.12",
     "karma-chrome-launcher": "^0.1.12",
     "karma-firefox-launcher": "^0.1.6",
     "karma-jasmine": "^0.3.5",
-    "protractor": "^2.1.0",
-    "shelljs": "^0.2.6",
-    "bluebird": "^2.9.34",
-    "body-parser": "^1.13.3",
-    "express": "^4.13.3",
     "mysql": "^2.9.0",
-    "sequelize": "^3.6.0"
+    "protractor": "^2.1.0",
+    "sequelize": "^3.6.0",
+    "shelljs": "^0.2.6"
   },
   "devDependencies": {
     "karma-jasmine": "^0.3.6"

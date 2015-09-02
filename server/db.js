@@ -2,43 +2,36 @@ var Promise = require('bluebird');
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('schoolio', 'root', '');
 
-var Tables = {};
+// MODELS
+var Models = {};
+Models.Class    = sequelize.import('./models/Class');
+Models.Teacher  = sequelize.import('./models/Teacher');
+Models.Student  = sequelize.import('./models/Student');
+Models.Project  = sequelize.import('./models/Project');
+Models.Question = sequelize.import('./models/Question');
+Models.Page     = sequelize.import('./models/Page');
 
-Tables.Page = sequelize.define('Page', {
-  title: Sequelize.STRING,
-  content: Sequelize.STRING,
-  index: Sequelize.INTEGER
-});
+// JOIN TABLES
+Models.StudentClass   = sequelize.import('./models/StudentClass');
+Models.StudentProject = sequelize.import('./models/StudentProject');
 
-Tables.Project = sequelize.define('Project', {
-  name: Sequelize.STRING,
-  subject: Sequelize.STRING,
-  author: Sequelize.STRING
-});
+// Adds Foreign Keys to Join Tables
+Models.Project.belongsToMany(Models.Student, {through: 'StudentProject'});
+Models.Student.belongsToMany(Models.Project, {through: 'StudentProject'});
 
-Tables.Class = sequelize.define('Class', {
-  name: Sequelize.STRING
-});
+Models.Student.belongsToMany(Models.Class, {through: 'StudentClass'});
+Models.Class.belongsToMany(Models.Student, {through: 'StudentClass'});
 
-Tables.Student = sequelize.define('Student', {
-  firstName: Sequelize.STRING,
-  lastName: Sequelize.STRING,
-});
+// Adds Foreign Keys to Tables
+Models.Page.belongsTo(Models.Project);
 
-Tables.Teacher = sequelize.define('Teacher', {
-  firstName: Sequelize.STRING,
-  lastName: Sequelize.STRING
-});
+Models.Class.belongsTo(Models.Teacher);
 
-var addRelations = function () {
-  Tables.Project.hasMany(Tables.Page);
-  Tables.Teacher.hasMany(Tables.Project);
-  Tables.Teacher.hasMany(Tables.Class);
-  
-  // we need many to many for students and projects
+Models.Project.belongsTo(Models.Teacher);
 
-  Tables.Student.hasMany(Tables.Class);
-};
+Models.Question.belongsTo(Models.Page);
+Models.Question.belongsTo(Models.Project);
+Models.Question.belongsTo(Models.Student);
 
 var reportSuccessOf = function (tableName) {
   return function () {
@@ -46,10 +39,28 @@ var reportSuccessOf = function (tableName) {
   };
 };
 
+var reportErrorFor = function (tableName) {
+  return function () {
+    console.log(tableName + ' table didn\'t sync.');
+  };
+}
+
 var sync = function (tableName) {
-  return Tables[tableName].sync().then(reportSuccessOf(tableName));
+  return function () {
+    return Models[tableName]
+      .sync()
+      .then(reportSuccessOf(tableName))
+      .error(reportErrorFor(tableName));
+  }
 };
 
-Promise.join(sync('Page'), sync('Project'), sync('Class'), sync('Student'), sync('Teacher'), addRelations);
+Models.Teacher.sync()
+  .then(sync('Project'))
+  .then(sync('Page'))
+  .then(sync('Class'))
+  .then(sync('Student'))
+  .then(sync('Question'))
+  .then(sync('StudentProject'))
+  .then(sync('StudentClass'));
 
-module.exports = Tables;
+module.exports = Models;
