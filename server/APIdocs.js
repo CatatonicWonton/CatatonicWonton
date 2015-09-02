@@ -64,6 +64,7 @@
         name: String,
         {
           id: Id,
+          title: String,
           firstName: String,
           lastName: String,
           subject: String,
