@@ -1,13 +1,21 @@
 <div>
   Test - teacherHomeView
 </div>
+
 <div>
   <h1 ng-click="addProject()">Projects+</h1>
 </div>
+
 <div ng-repeat="project in teacherProjects">
-  {{project.name}}
-  {{project.subject}}
-  {{project.author}}
+  {{project.title}} | {{project.subject}} | {{project.author}}
   <div ng-click="editProject($index)"> Edit </div>
+</div>
+
+<div>
+  <h1 ng-click="addClass()">Classes+</h1>
+</div>
+<div ng-repeat="class in teacherClasses">
+  {{class.name}}
+  <!-- what else do we want to show for each class? -->
 </div>
 

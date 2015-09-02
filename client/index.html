@@ -1,6 +1,40 @@
 <html>
   <head>
     <title></title>
+
+    <!-- Include jquery for text editor -->
+    <script src='app/bower_components/jquery/dist/jquery.min.js'></script>
+    <!-- Include Font Awesome. -->
+    <link rel='stylesheet' href='app/bower_components/font-awesome/css/font-awesome.css'>
+
+    
+    <!-- Include Editor style. -->
+    <link rel='stylesheet' href='app/bower_components/FroalaWysiwygEditor/css/froala_content.min.css'>
+    <link rel='stylesheet' href='app/bower_components/FroalaWysiwygEditor/css/froala_editor.min.css'>
+    <link rel='stylesheet' href='app/bower_components/FroalaWysiwygEditor/css/froala_style.min.css'>
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+
+
+    <!-- Froala Main and Plugins -->
+    <!-- Plourd: may be able to lazy load to improve perf -->
+    <script src='app/bower_components/FroalaWysiwygEditor/js/froala_editor.min.js'></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/tables.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/video.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/block_styles.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/colors.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/media_manager.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/lists.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/font_family.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/font_size.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/file_upload.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/urls.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/fullscreen.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/inline_styles.min.js"></script>
+    <script src="app/bower_components/FroalaWysiwygEditor/js/plugins/char_counter.min.js"></script>
+    <!-- End Froala -->
+
   </head>
   <body ng-app="app">
 
@@ -21,7 +55,12 @@
     <script src="app/bower_components/angular/angular.min.js"></script>
     <script src="app/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 
-    <!-- load core module -->
+    <!-- Froala Editor JavaScript dependencies -->
+    <script src='app/bower_components/angular-froala/src/angular-froala.js'></script>
+    <script src='app/bower_components/angular-froala/src/froala-sanitize.js'></script>
+
+
+    <!-- core module -->
     <script src="app/app.js"></script>
 
     <!-- factories -->
@@ -36,9 +75,6 @@
     <script src="app/teacherClass/teacherClassCtrl.js"></script>
     <script src="app/teacherHome/teacherHomeCtrl.js"></script>
     <script src="app/teacherProject/teacherProjectCtrl.js"></script>
-
-    <!-- is there a reason this is at the bottom? -->
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
 
   </body>
 </html>
