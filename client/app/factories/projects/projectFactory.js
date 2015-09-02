@@ -55,7 +55,7 @@ angular.module('app')
       // send post request to update database
      };
 
-     var updatePage = function() {
+     var updatePage = function(title) {
 
      };
 
@@ -108,18 +108,30 @@ var Projects = [
       {
         pageId: '1',
         title: 'BugLife',
-        content: {
-          contentId: '1',
-          actualContent: '<p>Bugs are strange creatures. What are your favorite bugs?</p>'
-        }
+        content: [
+          {
+            contentId: '1',
+            actualContent: '<p>Bugs are strange creatures. What are your favorite bugs?</p>'
+          },
+          {
+            contentId: '2',
+            actualContent: '<div>something else here'
+          }
+        ]
       },
       {
         pageId: '2',
         title: '',
-        content: {
-          contentId: '',
-          actualContent: ''
-        }
+        content: [
+          {
+            contentId: '1',
+            actualContent: '<p>Bugs are strange creatures. What are your favorite bugs?</p>'
+          },
+          {
+            contentId: '2',
+            actualContent: '<div>something else here'
+          }
+        ]
       }
     ]
   },
@@ -132,18 +144,30 @@ var Projects = [
       {
         pageId: '1',
         title: '',
-        content: {
-          contentId: '',
-          actualContent: ''
-        }
+        content: [
+          {
+            contentId: '1',
+            actualContent: '<p>Bugs are strange creatures. What are your favorite bugs?</p>'
+          },
+          {
+            contentId: '2',
+            actualContent: '<div>something else here'
+          }
+        ]
       },
       {
         pageId: '2',
         title: '',
-        content: {
-          contentId: '',
-          actualContent: ''
-        }
+        content: [
+          {
+            contentId: '1',
+            actualContent: '<p>Bugs are strange creatures. What are your favorite bugs?</p>'
+          },
+          {
+            contentId: '2',
+            actualContent: '<div>something else here'
+          }
+        ]
       }
     ]
   }
