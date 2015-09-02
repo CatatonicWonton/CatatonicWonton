@@ -1,3 +1,42 @@
+<!-- display basic information at top of view -->
 <div>
-  Test - teacherProjectView
+  <h3>{{currentProject.title}}</h3>
+  <h3>{{currentProject.subject}}</h3>
+  <h3>{{currentProject.author}}</h3>
 </div>
+
+<br>
+
+<!-- show tabs for each page -->
+<div ng-repeat="page in currentProject.pages">
+  <h4 ng-click="setCurrentPage($index)">{{page.title}}</h4>
+</div>
+
+<!-- adds new page -->
+<div style="color:green" ng-click="addPage(newPageTitle)">
+  <h4>Add New Page</h4>
+</div>
+
+<br>
+
+<div>
+  <!-- display current page -->
+  <h4>{{currentPage.title}}</h4>
+  <div ng-repeat="contentComponent in currentPage.contentComponents">
+    <div ng-bind-html="contentComponent.html"></div>
+  </div>
+  <div>
+    <div style="color:blue" ng-click="toggleTextEditor()">Add New ContentComponent</div>
+    <!-- add textAngular directive and set its model to  -->
+    <div ng-show="isTextEditorVisible">
+      <!-- <div text-angular ng-model="newComponentHtml"></div> -->
+      <textarea froala="froalaOptions" ng-model="newComponentHtml"></textarea>
+      <button style="font-size:20px" ng-click="addContentComponent(newComponentHtml, $index)">submit</button>
+    </div>
+  </div>
+</div>
+
+<!-- shows what html and rendered text will look like -->
+<pre>{{ newComponentHtml }}</pre>
+<div ng-bind-html="newComponentHtml"></div>
+
