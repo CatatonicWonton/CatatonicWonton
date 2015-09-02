@@ -12,10 +12,6 @@ describe('loginCtrl', function(){
       $scope = {};
       var controller = $controller('loginCtrl', { $scope : $scope});
       expect(controller).toBeDefined();
-    });
-
-    it('has a verifyUser function', function() {
-      
     })
   });
 });
