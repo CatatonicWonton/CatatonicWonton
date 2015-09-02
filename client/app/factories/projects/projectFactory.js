@@ -55,8 +55,8 @@ angular.module('app')
       // send post request to update database
      };
 
-     var updatePage = function(title) {
-
+     var updatePage = function(title, index) {
+      Projects[userFactory.currentProjectId].pages[index].title = title;
      };
 
      var deletePage = function() {

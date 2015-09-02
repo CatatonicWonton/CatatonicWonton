@@ -21,10 +21,14 @@ angular.module('app')
     }
 
     $scope.addPage = function(title) {
-      var title = window.prompt('What is the title of this page?')
+      title = title || window.prompt('What is the title of this page?')
       projectFactory.addPage(title);
-      $scope.newPageTitle = '';
     };
+
+    $scope.updatePage = function(title) {
+      title = title || window.prompt('What should the title of the page be?')
+      projectFactory.editPage(title);
+    }
 
     $scope.addContentComponent = function(html, index) {
       projectFactory.addContentComponent(html, $scope.currentIndex);
