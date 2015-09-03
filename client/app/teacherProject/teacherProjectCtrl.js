@@ -1,7 +1,21 @@
 angular.module('app')
-  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, projectFactory, userFactory){
+  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, $routeParams, Project, User){
 
-    
+    $scope.getProject = function() {
+      
+    };
+
+  })
+
+
+
+
+
+// ******************************************************************************** //
+        // trash:
+// ******************************************************************************** //
+
+/*
 
     // model: this is where we store the relevant data for this view
     $scope.currentProject = projectFactory.projects[userFactory.currentProjectId];
@@ -43,3 +57,5 @@ angular.module('app')
       $scope.currentPage = $scope.currentProject.pages[index];
     };
   });
+
+*/
