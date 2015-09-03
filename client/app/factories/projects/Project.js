@@ -1,30 +1,55 @@
 angular.module('app')
   .factory('Project', function Project($http, $routeParams) {
     
-    // TEACHER HOME CONTROLLER:
-    var getProjects = function() {
+// for STUDENT/TEACHER HOME CONTROLLER:
+    var getProjects = function() {  // jwt or session takes care of teacher's subset of projects
       return $http.get('api/projects').then(function(data){
         // convert data into useable array
       });
     };
 
-    var createProject = function() {
-      return $http.post('api/projects').then(function(data){
+    /* [+] button */
+    var createProject = function(title, subject, author) {
+      return $http.post('api/projects/create', {title: title, subject: subject, author: author}).then(function(data){
         // return the newly created projectId e.g. data.projectId
       });
     };
 
-    // TEACHER PROJECT CONTROLLER:
+// for TEACHER PROJECT CONTROLLER:
     var getProject = function() {
-      return $http.get('api/project/' + $routeParams.projectId); // returns project obj
+      return $http.get('api/projects/' + $routeParams.projectId); // returns project obj
     };
 
-      // PAGE METHODS
-      var createPage = function() {
-        return $http.post('api/project').then(function(data){
-          // return newly created pageId e.g. data.pageId
+    // PAGE METHODS
+    var createPage = function(pageTitle) { // todo: fix route
+      return $http.post('api/projects/' + $routeParams.projectId + '/create', {pageTitle: pageTitle})
+        .then(function(page){
+          // returns newly created page info object
+
         });
-      };
+    };
+
+    var updatePage = function(pageTitle) { /* todo */ };
+    
+    // CONTENT METHODS
+    var createContent = function(htmlString, pageId) {
+      return $http.post('api/projects/' + $routeParams.projectId + '/' + pageId + '/create', {htmlString: htmlString})
+        .then(function(content){
+          // return newly created content object
+        });
+    }
+
+    var updateContent = function(htmlString, pageId) { /* todo */ };
+
+    return {
+      getProjects: getProjects,
+      createProject: createProject,
+      getProject: getProject,
+      createPage: createPage, 
+      updatePage: updatePage, 
+      createContent: createContent
+    }
+
 
   })
 

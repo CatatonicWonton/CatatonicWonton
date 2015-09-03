@@ -20,8 +20,6 @@ angular.module('app')
 
 
     // CLASSES
-
-
     $scope.getClasses = function() {
       Class.getClasses().then(function(classes){
         $scope.teacherClasses = classes;
@@ -35,6 +33,8 @@ angular.module('app')
     $scope.goToClass = function(classId) {
       $state.go('teacherClass', {classId: classId})
     };
+
+    $scope.assignProject = function() { /* associate project with student(s) */ };
 
     $scope.getClasses();
     $scope.getProjects();

@@ -7,6 +7,11 @@ angular.module('app')
       });
     };
 
+
+    return {
+      getClasses: getClasses 
+    }
+
   })
      
 

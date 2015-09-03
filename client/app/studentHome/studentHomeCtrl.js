@@ -1,10 +1,19 @@
 angular.module('app')
 
-  /*
-    The student home should show all projects, and allow the
-    student to click. 
-  */
   .controller('studentHomeCtrl', function studentHomeCtrl($scope, projectFactory){
-    $scope.projects = projectFactory.projects
+    
+// PROJECTS
+    $scope.getProjects = function() {
+      Project.getProjects().then(function(projects){
+        $scope.projects = projects;
+      });
+    };
+                                  // pass in projectId from the view
+    $scope.goToProject = function(projectId) {
+      $state.go('studentProject', {projectId: projectId})
+    };
+
+    $scope.getProjects();
+
   });
 

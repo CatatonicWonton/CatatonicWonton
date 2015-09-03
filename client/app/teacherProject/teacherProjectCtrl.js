@@ -3,12 +3,14 @@ angular.module('app')
 
     // todo: organize methods by category
 
+    // PROJECT
     $scope.getProject = function() {
       Project.getProject().then(function(project){
         $scope.project = project;
       });
     };
 
+    // PAGE
     $scope.createPage = function(pageTitle) {
       Project.createPage(pageTitle).then(function(page){
         $scope.project.pages.push(page);
@@ -17,7 +19,14 @@ angular.module('app')
 
     $scope.updatePage = function(pageTitle) { /* todo */ };
 
-    $scope.createContent = function() { /* todo */ };
+    // CONTENT
+    $scope.createContent = function(htmlString, pageIndex) { 
+      var pageId = $scope.project.pages[pageIndex].pageId;
+
+      Project.createContent(htmlString, pageId).then(function(newContent){
+        $scope.project.pages[pageId].content.push(newContent);
+      }); 
+    };
 
     $scope.updateContent = function() { /* todo */ };
 

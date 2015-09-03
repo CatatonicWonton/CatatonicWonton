@@ -2,14 +2,11 @@
 
 angular.module('app')
   .factory('User', function User ($http) {
-    var signupTeacher = function(username, password) {
-      return $http.post('api/signupTeacher', {username: username, password: password});
-    };
 
-    var signupStudent = function(username, password) {
-      return $http.post('api/signupStudent', {username: username, password: password});
+    // todo: combine signups with radial/radius buttons
+    var signup = function(username, password, type) {
+      return $http.post('api/signup', {username: username, password: password, type: type});
     };
-
 
     // todo:
     var signin = function(username, password) {
