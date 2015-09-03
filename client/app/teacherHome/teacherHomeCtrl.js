@@ -27,7 +27,9 @@ angular.module('app')
       console.log('Edit this project:', $scope.teacherProjects[index]);
       // set the currentProjectId to index
       userFactory.currentProjectId = index;
-      $state.go('teacherProject');
+      $state.go('teacherProject', {
+        key: 'value'
+      });
       // transition state to the selected projects edit view
     };
 

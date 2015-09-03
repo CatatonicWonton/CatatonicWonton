@@ -21,7 +21,7 @@
 
 <div>
   <!-- display current page -->
-  <h4>{{currentPage.title}}</h4>
+  <h4 ng-dblclick="updatePage()">{{currentPage.title}}</h4>
   <div ng-repeat="contentComponent in currentPage.contentComponents">
     <div ng-bind-html="contentComponent.html"></div>
   </div>
