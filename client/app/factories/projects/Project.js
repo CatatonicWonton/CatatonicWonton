@@ -2,7 +2,6 @@ angular.module('app')
   .factory('Project', function Project($http, $routeParams) {
     
     // TEACHER HOME CONTROLLER:
-
     var getProjects = function() {
       return $http.get('api/projects').then(function(data){
         // convert data into useable array
@@ -16,13 +15,19 @@ angular.module('app')
     };
 
     // TEACHER PROJECT CONTROLLER:
-
     var getProject = function() {
-      return $http.get('api/project/' + $routeParams.projectId);
+      return $http.get('api/project/' + $routeParams.projectId); // returns project obj
     };
 
+      // PAGE METHODS
+      var createPage = function() {
+        return $http.post('api/project').then(function(data){
+          // return newly created pageId e.g. data.pageId
+        });
+      };
+
   })
-     
+
 
 
 
@@ -100,6 +105,8 @@ var Projects = [
     title: '',
     subject: '',
     author: 'Jeffrey'
+    
+
     pages: [
       {
         pageId: '1',
