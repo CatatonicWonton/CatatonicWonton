@@ -8,7 +8,7 @@
 <br>
 
 <!-- show tabs for each page -->
-<div ng-dblclick="updatePage($index)" ng-repeat="page in currentProject.pages">
+<div ng-repeat="page in currentProject.pages">
   <h4 ng-click="setCurrentPage($index)">{{page.title}}</h4>
 </div>
 
@@ -21,7 +21,7 @@
 
 <div>
   <!-- display current page -->
-  <h4>{{currentPage.title}}</h4>
+  <h4 ng-dblclick="updatePage()">{{currentPage.title}}</h4>
   <div ng-repeat="contentComponent in currentPage.contentComponents">
     <div ng-bind-html="contentComponent.html"></div>
   </div>

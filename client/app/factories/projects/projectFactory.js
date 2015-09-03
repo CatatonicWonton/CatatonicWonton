@@ -40,6 +40,12 @@ angular.module('app')
 
 
      // methods
+     var getProjects = function(id) {
+      // make http request to server
+        // on success, set Project = data
+     }
+
+
      var addProject = function(title, subject, author, id) {
       // add to factories Project collection
       Projects.push(new Project(title, subject, author, id));
@@ -57,6 +63,7 @@ angular.module('app')
 
      var updatePage = function(title, index) {
       Projects[userFactory.currentProjectId].pages[index].title = title;
+      // send post request to update database
      };
 
      var deletePage = function() {

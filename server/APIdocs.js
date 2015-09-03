@@ -1,5 +1,5 @@
 /* 
-  GET /projects 
+  GET /project/:projectId
   
   {
     projects: [
@@ -20,7 +20,7 @@
  */
 
 /* 
-  GET /projects/:id
+  GET /projects/:userid
 
   var Projects = [
     {

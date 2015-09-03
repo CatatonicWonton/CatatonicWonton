@@ -1,6 +1,8 @@
 angular.module('app')
   .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, projectFactory, userFactory){
 
+    
+
     // model: this is where we store the relevant data for this view
     $scope.currentProject = projectFactory.projects[userFactory.currentProjectId];
     $scope.currentIndex = 0;
@@ -20,14 +22,14 @@ angular.module('app')
       }
     }
 
-    $scope.addPage = function(title) {
-      title = title || window.prompt('What is the title of this page?')
+    $scope.addPage = function() {
+      var title = window.prompt('What is the title of this page?')
       projectFactory.addPage(title);
     };
 
-    $scope.updatePage = function(title) {
-      title = title || window.prompt('What should the title of the page be?')
-      projectFactory.editPage(title);
+    $scope.updatePage = function(index) {
+      var title = window.prompt('What should the title of the page be?')
+      projectFactory.updatePage(title, $scope.currentIndex);
     }
 
     $scope.addContentComponent = function(html, index) {

@@ -6,3 +6,4 @@ angular.module('app')
       currentProjectId: 0
     }
   })
+  
