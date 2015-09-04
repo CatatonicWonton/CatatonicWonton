@@ -22,14 +22,9 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala'])
         controller: "studentHomeCtrl"
     })
     .state("studentProject", {
-        url: "/studentProject",
+        url: "/studentProject/:projectId",
         templateUrl: "app/studentProject/studentProjectView.html",
         controller: "studentProjectCtrl"
-    })
-    .state("teacherClass", {
-        url: "/teacherClass/:classId",
-        templateUrl: "app/teacherClass/teacherClassView.html",
-        controller: "teacherClassCtrl"
     })
     .state("teacherHome", {
         url: "/teacherHome",
@@ -40,6 +35,11 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala'])
         url: "/teacherProject/:projectId",
         templateUrl: "app/teacherProject/teacherProjectView.html",
         controller: "teacherProjectCtrl"
+    })
+    .state("teacherClass", {
+        url: "/teacherClass/:classId",
+        templateUrl: "app/teacherClass/teacherClassView.html",
+        controller: "teacherClassCtrl"
     });
 
   $urlRouterProvider.otherwise("/");
