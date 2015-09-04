@@ -41,7 +41,8 @@
     <nav>
         <ul>
             <li><a ui-sref='landing'>Landing</a></li>
-            <li><a ui-sref='login'>Login</a></li>
+            <li><a ui-sref='signup'>Sign Up</a></li>
+            <li><a ui-sref='signin'>Sign In</a></li>
             <li><a ui-sref='studentHome'>studentHome</a></li>
             <li><a ui-sref='studentProject'>studentProject</a></li>
             <li><a ui-sref='teacherClass'>teacherClass</a></li>
@@ -65,12 +66,14 @@
     <script src="app/app.js"></script>
 
     <!-- factories -->
-    <script src="app/factories/projects/projectFactory.js"></script>
-    <script src="app/factories/users/userFactory.js"></script>
+    <script src="app/factories/projects/Project.js"></script>
+    <script src="app/factories/users/User.js"></script>
+    <script src="app/factories/classes/Class.js"></script>
 
     <!-- features -->
     <script src="app/landing/landingCtrl.js"></script>
-    <script src="app/login/loginCtrl.js"></script>
+    <script src="app/signin/signinCtrl.js"></script>
+    <script src="app/signup/signupCtrl.js"></script>
     <script src="app/studentHome/studentHomeCtrl.js"></script>
     <script src="app/studentProject/studentProjectCtrl.js"></script>
     <script src="app/teacherClass/teacherClassCtrl.js"></script>

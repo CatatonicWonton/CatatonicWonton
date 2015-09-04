@@ -1,7 +1,44 @@
 angular.module('app')
-  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, projectFactory, userFactory){
+  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, $routeParams, Project, User){
 
-    
+    // todo: organize methods by category
+
+    // PROJECT
+    $scope.getProject = function() {
+      Project.getProject().then(function(project){
+        $scope.project = project;
+      });
+    };
+
+    // PAGE
+    $scope.createPage = function(pageTitle) {
+      Project.createPage(pageTitle).then(function(page){
+        $scope.project.pages.push(page);
+      });
+    };
+
+    $scope.updatePage = function(pageTitle) { /* todo */ };
+
+    // CONTENT
+    $scope.createContent = function(htmlString, pageIndex) { 
+      var pageId = $scope.project.pages[pageIndex].pageId;
+
+      Project.createContent(htmlString, pageId).then(function(newContent){
+        $scope.project.pages[pageId].content.push(newContent);
+      }); 
+    };
+
+    $scope.updateContent = function() { /* todo */ };
+
+  })
+
+
+
+// ******************************************************************************** //
+        // trash:
+// ******************************************************************************** //
+
+/*
 
     // model: this is where we store the relevant data for this view
     $scope.currentProject = projectFactory.projects[userFactory.currentProjectId];
@@ -43,3 +80,5 @@ angular.module('app')
       $scope.currentPage = $scope.currentProject.pages[index];
     };
   });
+
+*/

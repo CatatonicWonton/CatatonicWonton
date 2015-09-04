@@ -1,9 +1,72 @@
 angular.module('app')
-  .controller('teacherHomeCtrl', function teacherHomeCtrl($scope, $state, projectFactory, userFactory){
+  .controller('teacherHomeCtrl', function teacherHomeCtrl($scope, $state, Class, Project ){
+
+    // PROJECTS
+    $scope.getProjects = function() {
+      Project.getProjects().then(function(projects){
+        $scope.teacherProjects = projects;
+      });
+    };
+
+    $scope.createProject = function(title, subject, author) {
+      Project.createProject(title, subject, author).then(function(projectId){
+        $scope.goToProject(projectId);
+      });
+    };
+
+    $scope.goToProject = function(projectId) {
+      $state.go('teacherProject', {projectId: projectId})
+    };
+
+
+    // CLASSES
+    $scope.getClasses = function() {
+      Class.getClasses().then(function(classes){
+        $scope.teacherClasses = classes;
+      });
+    };
+
+    // $scope.createClass = function() {
+    //   // todo for post-mvp
+    // };
     
-    // model: where we store all relavant data for this view
+    $scope.goToClass = function(classId) {
+      $state.go('teacherClass', {classId: classId})
+    };
+
+    $scope.assignProject = function() { /* associate project with student(s) */ };
+
+    $scope.getClasses();
+    $scope.getProjects();
+
+    // by this point, classes and projects are loaded on the screen
+
+
+
+
+  });
+
+
+
+
+
+
+
+
+// ******************************************************************************** //
+        // trash:
+// ******************************************************************************** //
+
+
+
+
+
+// model: where we store all relavant data for this view
 
     // this is the array of current project for this teacher
+
+/*
+
     $scope.teacherProjects = projectFactory.projects;
 
     // this is the array of current classes for this teacher
@@ -45,5 +108,4 @@ angular.module('app')
       $state.go('teacherClass');
       // transition to selected class (aka 'teacherClassView')
     };
-
-  });
+*/

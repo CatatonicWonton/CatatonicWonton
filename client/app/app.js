@@ -6,10 +6,15 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala'])
         templateUrl: "app/landing/landingView.html",
         controller: "landingCtrl"
     })
-    .state("login", {
-        url: "/login",
-        templateUrl: "app/login/loginView.html",
-        controller: "loginCtrl"
+    .state("signin", {
+        url: "/signin",
+        templateUrl: "app/signin/signinView.html",
+        controller: "signinCtrl"
+    })
+    .state("signup", {
+        url: "/signup",
+        templateUrl: "app/signup/signupView.html",
+        controller: "signupCtrl"
     })
     .state("studentHome", {
         url: "/studentHome",
@@ -22,7 +27,7 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala'])
         controller: "studentProjectCtrl"
     })
     .state("teacherClass", {
-        url: "/teacherClass",
+        url: "/teacherClass/:classId",
         templateUrl: "app/teacherClass/teacherClassView.html",
         controller: "teacherClassCtrl"
     })
@@ -32,7 +37,7 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala'])
         controller: "teacherHomeCtrl"
     })
     .state("teacherProject", {
-        url: "/teacherProject",
+        url: "/teacherProject/:projectId",
         templateUrl: "app/teacherProject/teacherProjectView.html",
         controller: "teacherProjectCtrl"
     });
