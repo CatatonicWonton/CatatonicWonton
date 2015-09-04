@@ -14,7 +14,7 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '../client'));
 
 // Define Routes
 app.use('api/project', projectRoutes);
