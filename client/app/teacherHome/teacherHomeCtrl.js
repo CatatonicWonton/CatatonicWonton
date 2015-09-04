@@ -38,7 +38,7 @@ angular.module('app')
 
     $scope.assignProject = function() { /* associate project with student(s) */ };
 
-    $scope.getClasses();
+    // $scope.getClasses();
     $scope.getProjects();
 
 

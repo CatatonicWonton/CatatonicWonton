@@ -4,7 +4,7 @@ angular.module('app')
 // for STUDENT + TEACHER HOME CONTROLLER:
     var getProjects = function() {  // jwt or session takes care of teacher's subset of projects
       return $http.get('api/projects').then(function(response){
-        console.log(response);
+        // convert data into useable array
       });
     };
 

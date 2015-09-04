@@ -21,7 +21,7 @@ angular.module('app')
     };
 
     return {
-      signup: signup,     
+      signup: signup,      
       signin: signin
     }
   })
