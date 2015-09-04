@@ -23,44 +23,49 @@ Models.Student.belongsToMany(Models.Class, {through: 'StudentClass'});
 Models.Class.belongsToMany(Models.Student, {through: 'StudentClass'});
 
 // Adds Foreign Keys to Tables
-Models.Page.belongsTo(Models.Project);
+// Models.Page.belongsTo(Models.Project);
 
 Models.Class.belongsTo(Models.Teacher);
 
 Models.Project.belongsTo(Models.Teacher);
+// Models.Teacher.hasMany(Models.Project);
+Models.Project.hasMany(Models.Page);
 
 Models.Question.belongsTo(Models.Page);
 Models.Question.belongsTo(Models.Project);
 Models.Question.belongsTo(Models.Student);
 
-var reportSuccessOf = function (tableName) {
-  return function () {
-    console.log(tableName + ' table successfully synced.');
-  };
-};
+// var reportSuccessOf = function (tableName) {
+//   return function () {
+//     console.log(tableName + ' table successfully synced.');
+//   };
+// };
 
-var reportErrorFor = function (tableName) {
-  return function () {
-    console.log(tableName + ' table didn\'t sync.');
-  };
-}
+// var reportErrorFor = function (tableName) {
+//   return function () {
+//     console.log(tableName + ' table didn\'t sync.');
+//   };
+// }
 
-var sync = function (tableName) {
-  return function () {
-    return Models[tableName]
-      .sync()
-      .then(reportSuccessOf(tableName))
-      .error(reportErrorFor(tableName));
-  }
-};
+// var sync = function (tableName) {
+//   return function () {
+//     return Models[tableName]
+//       .sync()
+//       .then(reportSuccessOf(tableName))
+//       .error(reportErrorFor(tableName));
+//   }
+// };
 
-Models.Teacher.sync()
-  .then(sync('Project'))
-  .then(sync('Page'))
-  .then(sync('Class'))
-  .then(sync('Student'))
-  .then(sync('Question'))
-  .then(sync('StudentProject'))
-  .then(sync('StudentClass'));
+// Models.Teacher.sync()
+//   .then(sync('Project'))
+//   .then(sync('Page'))
+//   .then(sync('Class'))
+//   .then(sync('Student'))
+//   .then(sync('Question'))
+//   .then(sync('StudentProject'))
+//   .then(sync('StudentClass'));
 
-module.exports = Models;
+sequelize.sync();
+
+module.exports.Models = Models;
+module.exports.database = sequelize;
