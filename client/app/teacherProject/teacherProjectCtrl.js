@@ -30,7 +30,7 @@ angular.module('app')
 
     $scope.updateContent = function() { /* todo */ };
 
-    $scope.getProject();
+    console.log($scope.getProject());
 
   })
 

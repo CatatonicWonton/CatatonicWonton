@@ -1,10 +1,12 @@
 angular.module('app')
   .factory('Project', function Project($http, $routeParams) {
     
-// for STUDENT + TEACHER HOME CONTROLLER:
+    // for STUDENT + TEACHER HOME CONTROLLER:
     var getProjects = function() {  // jwt or session takes care of teacher's subset of projects
       return $http.get('api/projects').then(function(response){
         // convert data into useable array
+        console.log(response);
+        return response;
       });
     };
 
@@ -15,7 +17,7 @@ angular.module('app')
       });
     };
 
-// for STUDENT + TEACHER PROJECT CONTROLLER:
+    // for STUDENT + TEACHER PROJECT CONTROLLER:
     var getProject = function() {
       return $http.get('api/projects/' + $routeParams.projectId); // returns project obj
     };
