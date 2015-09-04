@@ -23,11 +23,13 @@ Models.Student.belongsToMany(Models.Class, {through: 'StudentClass'});
 Models.Class.belongsToMany(Models.Student, {through: 'StudentClass'});
 
 // Adds Foreign Keys to Tables
-Models.Page.belongsTo(Models.Project);
+// Models.Page.belongsTo(Models.Project);
 
 Models.Class.belongsTo(Models.Teacher);
 
 Models.Project.belongsTo(Models.Teacher);
+// Models.Teacher.hasMany(Models.Project);
+Models.Project.hasMany(Models.Page);
 
 Models.Question.belongsTo(Models.Page);
 Models.Question.belongsTo(Models.Project);
@@ -65,4 +67,5 @@ Models.Question.belongsTo(Models.Student);
 
 sequelize.sync();
 
-module.exports = Models;
+module.exports.Models = Models;
+module.exports.database = sequelize;
