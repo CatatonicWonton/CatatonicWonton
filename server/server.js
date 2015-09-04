@@ -17,8 +17,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname));
 
 // Define Routes
-app.use('api/projects', projectsRoutes);
 app.use('api/project', projectRoutes);
+app.use('api/projects', projectsRoutes);
 app.use('api/class', classRoutes);
 
 app.listen(8000, function () {
