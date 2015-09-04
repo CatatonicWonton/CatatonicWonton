@@ -15,6 +15,16 @@ var sendResponse = function (res) {
   };
 };
 
+var extend = function () {
+  var object = {};
+  for (var i = 0; i < arguments.length; i++) {
+    for (var prop in arguments[i]) {
+      object[prop] = arguments[i][prop];
+    }
+  }
+  return object;
+};
+
 router.get('/', function (req, res) {
   Project.findAll({
     where: {
@@ -36,11 +46,35 @@ router.post('/', function (req, res) {
       subject: req.body.subject
     })
     .then(function (project) {
-      return Teacher.findById(1).then(function (teacher) {
+      return Teacher.findById(req.body.TeacherId).then(function (teacher) {
         return project.setTeacher(teacher);
       });
     })
     .then(sendResponse(res));
 }); 
+
+router.get('/:id', function (req, res) {
+  Project
+    .findById(req.params.id)
+    .then(sendResponse(res));
+});
+
+router.put('/:id', function (req, res) {
+  Project
+    .upsert(extend(req.body, {id: req.params.id}))
+    .then(function () {
+      return Project.findById(req.params.id);
+    })
+    .then(sendResponse(res));
+}); 
+
+router.delete('/:id', function (req, res) {
+  Project
+    .findById(req.params.id)
+    .then(function (project) {
+      return project.destroy();
+    })
+    .then(sendResponse(res));
+})
 
 module.exports = router;
