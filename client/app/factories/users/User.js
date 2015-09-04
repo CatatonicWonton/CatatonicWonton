@@ -5,14 +5,14 @@ angular.module('app')
 
     // todo:
     var signup = function(username, password, type) {
-      return {
-        username: username,
-        password: password,
-        type: type
-      };
+      // return {
+      //   username: username,
+      //   password: password,
+      //   type: type
+      // };
 
 
-      // return $http.post('api/signup', {username: username, password: password, type: type});
+      return $http.post('api/signup', {username: username, password: password, type: type});
     };
 
     // todo:
