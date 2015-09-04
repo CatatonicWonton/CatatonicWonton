@@ -5,30 +5,42 @@ var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
 
 // Models
-var Project = Models.Class;
+var Project = Models.Project; 
+var Page = Models.Page;
+var Teacher = Models.Teacher;
 
-router.get('/:id', function (req, res) {
-  Project
-    .findById(req.params.id)
-    .then(sendResponse(res));
+var sendResponse = function (res) {
+  return function (data) {
+    res.status(200).send(data);
+  };
+};
+
+router.get('/', function (req, res) {
+  Project.findAll({
+    where: {
+      TeacherId: req.body.TeacherId
+    },
+    include: [
+      { 
+        model: Page 
+      }
+    ]
+  })
+  .then(sendResponse(res));
 });
 
-router.put('/:id', function (req, res) {
+router.post('/', function (req, res) {
   Project
-    .findById(req.params.id)
+    .create({
+      name: req.body.name,
+      subject: req.body.subject
+    })
     .then(function (project) {
-      return project.upsert(req.body);
+      return Teacher.findById(1).then(function (teacher) {
+        return project.setTeacher(teacher);
+      });
     })
     .then(sendResponse(res));
 }); 
-
-router.delete('/:id', function (req, res) {
-  Project
-    .findById(req.params.id)
-    .then(function (project) {
-      return project.destroy();
-    })
-    .then(sendResponse(res));
-})
 
 module.exports = router;
