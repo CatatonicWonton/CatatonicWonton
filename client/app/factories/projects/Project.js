@@ -1,30 +1,30 @@
 angular.module('app')
   .factory('Project', function Project($http, $routeParams) {
     
-// for STUDENT/TEACHER HOME CONTROLLER:
+// for STUDENT + TEACHER HOME CONTROLLER:
     var getProjects = function() {  // jwt or session takes care of teacher's subset of projects
-      return $http.get('api/projects').then(function(data){
-        // convert data into useable array
+      return $http.get('api/projects').then(function(response){
+        console.log(response);
       });
     };
 
     /* [+] button */
     var createProject = function(title, subject, author) {
-      return $http.post('api/projects/create', {title: title, subject: subject, author: author}).then(function(data){
-        // return the newly created projectId e.g. data.projectId
+      return $http.post('api/projects', {title: title, subject: subject, author: author}).then(function(response){
+        console.log(response);
       });
     };
 
-// for TEACHER PROJECT CONTROLLER:
+// for STUDENT + TEACHER PROJECT CONTROLLER:
     var getProject = function() {
       return $http.get('api/projects/' + $routeParams.projectId); // returns project obj
     };
 
     // PAGE METHODS
     var createPage = function(pageTitle) { // todo: fix route
-      return $http.post('api/projects/' + $routeParams.projectId + '/create', {pageTitle: pageTitle})
+      return $http.post('api/projects/' + $routeParams.projectId, {pageTitle: pageTitle})
         .then(function(page){
-          // returns newly created page info object
+          return page.asdf // returns newly created page info object
 
         });
     };
@@ -33,9 +33,9 @@ angular.module('app')
     
     // CONTENT METHODS
     var createContent = function(htmlString, pageId) {
-      return $http.post('api/projects/' + $routeParams.projectId + '/' + pageId + '/create', {htmlString: htmlString})
+      return $http.post('api/projects/' + $routeParams.projectId + '/' + pageId, {htmlString: htmlString})
         .then(function(content){
-          // return newly created content object
+          return content.asdf // return newly created content object
         });
     }
 
@@ -46,8 +46,9 @@ angular.module('app')
       createProject: createProject,
       getProject: getProject,
       createPage: createPage, 
-      updatePage: updatePage, 
+      // updatePage: updatePage, 
       createContent: createContent
+      // updateContent: updateContent
     }
 
 
@@ -136,28 +137,28 @@ var Projects = [
       {
         pageId: '1',
         title: '',
-        content: [
+        plugin: [
           {
-            contentId: '1',
-            actualContent: '<p>Bugs are strange creatures. What are your favorite bugs?</p>'
+            pluginId: '1',
+            actualplugin: '<p>Bugs are strange creatures. What are your favorite bugs?</p>'
           },
           {
-            contentId: '2',
-            actualContent: '<div>something else here'
+            pluginId: '2',
+            actualplugin: '<div>something else here'
           }
         ]
       },
       {
         pageId: '2',
         title: '',
-        content: [
+        plugin: [
           {
-            contentId: '1',
-            actualContent: '<p>Bugs are strange creatures. What are your favorite bugs?</p>'
+            pluginId: '1',
+            actualplugin: '<p>Bugs are strange creatures. What are your favorite bugs?</p>'
           },
           {
-            contentId: '2',
-            actualContent: '<div>something else here'
+            pluginId: '2',
+            actualplugin: '<div>something else here'
           }
         ]
       }

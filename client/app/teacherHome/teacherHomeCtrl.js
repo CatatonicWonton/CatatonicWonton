@@ -2,11 +2,16 @@ angular.module('app')
   .controller('teacherHomeCtrl', function teacherHomeCtrl($scope, $state, Class, Project ){
 
     // PROJECTS
+    $scope.goToProject = function(projectId) {
+      $state.go('teacherProject', {projectId: projectId})
+    };
+
     $scope.getProjects = function() {
       Project.getProjects().then(function(projects){
         $scope.teacherProjects = projects;
       });
     };
+
 
     $scope.createProject = function(title, subject, author) {
       Project.createProject(title, subject, author).then(function(projectId){
@@ -14,9 +19,6 @@ angular.module('app')
       });
     };
 
-    $scope.goToProject = function(projectId) {
-      $state.go('teacherProject', {projectId: projectId})
-    };
 
 
     // CLASSES
@@ -27,7 +29,7 @@ angular.module('app')
     };
 
     // $scope.createClass = function() {
-    //   // todo for post-mvp
+    //   // todo: EXTRA
     // };
     
     $scope.goToClass = function(classId) {
@@ -38,10 +40,6 @@ angular.module('app')
 
     $scope.getClasses();
     $scope.getProjects();
-
-    // by this point, classes and projects are loaded on the screen
-
-
 
 
   });

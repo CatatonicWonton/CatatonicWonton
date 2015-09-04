@@ -1,3 +1,32 @@
-<div>
-  Test - signupView
+<div style='margin-left: 20px'>
+  <form ng-submit="signup(username, password, type)">
+    <label>
+      <input type="radio" ng-model="type" value="teacher">
+      Teacher
+    </label><br/>
+    <label>
+      <input type="radio" ng-model="type" value="student">
+      Student
+    </label>
+
+    <br/>
+    <br/>
+    
+    <div>
+        <label>Username:</label><br/>
+        <input ng-model="username" type="text" name="username"/>
+    </div>
+    <div>
+        <label>Password:</label><br/>
+        <input ng-model="password" type="password" name="password"/>
+    </div>
+
+    <br/>
+
+
+
+    <div>
+        <input type="submit" value="Sign Up"/>
+    </div>
+  </form>
 </div>
