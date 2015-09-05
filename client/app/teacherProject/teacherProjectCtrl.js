@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, $routeParams, Project, User){
+  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, Project, User){
 
     // todo: organize methods by category
 
@@ -30,7 +30,7 @@ angular.module('app')
 
     $scope.updateContent = function() { /* todo */ };
 
-    console.log($scope.getProject());
+    $scope.getProject();
 
   })
 

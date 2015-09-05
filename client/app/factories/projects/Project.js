@@ -1,12 +1,11 @@
 angular.module('app')
-  .factory('Project', function Project($http, $routeParams) {
+  .factory('Project', function Project($http, $stateParams) {
     
     // for STUDENT + TEACHER HOME CONTROLLER:
     var getProjects = function() {  // jwt or session takes care of teacher's subset of projects
       return $http.get('api/projects').then(function(response){
         // convert data into useable array
         console.log(response);
-        return response;
       });
     };
 
@@ -19,12 +18,16 @@ angular.module('app')
 
     // for STUDENT + TEACHER PROJECT CONTROLLER:
     var getProject = function() {
-      return $http.get('api/projects/' + $routeParams.projectId); // returns project obj
+      console.log($stateParams.projectId);
+      var url = 'api/project/' + $stateParams.projectId;
+      return $http.get(url).then(function(data) {
+        return data.data;
+      }); // returns project obj
     };
 
     // PAGE METHODS
     var createPage = function(pageTitle) { // todo: fix route
-      return $http.post('api/projects/' + $routeParams.projectId, {pageTitle: pageTitle})
+      return $http.post('api/projects/' + $stateParams.projectId, {pageTitle: pageTitle})
         .then(function(page){
           return page.asdf // returns newly created page info object
 
@@ -35,7 +38,7 @@ angular.module('app')
     
     // CONTENT METHODS
     var createContent = function(htmlString, pageId) {
-      return $http.post('api/projects/' + $routeParams.projectId + '/' + pageId, {htmlString: htmlString})
+      return $http.post('api/projects/' + $stateParams.projectId + '/' + pageId, {htmlString: htmlString})
         .then(function(content){
           return content.asdf // return newly created content object
         });

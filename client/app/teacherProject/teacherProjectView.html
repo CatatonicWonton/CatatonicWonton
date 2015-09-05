@@ -1,14 +1,14 @@
 <!-- display basic information at top of view -->
 <div>
-  <h3>{{currentProject.title}}</h3>
-  <h3>{{currentProject.subject}}</h3>
-  <h3>{{currentProject.author}}</h3>
+  <h3>{{project.name}}</h3>
+  <h3>{{project.subject}}</h3>
+  <h3>{{project.author}}</h3>
 </div>
 
 <br>
 
 <!-- show tabs for each page -->
-<div ng-repeat="page in currentProject.pages">
+<div ng-repeat="page in project.pages">
   <h4 ng-click="setCurrentPage($index)">{{page.title}}</h4>
 </div>
 

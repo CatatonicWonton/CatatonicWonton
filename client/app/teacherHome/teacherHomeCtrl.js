@@ -12,13 +12,11 @@ angular.module('app')
       });
     };
 
-
     $scope.createProject = function(title, subject, author) {
       Project.createProject(title, subject, author).then(function(projectId){
         $scope.goToProject(projectId);
       });
     };
-
 
 
     // CLASSES
