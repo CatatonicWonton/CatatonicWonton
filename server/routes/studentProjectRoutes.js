@@ -27,29 +27,7 @@ var extend = function () {
   return object;
 };
 
-// teacher assigning / unassigning project to an entire class(es)
-// teacher assigning / unassigning to specific students in a class 
-
-// router.post('/student/:id', function (req, res) {
-//   StudentProject
-//     .create({
-//       StudentId: req.params.id,
-//       ProjectId: req.body.ProjectId
-//     })
-//     .then(sendResponse(res));
-// });
-
-// posts a student in a class
-// router.post('/:id', function (req, res) {
-//   Class.findById(req.params.id)
-//     .then(function (foundClass) {
-//       return Student.findById(req.body.StudentId).then(function (student) {
-//         return foundClass.addStudent(student);
-//       });
-//     })
-//     .then(sendResponse(res));
-// });
-
+// teacher can assign a project to a student
 router.post('/student/:id', function (req, res) {
   Student.findById(req.params.id)
     .then(function (student) {
@@ -60,15 +38,23 @@ router.post('/student/:id', function (req, res) {
     .then(sendResponse(res));
 });
 
-
+// teacher can assign projects to a class
 router.post('/class/:id', function (req, res) {
-  Class.findById(req.params.id)
-    .then(function (foundClass) {
-      return console.log(foundClass.getStudents());
-    })
-    .then(sendResponse(res));
+  Project.findById(req.body.ProjectId).then(function(project) {
+    return Class.findById(req.params.id)
+      .then(function (foundClass) {
+        return foundClass.getStudents()
+          .then(function(students) {
+            students.forEach(function(student){
+              student.addProject(project);
+            });
+          })
+      })
+  })
+  .then(sendResponse(res));
 });
 
+// teacher can unassign a project from a student
 router.delete('/student/:id', function (req, res) {
   StudentProject.findOne({
       where: {
@@ -82,35 +68,23 @@ router.delete('/student/:id', function (req, res) {
     .then(sendResponse(res));
 });
 
+// teacher can unassign projects from a class
 router.delete('/class/:id', function (req, res) {
-  
-});
-
-
-// posts a student in a class
-router.post('/:id', function (req, res) {
-  Class.findById(req.params.id)
-    .then(function (foundClass) {
-      return Student.findById(req.body.StudentId).then(function (student) {
-        return foundClass.addStudent(student);
-      });
+  Class.findById(req.params.id).then(function(foundClass){
+    return foundClass.getStudents().then(function(students){
+      students.forEach(function(student){
+        StudentProject.findOne({
+          where: {
+            StudentId: student.id,
+            ProjectId: req.body.ProjectId  
+          }
+        }).then(function(studentProject) {
+          return studentProject.destroy();
+        })
+      })
     })
-    .then(sendResponse(res));
+  })
+  .then(sendResponse(res));
 });
-
-// deletes a student from 1 particular class
-router.delete('/:id', function (req, res) {
-  StudentClass.findOne({
-      where: {
-        ClassId: req.params.id,
-        StudentId: req.body.StudentId
-      }
-    })
-    .then(function (studentClass) {
-      return studentClass.destroy();
-    })
-    .then(sendResponse(res));
-});
-
 
 module.exports = router;

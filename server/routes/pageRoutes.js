@@ -24,11 +24,13 @@ var extend = function () {
   return object;
 };
 
+// get a page from a project
 router.get('/:id', function (req, res) {
   Page.findById(req.params.id)
     .then(sendResponse(res));
 }); 
 
+// add a page to a project
 router.post('/:projectId', function (req, res) {
   Project.findById(req.params.projectId).then(function(project){
     return Page.create(req.body).then(function(page){
@@ -38,6 +40,7 @@ router.post('/:projectId', function (req, res) {
   .then(sendResponse(res));
 });
 
+// edit page from a project
 router.put('/:id', function (req, res) {
   Page
     .upsert(extend(req.body, {id: req.params.id}))
@@ -47,6 +50,8 @@ router.put('/:id', function (req, res) {
     .then(sendResponse(res));
 }); 
 
+
+// delete a page from a project
 router.delete('/:id', function (req, res) {
   Page.findById(req.params.id)
     .then(function (page) {
