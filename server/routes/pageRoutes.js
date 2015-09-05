@@ -6,6 +6,7 @@ var Models = require('../db.js').Models;
 
 // Models
 var Project = Models.Project;
+var Page = Models.Page;
 
 var sendResponse = function (res) {
   return function (data) {
@@ -24,27 +25,34 @@ var extend = function () {
 };
 
 router.get('/:id', function (req, res) {
-  Project
-    .findById(req.params.id)
+  Page.findById(req.params.id)
     .then(sendResponse(res));
+}); 
+
+router.post('/:projectId', function (req, res) {
+  Project.findById(req.params.projectId).then(function(project){
+    return Page.create(req.body).then(function(page){
+      return project.addPage(page);
+    });
+  })
+  .then(sendResponse(res));
 });
 
 router.put('/:id', function (req, res) {
-  Project
+  Page
     .upsert(extend(req.body, {id: req.params.id}))
     .then(function () {
-      return Project.findById(req.params.id);
+      return Page.findById(req.params.id);
     })
     .then(sendResponse(res));
 }); 
 
 router.delete('/:id', function (req, res) {
-  Project
-    .findById(req.params.id)
-    .then(function (project) {
-      return project.destroy();
+  Page.findById(req.params.id)
+    .then(function (page) {
+      return page.destroy();
     })
     .then(sendResponse(res));
-})
+});
 
-module.exports = router;
+module.exports = router;    

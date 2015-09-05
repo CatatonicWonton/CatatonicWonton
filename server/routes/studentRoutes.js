@@ -8,7 +8,6 @@ var Models = require('../db.js').Models;
 var Class = Models.Class;
 var Teacher = Models.Teacher;
 var Student = Models.Student;
-var StudentClass = Models.StudentClass;
 
 var sendResponse = function (res) {
   return function (data) {
@@ -26,39 +25,31 @@ var extend = function () {
   return object;
 };
 
-router.get('/', function (req, res) {
-  Class.findAll({
-    where: {
-      TeacherId: req.body.TeacherId
-    }
-  }).then(sendResponse(res));
-});
-
-router.post('/', function (req, res) {
-  Class
-    .create({
-      name: req.body.name
-    })
-    .then(function (classModel) { 
-      return Teacher.findById(req.body.TeacherId)
-        .then(function (teacher) {
-          return classModel.setTeacher(teacher);
-        });
-    })
+router.get('/:id', function (req, res) {
+  Student.findById(req.params.id)
     .then(sendResponse(res));
 });
 
-router.get('/:id', function (req, res) {
-  Class.findById(req.params.id)
+router.post('/', function (req, res) {
+  Student.create(req.body)
+    .then(sendResponse(res));
+});
+
+router.put('/:id', function (req, res) {
+  Student
+    .upsert(extend(req.body, {id: req.params.id}))
+    .then(function () {
+      return Student.findById(req.params.id);
+    })
     .then(sendResponse(res));
 });
 
 router.delete('/:id', function (req, res) {
-  Class.findById(req.params.id)
-    .then(function (foundClass) {
-      return foundClass.destroy();
+  Student.findById(req.params.id)
+    .then(function (student) {
+      return student.destroy();
     })
     .then(sendResponse(res));
-});
+})
 
 module.exports = router;
