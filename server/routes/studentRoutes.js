@@ -25,16 +25,19 @@ var extend = function () {
   return object;
 };
 
+// gets a student
 router.get('/:id', function (req, res) {
   Student.findById(req.params.id)
     .then(sendResponse(res));
 });
 
+// create a student
 router.post('/', function (req, res) {
   Student.create(req.body)
     .then(sendResponse(res));
 });
 
+// edit a student
 router.put('/:id', function (req, res) {
   Student
     .upsert(extend(req.body, {id: req.params.id}))
@@ -44,6 +47,7 @@ router.put('/:id', function (req, res) {
     .then(sendResponse(res));
 });
 
+// delete a student
 router.delete('/:id', function (req, res) {
   Student.findById(req.params.id)
     .then(function (student) {

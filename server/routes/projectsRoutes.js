@@ -25,6 +25,14 @@ var extend = function () {
   return object;
 };
 
+// get a project
+router.get('/:id', function (req, res) {
+  Project
+    .findById(req.params.id)
+    .then(sendResponse(res));
+});
+
+// get all projects
 router.get('/', function (req, res) {
   Project.findAll({
     where: {
@@ -39,6 +47,7 @@ router.get('/', function (req, res) {
   .then(sendResponse(res));
 });
 
+// create a project
 router.post('/', function (req, res) {
   Project
     .create({
@@ -53,12 +62,7 @@ router.post('/', function (req, res) {
     .then(sendResponse(res));
 }); 
 
-router.get('/:id', function (req, res) {
-  Project
-    .findById(req.params.id)
-    .then(sendResponse(res));
-});
-
+// edit a project
 router.put('/:id', function (req, res) {
   Project
     .upsert(extend(req.body, {id: req.params.id}))
@@ -68,6 +72,7 @@ router.put('/:id', function (req, res) {
     .then(sendResponse(res));
 }); 
 
+// delete a project
 router.delete('/:id', function (req, res) {
   Project
     .findById(req.params.id)

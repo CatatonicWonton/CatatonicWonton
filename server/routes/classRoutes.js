@@ -26,6 +26,13 @@ var extend = function () {
   return object;
 };
 
+// get a single class
+router.get('/:id', function (req, res) {
+  Class.findById(req.params.id)
+    .then(sendResponse(res));
+});
+
+// get all classes
 router.get('/', function (req, res) {
   Class.findAll({
     where: {
@@ -34,6 +41,7 @@ router.get('/', function (req, res) {
   }).then(sendResponse(res));
 });
 
+// create a class
 router.post('/', function (req, res) {
   Class
     .create({
@@ -48,11 +56,7 @@ router.post('/', function (req, res) {
     .then(sendResponse(res));
 });
 
-router.get('/:id', function (req, res) {
-  Class.findById(req.params.id)
-    .then(sendResponse(res));
-});
-
+// delete a class
 router.delete('/:id', function (req, res) {
   Class.findById(req.params.id)
     .then(function (foundClass) {

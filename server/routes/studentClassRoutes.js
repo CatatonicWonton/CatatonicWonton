@@ -26,7 +26,7 @@ var extend = function () {
   return object;
 };
 
-// posts a student in a class
+// add student to a class
 router.post('/:id', function (req, res) {
   Class.findById(req.params.id)
     .then(function (foundClass) {
@@ -37,7 +37,7 @@ router.post('/:id', function (req, res) {
     .then(sendResponse(res));
 });
 
-// deletes a student from 1 particular
+// deletes student from a class
 router.put('/:id', function (req, res) {
   StudentClass.findOne({
       where: {
