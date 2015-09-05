@@ -26,39 +26,30 @@ var extend = function () {
   return object;
 };
 
-router.get('/', function (req, res) {
-  Class.findAll({
-    where: {
-      TeacherId: req.body.TeacherId
-    }
-  }).then(sendResponse(res));
-});
-
-router.post('/', function (req, res) {
-  Class
-    .create({
-      name: req.body.name
-    })
-    .then(function (classModel) { 
-      return Teacher.findById(req.body.TeacherId)
-        .then(function (teacher) {
-          return classModel.setTeacher(teacher);
-        });
-    })
-    .then(sendResponse(res));
-});
-
-router.get('/:id', function (req, res) {
-  Class.findById(req.params.id)
-    .then(sendResponse(res));
-});
-
-router.delete('/:id', function (req, res) {
+// posts a student in a class
+router.post('/:id', function (req, res) {
   Class.findById(req.params.id)
     .then(function (foundClass) {
-      return foundClass.destroy();
+      return Student.findById(req.body.StudentId).then(function (student) {
+        return foundClass.addStudent(student);
+      });
     })
     .then(sendResponse(res));
 });
+
+// deletes a student from 1 particular
+router.put('/:id', function (req, res) {
+  StudentClass.findOne({
+      where: {
+        ClassId: req.params.id,
+        StudentId: req.body.StudentId
+      }
+    })
+    .then(function (studentClass) {
+      return studentClass.destroy();
+    })
+    .then(sendResponse(res));
+});
+
 
 module.exports = router;

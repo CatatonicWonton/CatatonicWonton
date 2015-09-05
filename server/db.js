@@ -16,8 +16,8 @@ Models.StudentClass   = sequelize.import('./models/StudentClass');
 Models.StudentProject = sequelize.import('./models/StudentProject');
 
 // Adds Foreign Keys to Join Tables
-Models.Project.belongsToMany(Models.Student, {through: 'StudentProject'});
 Models.Student.belongsToMany(Models.Project, {through: 'StudentProject'});
+Models.Project.belongsToMany(Models.Student, {through: 'StudentProject'});
 
 Models.Student.belongsToMany(Models.Class, {through: 'StudentClass'});
 Models.Class.belongsToMany(Models.Student, {through: 'StudentClass'});
