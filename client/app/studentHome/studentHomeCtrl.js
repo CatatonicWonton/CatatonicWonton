@@ -1,6 +1,6 @@
 angular.module('app')
 
-  .controller('studentHomeCtrl', function studentHomeCtrl($scope, projectFactory){
+  .controller('studentHomeCtrl', function studentHomeCtrl($scope, Project){
     
 // PROJECTS
     $scope.getProjects = function() {

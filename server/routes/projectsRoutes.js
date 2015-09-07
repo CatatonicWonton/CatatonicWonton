@@ -58,14 +58,13 @@ router.get('/', function (req, res) {
 
 // create a project
 router.post('/', function (req, res) {
-  console.log(req.body);
   Project
     .create({
       name: req.body.name,
       subject: req.body.subject
     })
     .then(function (project) {
-      return Teacher.findById(req.body.TeacherId).then(function (teacher) {
+      return Teacher.findById(1).then(function (teacher) {
         return project.setTeacher(teacher);
       });
     })

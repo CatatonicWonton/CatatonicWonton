@@ -3,19 +3,20 @@
 </div>
 
 <div>
-  <h1 ng-click="addProject()">Projects+</h1>
+  <h1 ng-click="createProject()">Projects+</h1>
 </div>
 
 <div ng-repeat="project in teacherProjects">
-  {{project.title}} | {{project.subject}} | {{project.author}}
-  <div ng-click="editProject($index)"> Edit </div>
+  {{project.name}} | {{project.subject}}
+  <div ng-click="goToProject(project.Id)"> Edit </div>
 </div>
 
 <div>
-  <h1 ng-click="addClass()">Classes+</h1>
+  <h1 ng-click="createClass()">Classes+</h1>
 </div>
 <div ng-repeat="class in teacherClasses">
   {{class.name}}
+  <div ng-click="goToClass(class.Id)"> View Class </div>
   <!-- what else do we want to show for each class? -->
 </div>
 

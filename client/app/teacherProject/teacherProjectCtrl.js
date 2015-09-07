@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, $routeParams, Project, User){
+  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, Project, User){
 
     // todo: organize methods by category
 
@@ -7,13 +7,17 @@ angular.module('app')
     $scope.getProject = function() {
       Project.getProject().then(function(project){
         $scope.project = project;
+        console.log("Project:", project);
       });
     };
 
     // PAGE
-    $scope.createPage = function(pageTitle) {
+    $scope.createPage = function() {
+      var pageTitle = window.prompt('What is the title of the page?');
       Project.createPage(pageTitle).then(function(page){
-        $scope.project.pages.push(page);
+        console.log(page);
+        // $scope.project.pages.push(page);
+        $scope.getProject();
       });
     };
 
