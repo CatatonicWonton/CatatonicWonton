@@ -14,7 +14,7 @@ var studentProjectRoutes  = require('./routes/studentProjectRoutes');
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 
 app.use(express.static(__dirname + '/../client'));

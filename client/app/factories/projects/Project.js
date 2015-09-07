@@ -1,50 +1,53 @@
 angular.module('app')
   .factory('Project', function Project($http, $stateParams) {
-    
+
     // for STUDENT + TEACHER HOME CONTROLLER:
     var getProjects = function() {  // jwt or session takes care of teacher's subset of projects
-      return $http.get('api/projects').then(function(response){
-        // convert data into useable array
-        console.log(response);
+      return $http.get('/api/projects').then(function(response){
+        return response.data;
       });
     };
 
     /* [+] button */
-    var createProject = function(title, subject, author) {
-      return $http.post('api/projects', {title: title, subject: subject, author: author}).then(function(response){
+    var createProject = function(name, subject, author) {
+      var projectData = {name: name, subject: subject, author: author};
+      return $http.post('/api/projects', projectData).then(function(response){
         console.log(response);
+        return response.data.id;
       });
     };
 
     // for STUDENT + TEACHER PROJECT CONTROLLER:
     var getProject = function() {
-      console.log($stateParams.projectId);
-      var url = 'api/project/' + $stateParams.projectId;
-      return $http.get(url).then(function(data) {
-        return data.data;
+      var url = '/api/projects/' + $stateParams.projectId;
+      return $http.get(url).then(function(response) {
+        console.log(response);
+        return response.data;
       }); // returns project obj
     };
 
     // PAGE METHODS
-    var createPage = function(pageTitle) { // todo: fix route
-      return $http.post('api/projects/' + $stateParams.projectId, {pageTitle: pageTitle})
-        .then(function(page){
-          return page.asdf // returns newly created page info object
-
+    var createPage = function(title) { // todo: fix route
+      var url = '/api/page/' + $stateParams.projectId;
+      return $http.post(url, {title: title})
+        .then(function(response){
+          return response.data; // returns newly created page info object
         });
     };
 
     var updatePage = function(pageTitle) { /* todo */ };
     
     // CONTENT METHODS
+    // this creates and/or updates using PUT
     var createContent = function(htmlString, pageId) {
-      return $http.post('api/projects/' + $stateParams.projectId + '/' + pageId, {htmlString: htmlString})
-        .then(function(content){
-          return content.asdf // return newly created content object
+      var url = 'api/page/' + pageId;
+      return $http.put(url, {content: htmlString})
+        .then(function(page){
+          // return the entire page
+          // send back what I need
         });
     }
 
-    var updateContent = function(htmlString, pageId) { /* todo */ };
 
     return {
       getProjects: getProjects,
@@ -53,7 +56,6 @@ angular.module('app')
       createPage: createPage, 
       // updatePage: updatePage, 
       createContent: createContent
-      // updateContent: updateContent
     }
 
 

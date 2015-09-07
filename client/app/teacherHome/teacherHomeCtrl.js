@@ -2,18 +2,23 @@ angular.module('app')
   .controller('teacherHomeCtrl', function teacherHomeCtrl($scope, $state, Class, Project ){
 
     // PROJECTS
-    $scope.goToProject = function(projectId) {
-      $state.go('teacherProject', {projectId: projectId})
-    };
-
     $scope.getProjects = function() {
       Project.getProjects().then(function(projects){
         $scope.teacherProjects = projects;
       });
     };
+    
+    $scope.goToProject = function(projectId) {
+      $state.go('teacherProject', {projectId: projectId})
+    };
 
-    $scope.createProject = function(title, subject, author) {
-      Project.createProject(title, subject, author).then(function(projectId){
+    $scope.createProject = function() {
+      // refactor with modal
+      var name = window.prompt('What is the title of the project?');
+      var subject = window.prompt('What subject?');
+      var author = window.prompt('Who is the author?');
+
+      Project.createProject(name, subject, author).then(function(projectId){
         $scope.goToProject(projectId);
       });
     };
@@ -26,18 +31,24 @@ angular.module('app')
       });
     };
 
-    // $scope.createClass = function() {
-    //   // todo: EXTRA
-    // };
-    
     $scope.goToClass = function(classId) {
       $state.go('teacherClass', {classId: classId})
     };
+    
+    $scope.createClass = function() {
+      // todo: EXTRA
+      var className = window.prompt('What is the class name?');
 
+      Class.createClass(name).then(function(classId){
+        $scope.goToClass(classId);
+      })
+    };
+    
+    
     $scope.assignProject = function() { /* associate project with student(s) */ };
 
-    // $scope.getClasses();
     $scope.getProjects();
+    $scope.getClasses();
 
 
   });

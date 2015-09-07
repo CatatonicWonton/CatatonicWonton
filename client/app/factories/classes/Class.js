@@ -1,18 +1,24 @@
 angular.module('app')
-  .factory('Class', function Class($http) {
+  .factory('Class', function Class($http, $stateParams) {
 
     var getClasses = function() {
-      return $http.get('api/classes').then(function(data){
-        // convert data into useable array
+      return $http.get('/api/class').then(function(response){
+        return response.data;
       });
     };
 
+    var getClass = function() {
+      return $http.get('/api/class/' + $stateParams.classId).then(function(response) {
+        return response.data;
+      });
+    };
 
     return {
-      getClasses: getClasses 
-    }
+      getClasses: getClasses,
+      getClass: getClass
+    };
 
-  })
+  });
      
 
 
