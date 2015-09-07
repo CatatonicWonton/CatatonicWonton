@@ -36,12 +36,17 @@ angular.module('app')
     };
     
     $scope.createClass = function() {
-      // todo: EXTRA
       var className = window.prompt('What is the class name?');
 
-      Class.createClass(name).then(function(classId){
+      Class.createClass(className).then(function(classId){
         $scope.goToClass(classId);
       })
+    };
+
+    $scope.deleteClass = function(classId) {
+      Class.deleteClass(classId).then(function(data){
+        console.log('Should have deleted class', data);
+      });
     };
     
     

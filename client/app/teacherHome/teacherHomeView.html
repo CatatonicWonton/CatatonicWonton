@@ -16,7 +16,9 @@
 </div>
 <div ng-repeat="class in teacherClasses">
   {{class.name}}
-  <div ng-click="goToClass(class.Id)"> View Class </div>
+  <div ng-click="goToClass(class.id)"> View Class </div>
+  <div ng-click="deleteClass(class.id)">Delete Class </div>
+  <br>
   <!-- what else do we want to show for each class? -->
 </div>
 

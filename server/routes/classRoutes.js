@@ -48,7 +48,7 @@ router.get('/', function (req, res) {
   Class
     .findAll({
       where: {
-        TeacherId: req.body.TeacherId
+        TeacherId: 1 //req.body.TeacherId
       }
     })
     .then(sendResponse(res));
@@ -62,7 +62,7 @@ router.post('/', function (req, res) {
     })
     .then(function (classModel) { 
       return Promise.props({
-        teacher: Teacher.findById(req.body.TeacherId),
+        teacher: Teacher.findById(1/*req.body.TeacherId*/),
         class: classModel
       });
     })
