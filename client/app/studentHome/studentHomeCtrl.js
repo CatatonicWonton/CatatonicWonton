@@ -1,14 +1,15 @@
 angular.module('app')
-
-  .controller('studentHomeCtrl', function studentHomeCtrl($scope, Project){
+  .controller('studentHomeCtrl', function studentHomeCtrl($scope, $state, Project){
     
-// PROJECTS
+    // PROJECTS
     $scope.getProjects = function() {
       Project.getProjects().then(function(projects){
-        $scope.projects = projects;
+        console.log(projects);
+        $scope.studentProjects = projects;
       });
     };
-                                  // pass in projectId from the view
+  
+    // pass in projectId from the view
     $scope.goToProject = function(projectId) {
       $state.go('studentProject', {projectId: projectId})
     };

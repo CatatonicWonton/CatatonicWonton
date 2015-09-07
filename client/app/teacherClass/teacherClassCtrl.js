@@ -3,7 +3,7 @@ angular.module('app')
     // get specific class
     $scope.getClass = function() {
       Class.getClass().then(function(myClass){
-        $scope.teachersClass = myClass;
+        $scope.teacherClass = myClass;
       })
     };
 

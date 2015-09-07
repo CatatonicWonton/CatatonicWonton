@@ -1,13 +1,17 @@
 angular.module('app')
-  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, Project, User){
+  .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, $sce, Project, User){
 
-    // todo: organize methods by category
+    $scope.project;
+    $scope.currentPage;
+    $scope.froalaOptions = {
+        placeholder: 'Add text, images, videos, and links here',
+        inlineMode: false
+    }
 
     // PROJECT
     $scope.getProject = function() {
       Project.getProject().then(function(project){
         $scope.project = project;
-        console.log("Project:", project);
       });
     };
 
@@ -16,23 +20,31 @@ angular.module('app')
       var pageTitle = window.prompt('What is the title of the page?');
       Project.createPage(pageTitle).then(function(page){
         console.log(page);
-        // $scope.project.pages.push(page);
-        $scope.getProject();
+        $scope.project.Pages.push(page);
       });
     };
 
     $scope.updatePage = function(pageTitle) { /* todo */ };
 
-    // CONTENT
-    $scope.createContent = function(htmlString, pageIndex) { 
-      var pageId = $scope.project.pages[pageIndex].pageId;
+    $scope.changePage = function(pageIndex) {
+      $scope.currentPage = $scope.project.Pages[pageIndex];
+    };
 
-      Project.createContent(htmlString, pageId).then(function(newContent){
-        $scope.project.pages[pageId].content.push(newContent);
+
+    // CONTENT
+    $scope.createContent = function(htmlString, pageId) { 
+      Project.createContent(htmlString, pageId).then(function(page){
+        angular.forEach($scope.project.Pages, function(currentPage) {
+          if(currentPage.id === pageId) {
+            currentPage.content = page.content;
+          }
+        });
       }); 
     };
 
-    $scope.updateContent = function() { /* todo */ };
+    $scope.trustify = function(content) {
+      return $sce.trustAsHtml(content);
+    }
 
     $scope.getProject();
 
