@@ -28,7 +28,16 @@ var extend = function () {
 // get a project
 router.get('/:id', function (req, res) {
   Project
-    .findById(req.params.id)
+    .find({
+      where: {
+        id: req.params.id
+      },
+      include: [
+        {
+          model: Page
+        }
+      ]
+    })
     .then(sendResponse(res));
 });
 
@@ -36,7 +45,7 @@ router.get('/:id', function (req, res) {
 router.get('/', function (req, res) {
   Project.findAll({
     where: {
-      TeacherId: req.body.TeacherId
+      TeacherId: 1 //req.body.TeacherId
     },
     include: [
       { 
@@ -49,6 +58,7 @@ router.get('/', function (req, res) {
 
 // create a project
 router.post('/', function (req, res) {
+  console.log(req.body);
   Project
     .create({
       name: req.body.name,

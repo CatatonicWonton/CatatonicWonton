@@ -3,28 +3,13 @@ var router = express.Router();
 var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
+var utils = require('../utilities.js');
 
 // MODELS
 var Class = Models.Class;
 var Teacher = Models.Teacher;
 var Student = Models.Student;
 var StudentClass = Models.StudentClass;
-
-var sendResponse = function (res) {
-  return function (data) {
-    res.status(200).send(data);
-  };
-};
-
-var extend = function () {
-  var object = {};
-  for (var i = 0; i < arguments.length; i++) {
-    for (var prop in arguments[i]) {
-      object[prop] = arguments[i][prop];
-    }
-  }
-  return object;
-};
 
 // add student to a class
 router.post('/:id', function (req, res) {
@@ -34,7 +19,16 @@ router.post('/:id', function (req, res) {
         return foundClass.addStudent(student);
       });
     })
-    .then(sendResponse(res));
+    .then(utils.sendResponse(res));
+});
+
+router.post('/:id', function (req, res) {
+  Class
+    .findById(req.params.id)
+    .then(function (foundClass) {
+      return Promise.props({})
+    })
+    .then(utils.sendResponse(res));
 });
 
 // deletes student from a class
@@ -48,7 +42,7 @@ router.put('/:id', function (req, res) {
     .then(function (studentClass) {
       return studentClass.destroy();
     })
-    .then(sendResponse(res));
+    .then(utils.sendResponse(res));
 });
 
 

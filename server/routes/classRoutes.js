@@ -3,6 +3,7 @@ var router = express.Router();
 var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
+var Promise = require('bluebird');
 
 // MODELS
 var Class = Models.Class;
@@ -28,17 +29,29 @@ var extend = function () {
 
 // get a single class
 router.get('/:id', function (req, res) {
-  Class.findById(req.params.id)
+  Class
+    .find({
+      where: {
+        id: req.params.id
+      },
+      include: [
+        {
+          model: Student
+        }
+      ]
+    })
     .then(sendResponse(res));
 });
 
 // get all classes
 router.get('/', function (req, res) {
-  Class.findAll({
-    where: {
-      TeacherId: req.body.TeacherId
-    }
-  }).then(sendResponse(res));
+  Class
+    .findAll({
+      where: {
+        TeacherId: req.body.TeacherId
+      }
+    })
+    .then(sendResponse(res));
 });
 
 // create a class
@@ -48,17 +61,23 @@ router.post('/', function (req, res) {
       name: req.body.name
     })
     .then(function (classModel) { 
-      return Teacher.findById(req.body.TeacherId)
-        .then(function (teacher) {
-          return classModel.setTeacher(teacher);
-        });
+      return Promise.props({
+        teacher: Teacher.findById(req.body.TeacherId),
+        class: classModel
+      });
+    })
+    .then(function (results) {
+      var teacher = results.teacher;
+      var classModel = results.class;
+      return classModel.setTeacher(teacher);
     })
     .then(sendResponse(res));
 });
 
 // delete a class
 router.delete('/:id', function (req, res) {
-  Class.findById(req.params.id)
+  Class
+    .findById(req.params.id)
     .then(function (foundClass) {
       return foundClass.destroy();
     })
