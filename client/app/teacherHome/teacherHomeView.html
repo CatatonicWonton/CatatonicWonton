@@ -7,7 +7,7 @@
 </div>
 
 <div ng-repeat="project in teacherProjects">
-  {{project.title}} | {{project.subject}} | {{project.author}}
+  {{project.name}} | {{project.subject}}
   <div ng-click="goToProject(project.Id)"> Edit </div>
 </div>
 
@@ -16,7 +16,7 @@
 </div>
 <div ng-repeat="class in teacherClasses">
   {{class.name}}
-  <div ng-click="goToClass(class.Id)"> Observe Class </div>
+  <div ng-click="goToClass(class.Id)"> View Class </div>
   <!-- what else do we want to show for each class? -->
 </div>
 

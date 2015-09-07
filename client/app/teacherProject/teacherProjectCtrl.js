@@ -7,7 +7,7 @@ angular.module('app')
     $scope.getProject = function() {
       Project.getProject().then(function(project){
         $scope.project = project;
-        console.log(project);
+        console.log("Project:", project);
       });
     };
 
