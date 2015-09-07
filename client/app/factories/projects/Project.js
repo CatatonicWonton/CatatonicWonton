@@ -41,11 +41,9 @@ angular.module('app')
     // this creates and/or updates using PUT
     var createContent = function(htmlString, pageId) {
       var url = 'api/page/' + pageId;
-      return $http.put(url, {content: htmlString})
-        .then(function(page){
-          // return the entire page
-          // send back what I need
-        });
+      return $http.put(url, {content: htmlString}).then(function(result){
+          return result.data;
+      });
     }
 
 

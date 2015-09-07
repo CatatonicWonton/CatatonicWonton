@@ -1,11 +1,12 @@
 <div>
-  <div ng-repeat="project in projects">
-    <div class ="project-tile">
-      <div class = "project-tile-title-box {{project.subject}}-box">
-        <span class= "project-tile-title-text"><strong>{{project.subject}}</strong>: {{project.name}}</span>
+  <div ng-repeat="project in studentProjects">
+    <div class="project-tile" ng-click="goToProject(project.id)">
+      <div>
+        {{project.subject}}: {{project.name}}
       </div>
-      <div class="project-tile-author"><strong>Author: </strong>{{project.author}}</div>
-      
+      <div class="project-tile-author">
+        <strong>Author: </strong>{{project.author}}
+      </div>
     </div>
   </div>
 </div>

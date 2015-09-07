@@ -1,3 +1,13 @@
 <div>
   Test - studentProjectView
 </div>
+<div>
+ <!-- {{project}} -->
+</div>
+<!-- shows titles of each page -->
+<div ng-repeat="page in project.Pages">
+  <h4 ng-click="changePage($index)">{{page.title}}</h4>
+</div>
+
+<!-- show content for current page -->
+<div ng-bind-html="trustify(currentPage.content)"></div>
