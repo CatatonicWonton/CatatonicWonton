@@ -34,6 +34,9 @@
 
 .plus-add {
   color: #059D8E;
+  width: 40px;
+  /*text-align: center;*/
+  display: inline-block;
 }
 
 .plus-add:hover {

@@ -6,7 +6,7 @@
 
 <div class="container projects-container">
   <div>
-    <h1>Projects <span class="plus-add" ng-click="createProject()">+</span></h1>
+    <h1>Projects <div class="plus-add" ng-click="createProject()">+</div></h1>
   </div>
     <div ng-repeat="project in teacherProjects">
       <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
@@ -15,8 +15,12 @@
               <h3 class="panel-title">{{project.name}}</h3>
             </div>
             <div class="panel-body">
-                <p><strong>Subject: </strong>{{project.subject}}</p>              
-               <button type="button" class="btn btn-block btn-success" ng-click="goToProject(project.id)">Edit</button>
+                <p><strong>Subject: </strong>{{project.subject}}</p>
+                <div class="btn-group btn-group-justified">
+                  <div class="btn-group" role="group">   
+                    <button type="button" class="btn btn-block btn-success" ng-click="goToProject(project.id)">Edit</button>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -24,7 +28,7 @@
 </div>
 
 <div class="container class-container">
-  <h1>Classes <span class="plus-add" ng-click="createClass()">+</span></h1>
+  <h1>Classes <div class="plus-add" ng-click="createClass()">+</div></h1>
   <div ng-repeat="class in teacherClasses">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default">
