@@ -12,10 +12,11 @@
     <link rel='stylesheet' href='app/bower_components/FroalaWysiwygEditor/css/froala_content.min.css'>
     <link rel='stylesheet' href='app/bower_components/FroalaWysiwygEditor/css/froala_editor.min.css'>
     <link rel='stylesheet' href='app/bower_components/FroalaWysiwygEditor/css/froala_style.min.css'>
+
     
     <!-- Custom styles -->
     <link rel="stylesheet" type="text/css" href="styles/main.css">
-
+    <link rel="stylesheet" href="styles/lumen.css">
 
     <!-- Froala Main and Plugins -->
     <!-- Plourd: may be able to lazy load to improve perf -->
@@ -38,7 +39,7 @@
   </head>
   <body ng-app="app">
 
-    <nav>
+    <!-- <nav>
         <ul>
             <li><a ui-sref='landing'>Landing</a></li>
             <li><a ui-sref='signup'>Sign Up</a></li>
@@ -49,13 +50,16 @@
             <li><a ui-sref='teacherHome'>teacherHome</a></li>
             <li><a ui-sref='teacherProject'>teacherProject</a></li>
         </ul>
-    </nav>
+    </nav> -->
+    <navbar></navbar>
 
     <ui-view></ui-view>
 
     <!-- dependencies -->
     <script src="app/bower_components/angular/angular.min.js"></script>
     <script src="app/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="app/bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+
 
     <!-- Froala Editor JavaScript dependencies -->
     <script src='app/bower_components/angular-froala/src/angular-froala.js'></script>
@@ -79,6 +83,8 @@
     <script src="app/teacherClass/teacherClassCtrl.js"></script>
     <script src="app/teacherHome/teacherHomeCtrl.js"></script>
     <script src="app/teacherProject/teacherProjectCtrl.js"></script>
+    <script src="app/navbar/nav-directive.js"></script>
+
 
   </body>
 </html>
