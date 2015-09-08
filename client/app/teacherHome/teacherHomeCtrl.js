@@ -12,18 +12,32 @@ angular.module('app')
       $state.go('teacherProject', {projectId: projectId})
     };
 
-    $scope.modalOpen = function(){
+    $scope.modalOpen = function(title, inputArray, callback){
       var modalInstance = $modal.open({
         templateUrl: 'app/teacherHome/newProjectModal.html',
-        controller: 'newProjectModalCtrl'
-      })
-    }
+        controller: function($scope, $modalInstance){
+          $scope.modaltitle = title;
+          $scope.inputArray = inputArray;
+          $scope.storage = [];
+
+          $scope.ok = function(){
+            $modalInstance.close($scope.storage)
+          };
+
+          $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+          };
+        }
+      });
+
+      modalInstance.result.then(function (argsArray) {
+          callback.apply(null, argsArray);
+        }, function () {
+          console.log('Modal dismissed at: ' + new Date());
+        });
+    };
 
     $scope.createProject = function(name, subject, author) {
-      // refactor with modal
-      // var name = window.prompt('What is the title of the project?');
-      // var subject = window.prompt('What subject?');
-      // var author = window.prompt('Who is the author?');
 
       Project.createProject(name, subject, author).then(function(projectId){
         $scope.goToProject(projectId);
@@ -42,10 +56,8 @@ angular.module('app')
       $state.go('teacherClass', {classId: classId})
     };
     
-    $scope.createClass = function() {
-      var className = window.prompt('What is the class name?');
-
-      Class.createClass(className).then(function(classId){
+    $scope.createClass = function(name) {
+      Class.createClass(name).then(function(classId){
         $scope.goToClass(classId);
       })
     };
@@ -63,11 +75,7 @@ angular.module('app')
     $scope.getClasses();
 
 
-  })
-  .controller('newProjectModalCtrl', function newProjectModalCtrl (){
-
-  })
-
+  });
 
 
 

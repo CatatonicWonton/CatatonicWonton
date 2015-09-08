@@ -1,13 +1,17 @@
 <div class="modal-header">
-    <h3 class="modal-title">I'm a modal!</h3>
+    <h3 class="modal-title">{{modaltitle}}</h3>
 </div>
-<div class="modal-body">
-    <ul>
-        <li ng-repeat="item in items">
-            <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-        </li>
-    </ul>
-    Selected: <b>{{ selected.item }}</b>
+<div class="modal-body">    
+    <div class="form-group">
+        <div class="modalInput" ng-repeat="inputfield in inputArray">
+            <label for="">{{inputfield}}</label>
+            <input type="text" class="form-control" placeholder="Type here..." ng-model='storage[$index]'>
+        </div>
+        <!-- <label for="">Subject</label>
+        <input type="text" class="form-control" placeholder="Type here..." ng-model='subject'>
+        <label for="">Author</label>
+        <input type="text" class="form-control" placeholder="Type here..." ng-model='author'> -->
+    </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>

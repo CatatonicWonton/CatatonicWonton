@@ -7,7 +7,7 @@
 
 <div class="container well projects-container">
   <div>
-    <h1>Projects <div class="plus-add" ng-click="modalOpen()">+</div></h1>
+    <h1>Projects <div class="plus-add" ng-click="modalOpen('Create New Project', ['Name', 'Subject', 'Author'], createProject)">+</div></h1>
   </div>
     <div ng-repeat="project in teacherProjects">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
@@ -29,7 +29,7 @@
 </div>
 
 <div class="well container class-container">
-  <h1>Classes <div class="plus-add" ng-click="createClass()">+</div></h1>
+  <h1>Classes <div class="plus-add" ng-click="modalOpen('Create New Class', ['Name'], createClass)">+</div></h1>
   <div ng-repeat="class in teacherClasses">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default">
