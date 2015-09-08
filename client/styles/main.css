@@ -18,6 +18,10 @@
   margin: 10px;
 }
 
+.projects-container, .class-container {
+  max-width: 800px;
+}
+
 .Science-box {
   background-color: #674ea7;
 }
@@ -34,6 +38,14 @@
 
 .plus-add {
   color: #059D8E;
+  width: 40px;
+  /*text-align: center;*/
+  display: inline-block;
+}
+
+.plus-center{
+  font-size: 25px;
+  text-align: center;
 }
 
 .plus-add:hover {

@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('teacherHomeCtrl', function teacherHomeCtrl($scope, $state, Class, Project ){
+  .controller('teacherHomeCtrl', function teacherHomeCtrl($scope, $state, $modal, Class, Project){
 
     // PROJECTS
     $scope.getProjects = function() {
@@ -12,11 +12,18 @@ angular.module('app')
       $state.go('teacherProject', {projectId: projectId})
     };
 
-    $scope.createProject = function() {
+    $scope.modalOpen = function(){
+      var modalInstance = $modal.open({
+        templateUrl: 'app/teacherHome/newProjectModal.html',
+        controller: 'newProjectModalCtrl'
+      })
+    }
+
+    $scope.createProject = function(name, subject, author) {
       // refactor with modal
-      var name = window.prompt('What is the title of the project?');
-      var subject = window.prompt('What subject?');
-      var author = window.prompt('Who is the author?');
+      // var name = window.prompt('What is the title of the project?');
+      // var subject = window.prompt('What subject?');
+      // var author = window.prompt('Who is the author?');
 
       Project.createProject(name, subject, author).then(function(projectId){
         $scope.goToProject(projectId);
@@ -56,7 +63,10 @@ angular.module('app')
     $scope.getClasses();
 
 
-  });
+  })
+  .controller('newProjectModalCtrl', function newProjectModalCtrl (){
+
+  })
 
 
 
