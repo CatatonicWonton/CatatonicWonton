@@ -1,15 +1,16 @@
 <div class="page-header">
   <div class="container">
-    <h1>Mr. Zuniga's Class <small>He's still here? Weird...is Pam here?</small></h1>
+    <h1>Mr. Zuniga's Class <small>6th Grade</small></h1>
   </div>
 </div>
 
-<div class="container projects-container">
+
+<div class="container well projects-container">
   <div>
-    <h1>Projects <div class="plus-add" ng-click="createProject()">+</div></h1>
+    <h1>Projects <div class="plus-add" ng-click="modalOpen()">+</div></h1>
   </div>
     <div ng-repeat="project in teacherProjects">
-      <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">{{project.name}}</h3>
@@ -27,7 +28,7 @@
   </div>
 </div>
 
-<div class="container class-container">
+<div class="well container class-container">
   <h1>Classes <div class="plus-add" ng-click="createClass()">+</div></h1>
   <div ng-repeat="class in teacherClasses">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">

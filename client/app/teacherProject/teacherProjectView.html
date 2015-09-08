@@ -1,44 +1,42 @@
 <!-- display basic information at top of view -->
-<div>
+<!-- <div>
   <h3>{{project.name}}</h3>
   <h3>{{project.subject}}</h3>
   <h3>{{project.author}}</h3>
-</div>
-
-<br>
+</div> -->
 
 <!-- show tabs for each page -->
-<div ng-repeat="page in project.Pages">
-  <h4 ng-click="changePage($index)">{{page.title}}</h4>
-</div>
 
-<!-- adds new page -->
-<div style="color:green" ng-click="createPage()">
-  <h4>Add New Page</h4>
-</div>
-
-<br>
-
-<div>
-  <!-- display current page -->
-  <div>
-    <h4>{{currentPage.title}}</h4>
-  </div>
-  <div>
-    <div style="color:blue">
-      <input type="checkbox" ng-model="showTextEditor">
-      Add New ContentComponent
-    </div>
-    <!-- add textAngular directive and set its model to  -->
-    <div ng-show="showTextEditor">
-      <!-- <div text-angular ng-model="newComponentHtml"></div> -->
-      <textarea froala="froalaOptions" ng-model="currentPage.content"></textarea>
-      <button style="font-size:20px" ng-click="createContent(currentPage.content, currentPage.id)">submit</button>
-    </div>
+<div class="container">
+  <div class="page-header">
+    <h1>{{project.name}} <small>{{project.subject}}<!--  | {{project.TeacherId}} --></small></h1>
   </div>
 </div>
 
-<!-- shows what html and rendered text will look like -->
-<pre>{{ currentPage.content }}</pre>
-<div ng-bind-html="trustify(currentPage.content)"></div>
+<div class="container">
+  <tabset>
+    <tab ng-repeat="page in project.Pages" heading="Page {{$index+1}}" active='page.active'>
+      <div class="container">
+        <h3>{{page.title}}</h3>
+        <div style="color:blue">
+          <input type="checkbox" ng-model="showTextEditor">
+          Add New ContentComponent
+        </div>
+        <div class="container">
+          <div ng-show="showTextEditor">
+            <textarea froala="froalaOptions" ng-model="page.content"></textarea>
+            <button style="font-size:20px" ng-click="createContent(page.content, page.id)">submit</button>
+          </div>
+        </div>
+        <div ng-bind-html="trustify(page.content)"></div>
+      </div>
+    </tab>
+
+    <tab>
+      <tab-heading>
+        <span ng-click="createPage()" disabled="true">+</span>
+      </tab-heading>
+    </tab>
+  </tabset>
+</div>
 
