@@ -1,21 +1,87 @@
 var express = require('express');
-var bodyParser = require('body-parser');
 var db = require('./db.js');
 var sequelize = require('sequelize');
+var Promise = require('bluebird');
+
+// Auth
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+// Auth models
+var StudentModel = db.Models.Student;
+var TeacherModel = db.Models.Teacher;
+
+
+// middleware
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
 // ROUTE HANDLER
-var classRoutes           = require('./routes/classRoutes');
-var pageRoutes            = require('./routes/pageRoutes');
-var projectsRoutes        = require('./routes/projectsRoutes');
-var studentRoutes         = require('./routes/studentRoutes');
-var studentClassRoutes    = require('./routes/studentClassRoutes');
-var studentProjectRoutes  = require('./routes/studentProjectRoutes');
+var classRoutes          = require('./routes/classRoutes');
+var pageRoutes           = require('./routes/pageRoutes');
+var projectsRoutes       = require('./routes/projectsRoutes');
+var studentRoutes        = require('./routes/studentRoutes');
+var studentClassRoutes   = require('./routes/studentClassRoutes');
+var studentProjectRoutes = require('./routes/studentProjectRoutes');
 
 var app = express();
 
 // app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
 
+// passport middleware
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(session({ secret: 'SECRET' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Authentication
+
+// TODO: sign up
+
+
+// sign in
+Promise
+  .some([
+    StudentModel.findOne({
+      where: {username: username}
+    }),
+    TeacherModel.findOne({
+      where: {username: username}
+    })
+  ], 1)
+  .then(function (user) {
+    if(user.password === password) {
+      return done(null, user);
+    }
+    return done(null, false, { message: 'Incorrect password.' });
+  })
+  .catch(AggregateError, function(err) {
+    return done(null, false, { message: 'Incorrect username.' });
+  });
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    Promise
+      .some([
+        StudentModel.findOne({
+          where: {username: username}
+        }),
+        TeacherModel.findOne({
+          where: {username: username}
+        })
+      ], 1)
+      .then(function (user) {
+        if(user.password === password) { // ???
+          return done(null, user);
+        }
+        return done(null, false, { message: 'Incorrect password.' });
+      })
+      .catch(AggregateError, function(err) {
+        return done(null, false, { message: 'Incorrect username.' });
+      });
+  }
+));
 
 app.use(express.static(__dirname + '/../client'));
 
