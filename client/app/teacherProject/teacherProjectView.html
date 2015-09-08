@@ -15,9 +15,8 @@
 
 <div class="container">
   <tabset>
-    <tab ng-repeat="page in project.Pages" heading="Page {{$index+1}}" active='page.active'>
+    <tab ng-repeat="page in project.Pages" heading="{{page.title}}" active='page.active'>
       <div class="container">
-        <h3>{{page.title}}</h3>
         <div style="color:blue">
           <input type="checkbox" ng-model="showTextEditor">
           Add New ContentComponent

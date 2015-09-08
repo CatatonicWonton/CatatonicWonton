@@ -56,3 +56,7 @@
 .plus-add:active {
   color: #313732;
 }
+
+.modalInput {
+  margin: 10px auto;
+}
