@@ -41,6 +41,7 @@ router.post('/signup',
 
 // sign out
 router.post('/logout', function (req, res) {
+  req.session.destory();
   req.logout();
 });
 

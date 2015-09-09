@@ -16,7 +16,9 @@ module.exports = function (passport) {
           
           bcrypt.compare(password, user.password, function(err, res) {
             if (res) {
-              return done(null, user);
+              var accountType = {};
+              accountType.accountType = student ? 'student' : 'teacher';
+              return done(null, Utils.extend(user, accountType));
             }
             return done(null, false, {message: 'Incorrect password'})
           });
@@ -28,12 +30,19 @@ module.exports = function (passport) {
   ));
 
   passport.serializeUser(function(user, done) {
-    done(null, user.username);
+    var sessionUser = {
+      _id: user.id,
+      accountType: user.accountType,
+      username: user.username
+    };
+
+    console.log(sessionUser);
+    done(null, sessionUser);
   });
 
-  passport.deserializeUser(function(username, done) {
+  passport.deserializeUser(function(user, done) {
     Utils
-      .findUsername(username)
+      .findUsername(user.username)
       .spread(function (user) {
         return done(null, user);
       })
