@@ -1,15 +1,26 @@
 <div style='margin-left: 20px'>
-  <form ng-submit="signup(username, password, type)">
+  <form ng-submit="signup(firstName, lastName, username, password, accountType)">
+    <div>
+        <label>First Name:</label><br/>
+        <input ng-model="firstName" type="text" name="firstName"/>
+    </div>
+
+    <div>
+        <label>Last Name:</label><br/>
+        <input ng-model="lastName" type="text" name="lastName"/>
+    </div>
+
+    <br/>
+    
     <label>
-      <input type="radio" ng-model="type" value="teacher">
+      <input type="radio" ng-model="accountType" value="Teacher">
       Teacher
     </label><br/>
     <label>
-      <input type="radio" ng-model="type" value="student">
+      <input type="radio" ng-model="accountType" value="Student">
       Student
     </label>
 
-    <br/>
     <br/>
     
     <div>
@@ -22,8 +33,6 @@
     </div>
 
     <br/>
-
-
 
     <div>
         <input type="submit" value="Sign Up"/>
