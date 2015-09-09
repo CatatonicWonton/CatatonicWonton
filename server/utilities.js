@@ -28,6 +28,6 @@ module.exports = {
         Models.Teacher.findOne({
           where: {username: username}
         })
-      ], 1)
+      ], 2)
   }
 };
