@@ -8,12 +8,13 @@ var bcrypt = require('bcrypt');
 
 // Auth
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var passportMiddleware = require('./passportMiddleware.js').Strategy;
 
 // middleware
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+
 
 // ROUTE HANDLER
 var authRoutes           = require('./routes/authRoutes');
@@ -29,6 +30,7 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/../client'));
+
 // middleware
 app.use(cookieParser());
 app.use(bodyParser.json());
