@@ -13,6 +13,8 @@ var createAccount = function (req, res, next) {
   var accountType = req.body.accountType;
   var username = req.body.username;
 
+  console.log('account creation');
+
   req.body.salt = bcrypt.genSaltSync(10);
   req.body.password = bcrypt.hashSync(req.body.password, req.body.salt);
 
