@@ -75,7 +75,8 @@ router.post('/class/:id', function (req, res) {
 
 // teacher can unassign a project from a student
 router.delete('/student/:id', function (req, res) {
-  StudentProject.findOne({
+  StudentProject
+    .findOne({
       where: {
         StudentId: req.params.id,
         ProjectId: req.body.ProjectId

@@ -8,7 +8,7 @@ var bcrypt = require('bcrypt');
 
 // Auth
 var passport = require('passport');
-var passportMiddleware = require('./passportMiddleware.js').Strategy;
+var passportMiddleware = require('./passportMiddleware.js');
 
 // middleware
 var cookieParser = require('cookie-parser');
@@ -41,6 +41,8 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+passportMiddleware(passport);
 
 // Define Routes
 app.use('/auth', authRoutes);
