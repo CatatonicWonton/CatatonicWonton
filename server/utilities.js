@@ -1,3 +1,7 @@
+var Promise = require('bluebird');
+var Models = require('./db').Models;
+var sequelize = require('Sequelize');
+
 module.exports = {
   extend: function () {
     var object = {};
@@ -13,5 +17,17 @@ module.exports = {
     return function (data) {
       res.status(200).send(data);
     };
+  },
+
+  findUsername: function (username) {
+    return Promise
+      .some([
+        Models.Student.findOne({
+          where: {username: username}
+        }),
+        Models.Teacher.findOne({
+          where: {username: username}
+        })
+      ], 1)
   }
 };
