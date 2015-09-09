@@ -13,10 +13,8 @@ var createAccount = function (req, res, next) {
   var accountType = req.body.accountType;
   var username = req.body.username;
 
-  console.log('account creation');
-
   req.body.salt = bcrypt.genSaltSync(10);
-  req.body.password = bcrypt.hashSync(req.body.password, req.body.salt);
+  var hashedPassword = bcrypt.hashSync(req.body.password, req.body.salt);
 
   Utils
     .findUsername(username)
@@ -24,8 +22,10 @@ var createAccount = function (req, res, next) {
       var user = student || teacher;
       if (!user) {
         Models[accountType]
-          .create(req.body);
-        next();
+          .create(Utils.extend(req.body, {password: hashedPassword}))
+          .then(function(){
+            next();
+          });
       } else {
         res.send('Username is already taken!');
       }
