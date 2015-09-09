@@ -15,6 +15,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 // ROUTE HANDLER
+var authRoutes           = require('./routes/authRoutes');
 var classRoutes          = require('./routes/classRoutes');
 var pageRoutes           = require('./routes/pageRoutes');
 var projectsRoutes       = require('./routes/projectsRoutes');
@@ -86,23 +87,8 @@ passport.deserializeUser(function(username, done) {
     });
 });
 
-function createAccount (req, res) {
-  var accountType = req.body.accountType;
-  var username = req.body.username;
-
-  Utils
-    .findUsername(username)
-    .spread(function (user) {
-      if (!user) {
-        Models[accountType]
-          .create(req.body);
-      } else {
-        res.send('Username is already taken!');
-      }
-    })
-};
-
 // Define Routes
+app.use('/auth', authRoutes);
 app.use('/api/class', classRoutes);
 app.use('/api/page', pageRoutes);
 app.use('/api/projects', projectsRoutes);
