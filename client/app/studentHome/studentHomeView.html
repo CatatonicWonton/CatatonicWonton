@@ -1,22 +1,24 @@
-<div>
-  <div ng-repeat="project in studentProjects">
-    <div class="project-tile" ng-click="goToProject(project.id)">
-      <div>
-        {{project.subject}}: {{project.name}}
-      </div>
-      <div class="project-tile-author">
-        <strong>Author: </strong>{{project.author}}
-      </div>
-    </div>
+<div class="page-header">
+  <div class="container">
+    <h1>Jeff's Projects</h1>
   </div>
 </div>
 
 
-<!-- 
-name
-subject
-author
-pages
-  title
-
- -->
+<div class = "well container class-container">
+  <div ng-repeat="project in studentProjects">
+    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{project.name}}</h3>
+          </div>
+          <div class="panel-body">
+              <p><strong>Subject: </strong>{{project.subject}}</p>
+              <div class="btn-group btn-group-justified">
+                <div class="btn-group" role="group">   
+                  <button type="button" class="btn btn-block btn-primary" ng-click="goToProject(project.id)">View</button>
+                </div>
+              </div>
+          </div>
+      </div>
+</div>
