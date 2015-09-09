@@ -11,7 +11,8 @@ module.exports = function (sequelize, DataTypes) {
     //   }
     // },
     username: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: DataTypes.STRING,
+    salt: DataTypes.STRING
   });
 };
 
