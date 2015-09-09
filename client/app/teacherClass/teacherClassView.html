@@ -1,13 +1,23 @@
-<div>
-  Test - teacherClassView
+<div class="page-header">
+  <div class="container">
+    <h1>Mr. Zuniga <small>Class: {{teacherClass.name}}</small></h1>
+  </div>
 </div>
 
-<div>
-  {{teacherClass.name}}
-</div>
-<div>
-  <p>Add New Student</p>
-</div>
-<div ng-repeat="student in teacherClass.Students">
-  <p>student.name</p>
+
+<div class="container class-container well">
+  <h1>Students</h1>
+    <div ng-repeat="student in teacherClass.Students">
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{student.firstName | limitTo : 1}}. {{student.lastName}}</h3>
+            </div>
+            <div class="panel-body">
+                <p><strong>Project: </strong></p>
+                <p><strong>Progress: </strong></p>
+            </div>
+        </div>
+    </div>
+  </div>
 </div>

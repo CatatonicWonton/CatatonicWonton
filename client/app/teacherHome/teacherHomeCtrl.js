@@ -1,45 +1,47 @@
 angular.module('app')
-  .controller('teacherHomeCtrl', function teacherHomeCtrl($scope, $state, $modal, Class, Project){
+  .controller('teacherHomeCtrl', function teacherHomeCtrl($scope, $state, $modal, Class, Project) {
 
     // PROJECTS
     $scope.getProjects = function() {
-      Project.getProjects().then(function(projects){
+      Project.getProjects().then(function(projects) {
         $scope.teacherProjects = projects;
       });
     };
-    
+
     $scope.goToProject = function(projectId) {
-      $state.go('teacherProject', {projectId: projectId})
+      $state.go('teacherProject', {
+        projectId: projectId
+      })
     };
 
-    $scope.modalOpen = function(title, inputArray, callback){
+    $scope.modalOpen = function(title, inputArray, callback) {
       var modalInstance = $modal.open({
         templateUrl: 'app/teacherHome/newProjectModal.html',
-        controller: function($scope, $modalInstance){
+        controller: function($scope, $modalInstance) {
           $scope.modaltitle = title;
           $scope.inputArray = inputArray;
           $scope.storage = [];
 
-          $scope.ok = function(){
+          $scope.ok = function() {
             $modalInstance.close($scope.storage)
           };
 
-          $scope.cancel = function () {
+          $scope.cancel = function() {
             $modalInstance.dismiss('cancel');
           };
         }
       });
 
-      modalInstance.result.then(function (argsArray) {
-          callback.apply(null, argsArray);
-        }, function () {
-          console.log('Modal dismissed at: ' + new Date());
-        });
+      modalInstance.result.then(function(argsArray) {
+        callback.apply(null, argsArray);
+      }, function() {
+        console.log('Modal dismissed at: ' + new Date());
+      });
     };
 
     $scope.createProject = function(name, subject, author) {
 
-      Project.createProject(name, subject, author).then(function(projectId){
+      Project.createProject(name, subject, author).then(function(projectId) {
         $scope.goToProject(projectId);
       });
     };
@@ -47,28 +49,30 @@ angular.module('app')
 
     // CLASSES
     $scope.getClasses = function() {
-      Class.getClasses().then(function(classes){
+      Class.getClasses().then(function(classes) {
         $scope.teacherClasses = classes;
       });
     };
 
     $scope.goToClass = function(classId) {
-      $state.go('teacherClass', {classId: classId})
+      $state.go('teacherClass', {
+        classId: classId
+      })
     };
-    
+
     $scope.createClass = function(name) {
-      Class.createClass(name).then(function(classId){
+      Class.createClass(name).then(function(classId) {
         $scope.goToClass(classId);
       })
     };
 
     $scope.deleteClass = function(classId) {
-      Class.deleteClass(classId).then(function(data){
+      Class.deleteClass(classId).then(function(data) {
         console.log('Should have deleted class', data);
       });
     };
-    
-    
+
+
     $scope.assignProject = function() { /* associate project with student(s) */ };
 
     $scope.getProjects();
@@ -79,21 +83,15 @@ angular.module('app')
 
 
 
-
-
-
-
 // ******************************************************************************** //
-        // trash:
+// trash:
 // ******************************************************************************** //
-
-
 
 
 
 // model: where we store all relavant data for this view
 
-    // this is the array of current project for this teacher
+// this is the array of current project for this teacher
 
 /*
 
