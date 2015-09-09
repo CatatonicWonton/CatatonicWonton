@@ -33,14 +33,15 @@ router.get('/:id', function (req, res) {
 
 // add a page to a project
 router.post('/:projectId', function (req, res) {
-  Project
-    .findById(req.params.projectId)
-    .then(function (project) {
-      return Promise.props({page: Page.create(req.body), project: project});
-    })
-    .then(function (results) {
-      var page = results.page;
-      var project = results.project;
+  Promise
+    .all([
+      Page
+        .create(req.body),
+
+      Project
+        .findById(req.params.projectId)
+    ])
+    .spread(function (page, project) {
       return Promise.join(project.addPage(page), function () {
         return page;
       });

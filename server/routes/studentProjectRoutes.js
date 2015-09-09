@@ -29,29 +29,60 @@ var extend = function () {
 
 // teacher can assign a project to a student
 router.post('/student/:id', function (req, res) {
-  Student.findById(req.params.id)
-    .then(function (student) {
-      return Project.findById(req.body.ProjectId).then(function (project) {
-        return student.addProject(project);
-      });
-    })
-    .then(sendResponse(res));
+  Promise.all([
+    Student
+      .findById(req.params.id),
+
+    Project
+      .findById(req.body.ProjectId)
+  ])
+  .spread(function (student, project) {
+    return student.addProject(project);
+  })
+  .then(sendResponse(res));
 });
 
 // teacher can assign projects to a class
 router.post('/class/:id', function (req, res) {
-  Project.findById(req.body.ProjectId).then(function(project) {
-    return Class.findById(req.params.id)
-      .then(function (foundClass) {
-        return foundClass.getStudents()
-          .then(function(students) {
-            students.forEach(function(student){
-              student.addProject(project);
-            });
-          })
-      })
+  // Project.findById(req.body.ProjectId).then(function(project) {
+  //   return Class.findById(req.params.id)
+  //     .then(function (foundClass) {
+  //       return foundClass.getStudents()
+  //         .then(function(students) {
+  //           students.forEach(function(student){
+  //             student.addProject(project);
+  //           });
+  //         })
+  //     })
+  // })
+  // .then(sendResponse(res));
+  Promise.all([
+    Project
+      .findById(req.body.ProjectId),
+
+    Class
+      .findById(req.params.id)
+  ])
+  .spread(function (project) {
+
   })
-  .then(sendResponse(res));
+
+  Class
+    .findById(req.params.id)
+    .then(function (foundClass) {
+      return Promise.all([
+        foundClass
+          .getStudents(),
+
+        Project
+          .findById(req.body.ProjectId)
+      ])
+    })
+    .spread(function (students, project) {
+      students.forEach(function (student) {
+        student.addProject(project);
+      });
+    })
 });
 
 // teacher can unassign a project from a student

@@ -56,20 +56,18 @@ router.get('/', function (req, res) {
 
 // create a class
 router.post('/', function (req, res) {
-  Class
-    .create({
-      name: req.body.name
-    })
-    .then(function (classModel) { 
-      return Promise.props({
-        teacher: Teacher.findById(1/*req.body.TeacherId*/),
-        class: classModel
-      });
-    })
-    .then(function (results) {
-      var teacher = results.teacher;
-      var classModel = results.class;
-      return classModel.setTeacher(teacher);
+  Promise
+    .all([
+      Class
+        .create({
+          name: req.body.name
+        }),
+        
+      Teacher
+        .findById(req.body.TeacherId)
+    ])
+    .spread(function (newClass, teacher) {
+      return newClass.setTeacher(teacher);
     })
     .then(sendResponse(res));
 });

@@ -4,6 +4,7 @@ var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
 var utils = require('../utilities.js');
+var Promise = require('bluebird');
 
 // MODELS
 var Class = Models.Class;
@@ -13,13 +14,17 @@ var StudentClass = Models.StudentClass;
 
 // add student to a class
 router.post('/:id', function (req, res) {
-  Class.findById(req.params.id)
-    .then(function (foundClass) {
-      return Student.findById(req.body.StudentId).then(function (student) {
-        return foundClass.addStudent(student);
-      });
-    })
-    .then(utils.sendResponse(res));
+  Promise.all([
+    Class
+      .findById(req.params.id),
+
+    Student
+      .findById(req.body.StudentId)
+  ])
+  .spread(function (foundClass, student) {
+    return foundClass.addStudent(student);
+  })
+  .then(utils.sendResponse(res));
 });
 
 router.post('/:id', function (req, res) {
