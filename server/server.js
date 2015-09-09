@@ -42,61 +42,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Passport Authentication
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    Promise
-      .some([
-        Models.Student.findOne({
-          where: {username: username}
-        }),
-        Models.Teacher.findOne({
-          where: {username: username}
-        })
-      ], 2)
-      .spread(function (student, teacher) {
-        var user = student || teacher;
-
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username' });
-        }
-        
-        bcrypt.compare(password, user.password, function(err, res) {
-          if (res) {
-            return done(null, user);
-          }
-          return done(null, false, {message: 'Incorrect password'})
-        });
-      })
-      .catch(function(err) { // catches in the event of database failure
-        return done(err);
-      });
-  }
-));
-
-// session support
-passport.serializeUser(function(user, done) {
-  done(null, user.username); // we use ".username" instead of ".id" becuase teacher and student ids can collide
-});
-
-passport.deserializeUser(function(username, done) {
-  Promise
-    .some([
-      Models.Student.findOne({
-        where: {username: username}
-      }),
-      Models.Teacher.findOne({
-        where: {username: username}
-      })
-    ], 1)
-    .spread(function (user) {
-      return done(null, user);
-    })
-    .catch(function(err) {
-      return done(err);
-    });
-});
-
 // Define Routes
 app.use('/auth', authRoutes);
 app.use('/api/class', classRoutes);

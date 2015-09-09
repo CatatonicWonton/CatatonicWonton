@@ -1,50 +1,39 @@
 var LocalStrategy = require('passport-local').Strategy;
-var db = require('./db.js');
-var Promise = require('bluebird');
-var Models = db.Models;
 var Utils = require('./utilities.js');
+var bcrypt = require('bcrypt');
 
 module.exports = function (passport) {
   passport.use(new LocalStrategy(
     function(username, password, done) {
-      Promise
-        .some([
-          Models.Student.findOne({
-            where: {username: username}
-          }),
-          Models.Teacher.findOne({
-            where: {username: username}
-          })
-        ], 1)
-        .spread(function (user) {
-          if(!user) {
-            return done(null, false, { message: 'Incorrect username or password.' });
+      Utils
+        .findUsername(username)
+        .spread(function (student, teacher) {
+          var user = student || teacher;
+
+          if (!user) {
+            return done(null, false, { message: 'Incorrect username' });
           }
-          if(user.password === password) { 
-            return done(null, user);
-          }
+          
+          bcrypt.compare(password, user.password, function(err, res) {
+            if (res) {
+              return done(null, user);
+            }
+            return done(null, false, {message: 'Incorrect password'})
+          });
         })
-        .catch(function(err) { // catches in the event of database failure
+        .catch(function(err) {
           return done(err);
         });
     }
   ));
 
-  // session support
   passport.serializeUser(function(user, done) {
-    done(null, user.username); // we use ".username" instead of ".id" becuase teacher and student ids can collide
+    done(null, user.username);
   });
 
   passport.deserializeUser(function(username, done) {
-    Promise
-      .some([
-        Models.Student.findOne({
-          where: {username: username}
-        }),
-        Models.Teacher.findOne({
-          where: {username: username}
-        })
-      ], 1)
+    Utils
+      .findUsername(username)
       .spread(function (user) {
         return done(null, user);
       })

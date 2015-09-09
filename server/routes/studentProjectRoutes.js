@@ -44,18 +44,6 @@ router.post('/student/:id', function (req, res) {
 
 // teacher can assign projects to a class
 router.post('/class/:id', function (req, res) {
-  // Project.findById(req.body.ProjectId).then(function(project) {
-  //   return Class.findById(req.params.id)
-  //     .then(function (foundClass) {
-  //       return foundClass.getStudents()
-  //         .then(function(students) {
-  //           students.forEach(function(student){
-  //             student.addProject(project);
-  //           });
-  //         })
-  //     })
-  // })
-  // .then(sendResponse(res));
   Promise.all([
     Project
       .findById(req.body.ProjectId),
@@ -101,9 +89,13 @@ router.delete('/student/:id', function (req, res) {
 
 // teacher can unassign projects from a class
 router.delete('/class/:id', function (req, res) {
-  Class.findById(req.params.id).then(function(foundClass){
-    return foundClass.getStudents().then(function(students){
-      students.forEach(function(student){
+  Class
+    .findById(req.params.id)
+    .then(function (foundClass) {
+      return foundClass.getStudents();
+    })
+    .then(function (students) {
+      students.forEach(function (student) {
         StudentProject.findOne({
           where: {
             StudentId: student.id,
@@ -113,9 +105,7 @@ router.delete('/class/:id', function (req, res) {
           return studentProject.destroy();
         })
       })
-    })
-  })
-  .then(sendResponse(res));
+    });
 });
 
 module.exports = router;
