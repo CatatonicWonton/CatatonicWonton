@@ -32,25 +32,24 @@ var createAccount = function (req, res, next) {
     });
 };
 
-var success = function (req, res) {
-  res.status(200).send(true);
+var logout = function (req, res, next) {
+  req.session.destroy();
+  req.logout();
+  next();
 };
 
-router.post('/login', passport.authenticate('local'), function (req, res) {
+var success = function (req, res, next) {
+  res.status(200).send(true);
+  next();
+};
+
+router.post('/login', passport.authenticate('local'), function (req, res, next) {
   res.status(200).send(req.session.passport.user);
 });
 
-router.post('/signup',
-  createAccount,
-  success
-  // passport.authenticate('local'),
-  // success
-);
+router.post('/signup', createAccount, success);
 
 // sign out
-router.post('/logout', function (req, res) {
-  req.session.destroy();
-  req.logout();
-});
+router.post('/logout', logout);
 
 module.exports = router;

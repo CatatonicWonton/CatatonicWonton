@@ -5,6 +5,7 @@ var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
 var Promise = require('bluebird');
 var Utils = require('../utilities.js');
+var helpers = require('../helpers.js');
 
 // MODELS
 var Class = Models.Class;
@@ -14,22 +15,24 @@ var StudentClass = Models.StudentClass;
 
 // add student to a class
 router.post('/:id', function (req, res) {
-  Promise.all([
-    Class
-      .findById(req.params.id),
+  Promise
+    .all([
+      Class
+        .findById(req.params.id),
 
-    Student
-      .findById(req.body.StudentId)
-  ])
-  .spread(function (foundClass, student) {
-    return foundClass.addStudent(student);
-  })
-  .then(Utils.sendResponse(res));
+      Student
+        .findById(req.body.StudentId)
+    ])
+    .spread(function (foundClass, student) {
+      return foundClass.addStudent(student);
+    })
+    .then(helpers.sendResponse(res));
 });
 
 // deletes student from a class
 router.put('/:id', function (req, res) {
-  StudentClass.findOne({
+  StudentClass
+    .findOne({
       where: {
         ClassId: req.params.id,
         StudentId: req.body.StudentId
@@ -38,7 +41,7 @@ router.put('/:id', function (req, res) {
     .then(function (studentClass) {
       return studentClass.destroy();
     })
-    .then(Utils.sendResponse(res));
+    .then(helpers.sendResponse(res));
 });
 
 

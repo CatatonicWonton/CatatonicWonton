@@ -89,9 +89,6 @@ var makeProjects = function () {
     subject: 'Bio'
   })
   .then(function(project){
-    console.log('********************************');
-    console.log(project.setTeacher(teacher));
-    console.log('********************************');
     return project.setTeacher(teacher);
   })
   .then(makePages);
@@ -99,6 +96,8 @@ var makeProjects = function () {
 
 tables.Teacher.create({
   firstName: "Mychael",
-  lastName: "Zuniga"
+  lastName: "Zuniga",
+  username: "mike",
+  password: 'password'
 })
 .then(makeClasses);
