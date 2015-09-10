@@ -29,7 +29,7 @@ var extend = function () {
 };
 
 // teacher can assign a project to a student
-router.post('/student/:id', checkIf('Teacher'), function (req, res) {
+router.post('/student/:id', Utils.checkIf('Teacher'), function (req, res) {
   Promise.all([
     Student
       .findById(req.params.id),
@@ -44,7 +44,7 @@ router.post('/student/:id', checkIf('Teacher'), function (req, res) {
 });
 
 // teacher can assign projects to a class
-router.post('/class/:id', checkIf('Teacher'), function (req, res) {
+router.post('/class/:id', Utils.checkIf('Teacher'), function (req, res) {
   Class
     .findById(req.params.id)
     .then(function (foundClass) {
@@ -64,7 +64,7 @@ router.post('/class/:id', checkIf('Teacher'), function (req, res) {
 });
 
 // teacher can unassign a project from a student
-router.delete('/student/:id', checkIf('Teacher'), function (req, res) {
+router.delete('/student/:id', Utils.checkIf('Teacher'), function (req, res) {
   StudentProject
     .findOne({
       where: {
@@ -79,7 +79,7 @@ router.delete('/student/:id', checkIf('Teacher'), function (req, res) {
 });
 
 // teacher can unassign projects from a class
-router.delete('/class/:id', checkIf('Teacher'), function (req, res) {
+router.delete('/class/:id', Utils.checkIf('Teacher'), function (req, res) {
   Class
     .findById(req.params.id)
     .then(function (foundClass) {
@@ -87,7 +87,8 @@ router.delete('/class/:id', checkIf('Teacher'), function (req, res) {
     })
     .then(function (students) {
       students.forEach(function (student) {
-        StudentProject.findOne({
+        StudentProject
+        .findOne({
           where: {
             StudentId: student.id,
             ProjectId: req.body.ProjectId  

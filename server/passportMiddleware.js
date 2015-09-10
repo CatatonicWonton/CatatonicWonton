@@ -35,13 +35,14 @@ module.exports = function (passport) {
       username: user.username
     };
 
-    done(null, sessionUser);
+    return done(null, sessionUser);
   });
 
   passport.deserializeUser(function(user, done) {
     Utils
       .findUsername(user.username)
-      .spread(function (user) {
+      .spread(function (student, teacher) {
+        var user = student || teacher;
         return done(null, user);
       })
       .catch(function(err) {

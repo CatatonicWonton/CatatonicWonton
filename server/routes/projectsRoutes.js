@@ -10,6 +10,7 @@ var Utils = require('../utilities.js');
 var Project = Models.Project; 
 var Page = Models.Page;
 var Teacher = Models.Teacher;
+var StudentProject = Models.StudentProject;
 
 var sendResponse = function (res) {
   return function (data) {
@@ -46,7 +47,7 @@ router.get('/:id', function (req, res) {
 // get all projects
 router.get('/', function (req, res) {
   var user = req.session.passport.user;
-
+  console.log(user);
   if (user.accountType === 'Teacher') {
     Project.findAll({
       where: {
@@ -75,7 +76,7 @@ router.get('/', function (req, res) {
 });
 
 // create a project
-router.post('/', checkIf('Teacher'), function (req, res) {
+router.post('/', Utils.checkIf('Teacher'), function (req, res) {
   Promise
     .all([
       Project
@@ -94,7 +95,7 @@ router.post('/', checkIf('Teacher'), function (req, res) {
 }); 
 
 // edit a project
-router.put('/:id', checkIf('Teacher'), function (req, res) {
+router.put('/:id', Utils.checkIf('Teacher'), function (req, res) {
   Project
     .upsert(extend(req.body, {id: req.params.id}))
     .then(function () {
@@ -104,7 +105,7 @@ router.put('/:id', checkIf('Teacher'), function (req, res) {
 }); 
 
 // delete a project
-router.delete('/:id', checkIf('Teacher'), function (req, res) {
+router.delete('/:id', Utils.checkIf('Teacher'), function (req, res) {
   Project
     .findById(req.params.id)
     .then(function (project) {

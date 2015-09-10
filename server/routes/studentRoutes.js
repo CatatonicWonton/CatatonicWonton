@@ -27,7 +27,7 @@ var extend = function () {
 };
 
 // gets a student
-router.get('/:id', checkIf('Teacher'), function (req, res) {
+router.get('/:id', Utils.checkIf('Teacher'), function (req, res) {
   Student.findById(req.params.id)
     .then(sendResponse(res));
 });
@@ -39,7 +39,7 @@ router.post('/', function (req, res) {
 });
 
 // edit a student
-router.put('/:id', checkIf('Teacher'), function (req, res) {
+router.put('/:id', Utils.checkIf('Teacher'), function (req, res) {
   Student
     .upsert(extend(req.body, {id: req.params.id}))
     .then(function () {
@@ -49,7 +49,7 @@ router.put('/:id', checkIf('Teacher'), function (req, res) {
 });
 
 // delete a student
-router.delete('/:id', checkIf('Teacher'), function (req, res) {
+router.delete('/:id', Utils.checkIf('Teacher'), function (req, res) {
   Student.findById(req.params.id)
     .then(function (student) {
       return student.destroy();
