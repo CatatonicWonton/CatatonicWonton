@@ -1,41 +1,45 @@
-<div style='margin-left: 20px'>
-  <form ng-submit="signup(firstName, lastName, username, password, accountType)">
-    <div>
-        <label>First Name:</label><br/>
-        <input ng-model="firstName" type="text" name="firstName"/>
-    </div>
+<div class="container well form-wrap">
+    <form ng-submit="signup(firstName, lastName, username, password, accountType)" role="form">
+        <legend>Signup</legend>
 
-    <div>
-        <label>Last Name:</label><br/>
-        <input ng-model="lastName" type="text" name="lastName"/>
-    </div>
+        <div class="form-group">
+            <div class='type-selector'>
+                <div class="row signup-row">
+                    <div class="account-type-wrap col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    Account Type:
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <label class="btn btn-block btn-success" ng-model="accountType" btn-radio="'Teacher'">Teacher</label>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                <label class="btn btn-block btn-success" ng-model="accountType" btn-radio="'Student'">Student</label>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row signup-row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" ng-model="firstName" placeholder="Type here...">
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" ng-model="lastName" placeholder="Type here...">
+                </div>
+            </div>
+            <div class="row signup-row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label>Username</label>
+                    <input type="text" class="form-control" ng-model="username" placeholder="Type here...">
+                    <label>Password</label>
+                    <input type="password" class="form-control" ng-model="password" placeholder="Type here...">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
 
-    <br/>
-    
-    <label>
-      <input type="radio" ng-model="accountType" value="Teacher">
-      Teacher
-    </label><br/>
-    <label>
-      <input type="radio" ng-model="accountType" value="Student">
-      Student
-    </label>
-
-    <br/>
-    
-    <div>
-        <label>Username:</label><br/>
-        <input ng-model="username" type="text" name="username"/>
-    </div>
-    <div>
-        <label>Password:</label><br/>
-        <input ng-model="password" type="password" name="password"/>
-    </div>
-
-    <br/>
-
-    <div>
-        <input type="submit" value="Sign Up"/>
-    </div>
-  </form>
 </div>

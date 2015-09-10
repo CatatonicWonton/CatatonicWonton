@@ -1,18 +1,15 @@
-<div style='margin-left: 20px'>
-  <form ng-submit="signin(username, password)">
-    <div>
-        <label>Username:</label><br/>
-        <input ng-model="username" type="text" name="username"/>
-    </div>
-    <div>
-        <label>Password:</label><br/>
-        <input ng-model="password" type="password" name="password"/>
-    </div>
+<div class="container well signin-wrap">
+    <form ng-submit="signin(username, password)" role="form">
+        <legend>Signin</legend>
 
-    <br/>
+        <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" ng-model="username" placeholder="Type here...">
+                <label>Password</label>
+                <input type="password" class="form-control" ng-model="password" placeholder="Type here...">
 
-    <div>
-        <input type="submit" value="Sign In"/>
-    </div>
-  </form>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+    </form>
+
 </div>
