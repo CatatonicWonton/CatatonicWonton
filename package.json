@@ -4,7 +4,7 @@
   "description": "an ed-tech spa",
   "main": "index.js",
   "scripts": {
-    "test": "// something related to gulp"
+    "_test" : "this will eventually be a test"
   },
   "repository": {
     "type": "git",

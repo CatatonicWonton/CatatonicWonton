@@ -60,3 +60,16 @@
 .modalInput {
   margin: 10px auto;
 }
+
+.form-wrap {
+  max-width: 600px;
+}
+
+.type-selector{
+  margin:10px;
+}
+
+.account-type-wrap{
+  text-align: right;
+  padding:5px;
+}
