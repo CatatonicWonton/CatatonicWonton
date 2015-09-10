@@ -4,7 +4,7 @@
 
         <div class="form-group">
             <div class='type-selector'>
-                <div class="row">
+                <div class="row signup-row">
                     <div class="account-type-wrap col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     Account Type:
                     </div>
@@ -20,25 +20,25 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row signup-row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <label>First Name</label>
                     <input type="text" class="form-control" ng-model="firstName" placeholder="Type here...">
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <label>Last Name</label>
-                    <input type="text" class="form-control" ng-model="firstName" placeholder="Type here...">
+                    <input type="text" class="form-control" ng-model="lastName" placeholder="Type here...">
                 </div>
             </div>
-                <label>Username</label>
-                <input type="text" class="form-control" ng-model="username" placeholder="Type here...">
-                <label>Password</label>
-                <input type="text" class="form-control" ng-model="password" placeholder="Type here...">
-
+            <div class="row signup-row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <label>Username</label>
+                    <input type="text" class="form-control" ng-model="username" placeholder="Type here...">
+                    <label>Password</label>
+                    <input type="text" class="form-control" ng-model="password" placeholder="Type here...">
+                </div>
+            </div>
         </div>
-
-        
-
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
     </form>
 
