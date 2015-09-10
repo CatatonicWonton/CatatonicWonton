@@ -4,6 +4,7 @@ var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
 var Promise = require('bluebird');
+var Utils = require('../utilities.js');
 
 // Models
 var Project = Models.Project; 
@@ -44,21 +45,37 @@ router.get('/:id', function (req, res) {
 
 // get all projects
 router.get('/', function (req, res) {
-  Project.findAll({
-    where: {
-      TeacherId: 1 //req.body.TeacherId
-    },
-    include: [
-      { 
-        model: Page 
-      }
-    ]
-  })
-  .then(sendResponse(res));
+  var user = req.session.passport.user;
+
+  if (user.accountType === 'Teacher') {
+    Project.findAll({
+      where: {
+        TeacherId: user._id
+      },
+      include: [
+        { 
+          model: Page 
+        }
+      ]
+    })
+    .then(sendResponse(res));
+  } else {
+    StudentProject.findAll({
+      where: {
+        StudentId: user._id
+      },
+      include: [
+        { 
+          model: Page 
+        }
+      ]
+    })
+    .then(sendResponse(res));
+  }
 });
 
 // create a project
-router.post('/', function (req, res) {
+router.post('/', checkIf('Teacher'), function (req, res) {
   Promise
     .all([
       Project
@@ -68,7 +85,7 @@ router.post('/', function (req, res) {
         }),
 
       Teacher
-        .findById(req.body.TeacherId)
+        .findById(req.session.passport.user._id)
     ])
     .spread(function (project, teacher) { 
       return project.setTeacher(teacher);
@@ -77,7 +94,7 @@ router.post('/', function (req, res) {
 }); 
 
 // edit a project
-router.put('/:id', function (req, res) {
+router.put('/:id', checkIf('Teacher'), function (req, res) {
   Project
     .upsert(extend(req.body, {id: req.params.id}))
     .then(function () {
@@ -87,7 +104,7 @@ router.put('/:id', function (req, res) {
 }); 
 
 // delete a project
-router.delete('/:id', function (req, res) {
+router.delete('/:id', checkIf('Teacher'), function (req, res) {
   Project
     .findById(req.params.id)
     .then(function (project) {

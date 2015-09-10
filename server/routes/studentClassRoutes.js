@@ -3,8 +3,8 @@ var router = express.Router();
 var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
-var utils = require('../utilities.js');
 var Promise = require('bluebird');
+var Utils = require('../utilities.js');
 
 // MODELS
 var Class = Models.Class;
@@ -24,16 +24,7 @@ router.post('/:id', function (req, res) {
   .spread(function (foundClass, student) {
     return foundClass.addStudent(student);
   })
-  .then(utils.sendResponse(res));
-});
-
-router.post('/:id', function (req, res) {
-  Class
-    .findById(req.params.id)
-    .then(function (foundClass) {
-      return Promise.props({})
-    })
-    .then(utils.sendResponse(res));
+  .then(Utils.sendResponse(res));
 });
 
 // deletes student from a class
@@ -47,7 +38,7 @@ router.put('/:id', function (req, res) {
     .then(function (studentClass) {
       return studentClass.destroy();
     })
-    .then(utils.sendResponse(res));
+    .then(Utils.sendResponse(res));
 });
 
 

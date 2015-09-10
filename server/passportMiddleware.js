@@ -16,7 +16,7 @@ module.exports = function (passport) {
           
           bcrypt.compare(password, user.password, function(err, res) {
             if (res) {
-              user.accountType = student ? 'student' : 'teacher';
+              user.accountType = student ? 'Student' : 'Teacher';
               return done(null, user);
             }
             return done(null, false, {message: 'Incorrect password'})
@@ -34,7 +34,7 @@ module.exports = function (passport) {
       accountType: user.accountType,
       username: user.username
     };
-    
+
     done(null, sessionUser);
   });
 

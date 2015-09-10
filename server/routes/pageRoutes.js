@@ -4,6 +4,7 @@ var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
 var Promise = require('bluebird');
+var Utils = require('../utilities.js');
 
 // Models
 var Project = Models.Project;
@@ -32,7 +33,7 @@ router.get('/:id', function (req, res) {
 }); 
 
 // add a page to a project
-router.post('/:projectId', function (req, res) {
+router.post('/:projectId', Utils.checkIf('Teacher'), function (req, res) {
   Promise
     .all([
       Page
@@ -50,7 +51,7 @@ router.post('/:projectId', function (req, res) {
 });
 
 // edit page from a project
-router.put('/:id', function (req, res) {
+router.put('/:id', Utils.checkIf('Teacher'), function (req, res) {
   Page
     .upsert(extend(req.body, {id: req.params.id}))
     .then(function () {
@@ -61,7 +62,7 @@ router.put('/:id', function (req, res) {
 
 
 // delete a page from a project
-router.delete('/:id', function (req, res) {
+router.delete('/:id', Utils.checkIf('Teacher'), function (req, res) {
   Page
     .findById(req.params.id)
     .then(function (page) {

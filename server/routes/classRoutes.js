@@ -4,6 +4,7 @@ var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
 var Promise = require('bluebird');
+var Utils = require('../utilities.js');
 
 // MODELS
 var Class = Models.Class;
@@ -45,17 +46,31 @@ router.get('/:id', function (req, res) {
 
 // get all classes
 router.get('/', function (req, res) {
-  Class
-    .findAll({
-      where: {
-        TeacherId: 1 //req.body.TeacherId
-      }
-    })
-    .then(sendResponse(res));
+  var user = req.session.passport.user;
+
+  if (user.accountType === 'Teacher') {
+    Class
+      .findAll({
+        where: {
+          TeacherId: user._id
+        }
+      })
+      .then(sendResponse(res));
+  } else {
+    StudentClass
+      .findAll({
+        where: {
+          StudentId: user._id
+        }
+      })
+      .then(sendResponse(res));
+  }
 });
 
 // create a class
-router.post('/', function (req, res) {
+router.post('/', Utils.checkIf('Teacher'), function (req, res) {
+  var user = req.session.passport.user;
+
   Promise
     .all([
       Class
@@ -64,7 +79,7 @@ router.post('/', function (req, res) {
         }),
         
       Teacher
-        .findById(req.body.TeacherId)
+        .findById(user._id)
     ])
     .spread(function (newClass, teacher) {
       return newClass.setTeacher(teacher);
@@ -73,7 +88,7 @@ router.post('/', function (req, res) {
 });
 
 // delete a class
-router.delete('/:id', function (req, res) {
+router.delete('/:id', Utils.checkIf('Teacher'), function (req, res) {
   Class
     .findById(req.params.id)
     .then(function (foundClass) {

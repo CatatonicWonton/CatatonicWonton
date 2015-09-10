@@ -3,6 +3,7 @@ var router = express.Router();
 var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
+var Utils = require('../utilities.js');
 
 // MODELS
 var Class = Models.Class;
@@ -28,7 +29,7 @@ var extend = function () {
 };
 
 // teacher can assign a project to a student
-router.post('/student/:id', function (req, res) {
+router.post('/student/:id', checkIf('Teacher'), function (req, res) {
   Promise.all([
     Student
       .findById(req.params.id),
@@ -43,18 +44,7 @@ router.post('/student/:id', function (req, res) {
 });
 
 // teacher can assign projects to a class
-router.post('/class/:id', function (req, res) {
-  Promise.all([
-    Project
-      .findById(req.body.ProjectId),
-
-    Class
-      .findById(req.params.id)
-  ])
-  .spread(function (project) {
-
-  })
-
+router.post('/class/:id', checkIf('Teacher'), function (req, res) {
   Class
     .findById(req.params.id)
     .then(function (foundClass) {
@@ -74,7 +64,7 @@ router.post('/class/:id', function (req, res) {
 });
 
 // teacher can unassign a project from a student
-router.delete('/student/:id', function (req, res) {
+router.delete('/student/:id', checkIf('Teacher'), function (req, res) {
   StudentProject
     .findOne({
       where: {
@@ -89,7 +79,7 @@ router.delete('/student/:id', function (req, res) {
 });
 
 // teacher can unassign projects from a class
-router.delete('/class/:id', function (req, res) {
+router.delete('/class/:id', checkIf('Teacher'), function (req, res) {
   Class
     .findById(req.params.id)
     .then(function (foundClass) {
