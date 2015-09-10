@@ -32,11 +32,19 @@ var createAccount = function (req, res, next) {
     });
 };
 
-router.post('/login', passport.authenticate('local'));
+var success = function (req, res) {
+  res.status(200).send(true);
+};
+
+router.post('/login', passport.authenticate('local'), function (req, res) {
+  res.status(200).send(req.session.passport.user);
+});
 
 router.post('/signup',
   createAccount,
-  passport.authenticate('local')
+  success
+  // passport.authenticate('local'),
+  // success
 );
 
 // sign out

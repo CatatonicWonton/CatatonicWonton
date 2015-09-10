@@ -47,7 +47,7 @@ router.get('/:id', function (req, res) {
 // get all classes
 router.get('/', function (req, res) {
   var user = req.session.passport.user;
-
+  console.log(user);
   if (user.accountType === 'Teacher') {
     Class
       .findAll({
