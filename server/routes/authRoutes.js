@@ -29,31 +29,20 @@ var createAccount = function (req, res, next) {
       } else {
         res.send('Username is already taken!');
       }
-    })
+    });
 };
 
-var sucessIs = function(req, res) {
-  res.send('success');
-};
-
-router.post('/login', passport.authenticate('local'
-// {
-//   successRedirect: '/',
-//   failureRedirect: '/login'
-// }
-), sucessIs);
+router.post('/login', passport.authenticate('local'));
 
 router.post('/signup',
   createAccount,
-  passport.authenticate('local'
-  // {
-  //   successRedirect: '/',
-  //   failureRedirect: '/login'
-  // }
-  ),
-  sucessIs
+  passport.authenticate('local')
 );
 
 // sign out
+router.post('/logout', function (req, res) {
+  req.session.destroy();
+  req.logout();
+});
 
 module.exports = router;

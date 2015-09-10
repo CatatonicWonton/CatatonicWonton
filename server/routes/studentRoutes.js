@@ -3,6 +3,7 @@ var router = express.Router();
 var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
+var Utils = require('../utilities.js');
 
 // MODELS
 var Class = Models.Class;
@@ -26,7 +27,7 @@ var extend = function () {
 };
 
 // gets a student
-router.get('/:id', function (req, res) {
+router.get('/:id', checkIf('Teacher'), function (req, res) {
   Student.findById(req.params.id)
     .then(sendResponse(res));
 });
@@ -38,7 +39,7 @@ router.post('/', function (req, res) {
 });
 
 // edit a student
-router.put('/:id', function (req, res) {
+router.put('/:id', checkIf('Teacher'), function (req, res) {
   Student
     .upsert(extend(req.body, {id: req.params.id}))
     .then(function () {
@@ -48,7 +49,7 @@ router.put('/:id', function (req, res) {
 });
 
 // delete a student
-router.delete('/:id', function (req, res) {
+router.delete('/:id', checkIf('Teacher'), function (req, res) {
   Student.findById(req.params.id)
     .then(function (student) {
       return student.destroy();

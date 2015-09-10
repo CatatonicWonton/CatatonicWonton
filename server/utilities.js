@@ -29,5 +29,14 @@ module.exports = {
           where: {username: username}
         })
       ], 2)
+  },
+
+  // ROUTE HANDLERS
+  checkIf: function (model) {
+    return function (req, res, next) {
+      if (req.session.passport.user.accountType === model) { 
+        next();
+      }
+    };
   }
 };
