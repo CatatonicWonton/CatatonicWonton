@@ -3,6 +3,6 @@ module.exports = function (sequelize, DataTypes) {
     title: DataTypes.STRING,
     content: DataTypes.STRING,
     index: DataTypes.INTEGER,
-    solution: DataTypes.STRING,
+    solution: DataTypes.STRING
   });
 };
