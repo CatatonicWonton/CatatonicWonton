@@ -1,6 +1,6 @@
 <div class="page-header">
   <div class="container">
-    <h1>Mr. Zuniga's Class <small>Williamson County Correctional</small></h1>
+    <h1>{{teacherClasses}} <small>{{teacherClasses}}</small></h1>
   </div>
 </div>
 
@@ -14,6 +14,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">{{project.name}}</h3>
+              <button ng-click="assignProject(project.id)">Assign</button>
             </div>
             <div class="panel-body">
                 <p><strong>Subject: </strong>{{project.subject}}</p>

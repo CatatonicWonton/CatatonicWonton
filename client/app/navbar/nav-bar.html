@@ -16,11 +16,8 @@
       <li><a ui-sref='landing'>Home</a></li>
       <li><a ui-sref='signup'>Sign Up</a></li>
       <li><a ui-sref='signin'>Sign In</a></li>
-      <li><a ui-sref='studentHome'>Home</a></li>
-      <li><a ui-sref='studentProject'>studentProject</a></li>
-      <!-- <li><a ui-sref='teacherClass'>teacherClass</a></li> -->
-      <li><a ui-sref='teacherHome'>teacherHome</a></li>
-      <li><a snap-toggle="right">Toggle Drawer</a></li>
+      <li ng-hide="isTeacher"><a ui-sref='studentHome'>studentHome</a></li>
+      <li ng-show="isTeacher"><a ui-sref='teacherHome'>teacherHome</a></li>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">

@@ -40,7 +40,6 @@ angular.module('app')
     };
 
     $scope.createProject = function(name, subject, author) {
-
       Project.createProject(name, subject, author).then(function(projectId) {
         $scope.goToProject(projectId);
       });
@@ -73,7 +72,13 @@ angular.module('app')
     };
 
 
-    $scope.assignProject = function() { /* associate project with student(s) */ };
+    $scope.assignProject = function(projectId) {
+      console.log(projectId);
+      var classId = window.prompt('What is the classId you want to add?');
+      Project.assignProject(projectId, classId).then(function(response) {
+        console.log('project assigned', response);
+      });
+    };
 
     $scope.getProjects();
     $scope.getClasses();
