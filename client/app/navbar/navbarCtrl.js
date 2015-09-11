@@ -1,5 +1,3 @@
-// CONTROLLER: NAVBAR
-
 angular.module('app')
   .controller('navbarCtrl', function($scope, $state, $http) {
     $scope.logout = function() {

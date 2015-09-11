@@ -1,5 +1,3 @@
-// FACTORY: USER
-
 angular.module('app')
   .factory('User', function User ($http) {
 

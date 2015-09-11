@@ -1,5 +1,3 @@
-// CONTROLLER: TEACHER CLASS
-
 angular.module('app')
   .controller('teacherClassCtrl', function teacherClassCtrl($scope, Class){
     // get specific class
