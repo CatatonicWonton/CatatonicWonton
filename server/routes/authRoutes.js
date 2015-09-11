@@ -23,7 +23,7 @@ router.post('/signup', Auth.createAccount, Auth.sendSuccess);
 */
 
 router.post('/logout', Auth.logout, Auth.sendSuccess);
-||||||| merged common ancestors
+
 var success = function (req, res, next) {
   res.status(200).send(true);
   next();
