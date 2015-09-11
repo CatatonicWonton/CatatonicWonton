@@ -11,7 +11,7 @@ angular.module('app')
     $scope.goToProject = function(projectId) {
       $state.go('teacherProject', {
         projectId: projectId
-      })
+      });
     };
 
     $scope.modalOpen = function(title, inputArray, callback) {
@@ -23,7 +23,7 @@ angular.module('app')
           $scope.storage = [];
 
           $scope.ok = function() {
-            $modalInstance.close($scope.storage)
+            $modalInstance.close($scope.storage);
           };
 
           $scope.cancel = function() {
@@ -57,13 +57,13 @@ angular.module('app')
     $scope.goToClass = function(classId) {
       $state.go('teacherClass', {
         classId: classId
-      })
+      });
     };
 
     $scope.createClass = function(name) {
       Class.createClass(name).then(function(classId) {
         $scope.goToClass(classId);
-      })
+      });
     };
 
     $scope.deleteClass = function(classId) {

@@ -1,12 +1,13 @@
 angular.module('app')
   .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, $sce, Project, User){
 
-    $scope.project;
-    $scope.currentPage;
+    $scope.project = null;
+    $scope.currentPage = null;
+
     $scope.froalaOptions = {
         placeholder: 'Add text, images, videos, and links here',
         inlineMode: false
-    }
+    };
 
     // PROJECT
     $scope.getProject = function() {
@@ -41,11 +42,11 @@ angular.module('app')
 
     $scope.trustify = function(content) {
       return $sce.trustAsHtml(content);
-    }
+    };
 
     $scope.getProject();
 
-  })
+  });
 
 
 

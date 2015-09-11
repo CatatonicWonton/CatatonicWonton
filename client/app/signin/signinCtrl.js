@@ -4,8 +4,12 @@ angular.module('app')
     $scope.signin = function(username, password) {
       console.log('im working');
       User.signin(username, password).then(function(res){
-        res.data.accountType === 'Teacher' ? $state.go('teacherHome') : $state.go('studentHome');
-        // type === 'teacher' ? $state.go('teacherHome') : $state.go('studentHome');
+        // res.data.accountType === 'Teacher' ? $state.go('teacherHome') : $state.go('studentHome');
+        if (res.data.accountType === 'Teacher') {
+          $state.go('teacherHome');
+        } else {
+          $state.go('studentHome');
+        }
       });
     };
   });

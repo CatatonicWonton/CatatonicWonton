@@ -17,14 +17,14 @@ angular.module('app')
     var createClass = function(className) {
       return $http.post('/api/class/', {name: className}).then(function(response) {
         return response.data.id;
-      })
+      });
     };
 
     var deleteClass = function(classId) {
       return $http.delete('/api/class/' + classId).then(function(response) {
         return response.data;
-      })
-    }
+      });
+    };
 
     return {
       getClasses: getClasses,

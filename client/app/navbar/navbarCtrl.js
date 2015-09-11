@@ -7,6 +7,7 @@ angular.module('app')
       });
     };
 
-    $scope.navBarCollapsed = true;
-    
-  })
+  $scope.navBarCollapsed = true;    
+
+});
+

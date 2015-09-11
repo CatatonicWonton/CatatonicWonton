@@ -44,7 +44,7 @@ angular.module('app')
       return $http.put(url, {content: htmlString}).then(function(result){
           return result.data;
       });
-    }
+    };
 
 
     return {
@@ -54,10 +54,10 @@ angular.module('app')
       createPage: createPage, 
       // updatePage: updatePage, 
       createContent: createContent
-    }
+    };
 
 
-  })
+  });
 
 
 

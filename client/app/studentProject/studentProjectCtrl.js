@@ -1,8 +1,8 @@
 angular.module('app')
   .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, Project){
 
-    $scope.project;
-    $scope.currentPage;
+    $scope.project = null;
+    $scope.currentPage = null;
 
     // PROJECT
     $scope.getProject = function() {
@@ -18,7 +18,7 @@ angular.module('app')
 
     $scope.trustify = function(content) {
       return $sce.trustAsHtml(content);
-    }
+    };
 
     // EXTRA: student input
     $scope.answerQuestion = function() {
