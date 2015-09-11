@@ -33,13 +33,23 @@ gulp.task('install', shell.task([
   'bower install'
 ]));
 
-// Create the DB
-gulp.task('writeDB', shell.task([
-  'mysql -u root'
-  'create database schoolio',
-  'exit',
-  'node server/makeData.js',
-]));
+// gulp.task('serveprod', function() {
+//   connect.server({
+//     root: [your_project_path],
+//     port: process.env.PORT || 5000, // localhost:5000
+//     livereload: false
+//   });
+// });
+
+
+// TODO
+// // Create the DB
+// gulp.task('writeDB', shell.task([
+//   'mysql -u root'
+//   'create database schoolio;',
+//   'exit',
+//   'node server/makeData.js',
+// ]));
 
 gulp.task('startServer', function () {
   nodemon({
@@ -64,8 +74,8 @@ gulp.task('csslint', function() {
     .pipe(csslint.reporter())
 });
 
-// // Concatenate & Minify
-// // JS
+// Concatenate & Minify
+// JS
 // gulp.task('scripts', function() {
 //     return gulp.src('js/*.js')
 //         .pipe(concat('all.js'))
@@ -77,11 +87,11 @@ gulp.task('csslint', function() {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('client/**', ['jslint', 'csslint'/*, 'scripts'*/]);
+    gulp.watch('client/**', ['jslint', 'csslint', 'scripts']);
 });
 
 // Default Task
-gulp.task('default', ['jslint', 'csslint'/*, 'scripts'*/, 'watch']);
+gulp.task('default', ['jslint', 'csslint', 'scripts', 'watch']);
 
 
 
