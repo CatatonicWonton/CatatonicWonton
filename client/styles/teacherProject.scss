@@ -1,0 +1,103 @@
+.floating-help {
+  position: fixed;
+  width: 30px;
+  height: 60px;
+  top: 100px;
+  left: 0px;
+  background-color: blue;
+  z-index: 2;
+}
+
+.active {
+  background-color: red !important;
+}
+
+.project-container {
+  /*z-index: 1;*/
+  width: 100%;
+  height: 85%;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  /*align-items: stretch;*/
+
+  .project-view {
+
+    flex: 0 1 960px;
+    background-color: #eee;
+    
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+
+    .project-head {
+
+      flex: 0 0 50px;
+      background-color: #2F4F4F;
+
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      
+      .name {
+        flex: 1 1 0;
+        background-color: blue;
+      }
+
+      .current-page {
+        flex: 1 1 0;
+        background-color: #fsfdsd;
+      }
+    }
+
+    .project-pages {
+      flex: 0 0 50px;
+
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+
+      .bar {
+        flex: 1 1 100px;
+        background-color: yellow;
+        margin: 5px 5px 5px 5px;
+        max-height: 50px;
+  
+        /* only for teacher view */
+        .add-page {
+          flex: 1 1 30px;
+        }
+
+
+      }
+    }
+
+    .project-content {
+      flex: 1 1 0;
+      background-color: #DCDCDC;
+      overflow: scroll;
+      margin: 2px 0 2px 0;
+
+      transition: all 0.5s ease-in-out;
+    }
+
+    .project-action-bar {
+      flex: 0 0 50px;
+      background-color: red;
+
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end;
+
+      .button {
+        flex: 1 0 0;
+        background-color: gray;
+      }
+    }
+  }
+}
+
+.project-content:hover {
+  transition: all 1s ease-in-out;
+}

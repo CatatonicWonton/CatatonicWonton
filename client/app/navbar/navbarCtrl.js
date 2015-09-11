@@ -9,8 +9,8 @@ angular.module('app')
 
     $scope.navBarCollapsed = true;    
 
+    // makes sure the nav bar only shows the appropriate links for the user
     var setNavbar = function() {
-      console.log(User.getUser(), 'got user');
       var accountType = User.getUser().accountType;
       $scope.isTeacher = accountType === 'Teacher' ? true : false;
     };
