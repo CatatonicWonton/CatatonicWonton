@@ -5,5 +5,8 @@ angular.module('app')
         // probably want to do something after logout
         $state.go('signin');
       });
-    }
+    };
+
+    $scope.navBarCollapsed = true;
+    
   })
