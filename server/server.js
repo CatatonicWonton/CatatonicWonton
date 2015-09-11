@@ -1,10 +1,6 @@
 var express = require('express');
 var db = require('./db.js');
 var sequelize = require('sequelize');
-var Promise = require('bluebird');
-var Models = db.Models;
-var Utils = require('./utilities.js');
-var bcrypt = require('bcrypt');
 
 // Auth
 var passport = require('passport');
@@ -14,7 +10,6 @@ var passportMiddleware = require('./passportMiddleware.js');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-
 
 // ROUTE HANDLER
 var authRoutes           = require('./routes/authRoutes');

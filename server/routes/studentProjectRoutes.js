@@ -1,90 +1,34 @@
 var express = require('express');
 var router = express.Router();
-var Sequelize = require('Sequelize');
-var sequelize = require('../db.js').database;
-var Models = require('../db.js').Models;
-var Utils = require('../utilities.js');
-var helpers = require('../helpers.js');
-var Promise = require('bluebird');
+var Auth = require('../controllers/authController.js');
+var StudentProjectController = require('../controllers/studentProjectController.js');
 
-// MODELS
-var Class = Models.Class;
-var Teacher = Models.Teacher;
-var Project = Models.Project;
-var Student = Models.Student;
-var StudentProject = Models.StudentProject;
+/* Adds relationship in StudentProject join table
+ * input  -> {ProjectId}
+ * output -> [[{ProjectId, StudentId, createdAt, updatedAt}]]
+ */
 
-// teacher can assign a project to a student
-router.post('/student/:id', helpers.checkIf('Teacher'), function (req, res) {
-  Promise
-    .all([
-      Student
-        .findById(req.params.id),
+router.post('/student/:id', Auth.checkIf('Teacher'), StudentProjectController.assignProjectToStudent);
 
-      Project
-        .findById(req.body.ProjectId)
-    ])
-    .spread(function (student, project) {
-      return student.addProject(project);
-    })
-    .then(helpers.sendResponse(res));
-});
+/* Adds relationship in StudentProject join table for every student in a class
+ * input  -> {ProjectId}
+ * output -> [[[{ProjectId, StudentId, createdAt, updatedAt}]]]
+ */
+ 
+router.post('/class/:id', Auth.checkIf('Teacher'), StudentProjectController.assignProjectToClass);
 
-// teacher can assign projects to a class
-router.post('/class/:id', helpers.checkIf('Teacher'), function (req, res) {
-  Class
-    .findById(req.params.id)
-    .then(function (foundClass) {
-      return Promise.all([
-        foundClass
-          .getStudents(),
+/* Removes relationship in StudentProject join table
+ * input  -> {ProjectId}
+ * output -> {ProjectId, StudentId, createdAt, updatedAt}
+ */
+ 
+router.delete('/student/:id', Auth.checkIf('Teacher'), StudentProjectController.unassignProjectFromStudent);
 
-        Project
-          .findById(req.body.ProjectId)
-      ])
-    })
-    .spread(function (students, project) {
-      students.forEach(function (student) {
-        student.addProject(project);
-      });
-    })
-});
-
-// teacher can unassign a project from a student
-router.delete('/student/:id', helpers.checkIf('Teacher'), function (req, res) {
-  StudentProject
-    .findOne({
-      where: {
-        StudentId: req.params.id,
-        ProjectId: req.body.ProjectId
-      }
-    })
-    .then(function (studentProject) {
-      return studentProject.destroy();
-    })
-    .then(helpers.sendResponse(res));
-});
-
-// teacher can unassign projects from a class
-router.delete('/class/:id', helpers.checkIf('Teacher'), function (req, res) {
-  Class
-    .findById(req.params.id)
-    .then(function (foundClass) {
-      return foundClass.getStudents();
-    })
-    .then(function (students) {
-      students.forEach(function (student) {
-        StudentProject
-          .findOne({
-            where: {
-              StudentId: student.id,
-              ProjectId: req.body.ProjectId  
-            }
-          }).then(function(studentProject) {
-            return studentProject.destroy();
-          })
-      })
-    });
-});
+/* Removes relationshiop in StudentProject join table for every student in a class
+ * input  -> {ProjectId}
+ * output -> [{ProjectId, StudentId, createdAt, updatedAt}]
+ */
+ 
+router.delete('/class/:id', Auth.checkIf('Teacher'), StudentProjectController.unassignProjectFromClass);
 
 module.exports = router;
