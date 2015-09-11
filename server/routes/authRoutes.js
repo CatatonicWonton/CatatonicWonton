@@ -33,9 +33,9 @@ router.post('/login', passport.authenticate('local'), function (req, res, next) 
   res.status(200).send(req.session.passport.user);
 });
 
-router.post('/signup', createAccount, success);
+router.post('/signup', Auth.createAccount, Auth.sendSuccess);
 
 // sign out
-router.post('/logout', logout);
+router.post('/logout', Auth.logout);
 
 module.exports = router;

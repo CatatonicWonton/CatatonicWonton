@@ -33,7 +33,7 @@ angular.module('app')
 
     return {
       signup: signup,      
-      signin: signin
+      signin: signin,
       setUser: setUser,
       getUser: getUser
     }
