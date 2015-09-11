@@ -1,60 +1,34 @@
 var express = require('express');
 var router = express.Router();
-var Sequelize = require('Sequelize');
-var sequelize = require('../db.js').database;
-var Models = require('../db.js').Models;
-var Promise = require('bluebird');
-var Utils = require('../utilities.js');
-var helpers = require('../helpers.js');
+var Auth = require('../controllers/authController.js');
+var PageController = require('../controllers/pageController.js');
 
-// Models
-var Project = Models.Project;
-var Page = Models.Page;
+/* Gets a single page
+ * input  -> {}
+ * output -> {id, title, content, index, solution, ProjectId, createdAt, updatedAt}
+*/
 
-// get a page from a project
-router.get('/:id', function (req, res) {
-  Page
-    .findById(req.params.id)
-    .then(helpers.sendResponse(res));
-}); 
+router.get('/:id', PageController.getPage); 
 
-// add a page to a project
-router.post('/:projectId', helpers.checkIf('Teacher'), function (req, res) {
-  Promise
-    .all([
-      Page
-        .create(req.body),
+/* Adds a page to project
+ * input  -> {title, content, index, solution}
+ * output -> {id, title, content, index, solution, ProjectId, createdAt, updatedAt}
+*/
 
-      Project
-        .findById(req.params.projectId)
-    ])
-    .spread(function (page, project) {
-      return Promise.join(project.addPage(page), function () {
-        return page;
-      });
-    })
-    .then(helpers.sendResponse(res));
-});
+router.post('/:projectId', Auth.checkIf('Teacher'), PageController.addPage);
 
-// edit page from a project
-router.put('/:id', helpers.checkIf('Teacher'), function (req, res) {
-  Page
-    .upsert(Utils.extend(req.body, {id: req.params.id}))
-    .then(function () {
-      return Page.findById(req.params.id);
-    })
-    .then(helpers.sendResponse(res));
-}); 
+/* Edits a page
+ * input  -> {title, content, index, solution}
+ * output -> {id, title, content, index, solution, ProjectId, createdAt, updatedAt}
+*/
 
+router.put('/:id', Auth.checkIf('Teacher'), PageController.editPage); 
 
-// delete a page from a project
-router.delete('/:id', helpers.checkIf('Teacher'), function (req, res) {
-  Page
-    .findById(req.params.id)
-    .then(function (page) {
-      return page.destroy();
-    })
-    .then(helpers.sendResponse(res));
-});
+/* Deletes a page
+ * input  -> {}
+ * output -> {id, title, content, index, solution, ProjectId, createdAt, updatedAt}
+*/
+
+router.delete('/:id', Auth.checkIf('Teacher'), PageController.deletePage);
 
 module.exports = router;    

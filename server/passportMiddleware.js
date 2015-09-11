@@ -1,11 +1,12 @@
 var LocalStrategy = require('passport-local').Strategy;
 var Utils = require('./utilities.js');
 var bcrypt = require('bcrypt');
+var helpers = require('./helpers');
 
 module.exports = function (passport) {
   passport.use(new LocalStrategy(
     function(username, password, done) {
-      Utils
+      helpers
         .findUsername(username)
         .spread(function (student, teacher) {
           var user = student || teacher;
@@ -39,7 +40,7 @@ module.exports = function (passport) {
   });
 
   passport.deserializeUser(function(user, done) {
-    Utils
+    helpers
       .findUsername(user.username)
       .spread(function (student, teacher) {
         var user = student || teacher;

@@ -1,48 +1,20 @@
 var express = require('express');
 var router = express.Router();
-var Sequelize = require('Sequelize');
-var sequelize = require('../db.js').database;
-var Models = require('../db.js').Models;
-var Promise = require('bluebird');
-var Utils = require('../utilities.js');
-var helpers = require('../helpers.js');
+var StudentClassController = require('../controllers/studentClassController.js');
 
-// MODELS
-var Class = Models.Class;
-var Teacher = Models.Teacher;
-var Student = Models.Student;
-var StudentClass = Models.StudentClass;
+/* Adds student to class
+ * input  -> {StudentId}
+ * output -> [[{ClassId, StudentId, createdAt, updatedAt}]]
+*/
 
-// add student to a class
-router.post('/:id', function (req, res) {
-  Promise
-    .all([
-      Class
-        .findById(req.params.id),
+router.post('/:id', StudentClassController.addStudentToClass);
 
-      Student
-        .findById(req.body.StudentId)
-    ])
-    .spread(function (foundClass, student) {
-      return foundClass.addStudent(student);
-    })
-    .then(helpers.sendResponse(res));
-});
+/* Removes student from class
+ * input  -> {StudentId}
+ * output -> {ClassId, StudentId, createdAt, updatedAt}
+*/
 
-// deletes student from a class
-router.put('/:id', function (req, res) {
-  StudentClass
-    .findOne({
-      where: {
-        ClassId: req.params.id,
-        StudentId: req.body.StudentId
-      }
-    })
-    .then(function (studentClass) {
-      return studentClass.destroy();
-    })
-    .then(helpers.sendResponse(res));
-});
+router.put('/:id', StudentClassController.removeStudentFromClass);
 
 
 module.exports = router;

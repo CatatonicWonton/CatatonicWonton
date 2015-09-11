@@ -35,6 +35,14 @@ Models.Question.belongsTo(Models.Page);
 Models.Question.belongsTo(Models.Project);
 Models.Question.belongsTo(Models.Student);
 
+
+sequelize.sync();
+
+module.exports.Models = Models;
+module.exports.database = sequelize;
+
+
+
 // var reportSuccessOf = function (tableName) {
 //   return function () {
 //     console.log(tableName + ' table successfully synced.');
@@ -64,8 +72,3 @@ Models.Question.belongsTo(Models.Student);
 //   .then(sync('Question'))
 //   .then(sync('StudentProject'))
 //   .then(sync('StudentClass'));
-
-sequelize.sync();
-
-module.exports.Models = Models;
-module.exports.database = sequelize;

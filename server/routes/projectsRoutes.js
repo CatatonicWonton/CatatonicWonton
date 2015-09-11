@@ -1,110 +1,41 @@
 var express = require('express');
 var router = express.Router();
-var Sequelize = require('Sequelize');
-var sequelize = require('../db.js').database;
-var Models = require('../db.js').Models;
-var Promise = require('bluebird');
-var Utils = require('../utilities.js');
-var helpers = require('../helpers.js');
+var Auth = require('../controllers/authController.js');
+var ProjectController = require('../controllers/projectController.js');
 
-// Models
-var Project = Models.Project; 
-var Page = Models.Page;
-var Teacher = Models.Teacher;
-var StudentProject = Models.StudentProject;
+/* Gets a single project
+ * input  -> {}
+ * output -> {id, subject, name, teacherId, pages, createdAt, updatedAt}
+*/
 
-// get a project
-router.get('/:id', function (req, res) {
-  Project
-    .find({
-      where: {
-        id: req.params.id
-      },
-      include: [
-        {
-          model: Page
-        }
-      ]
-    })
-    .then(helpers.sendResponse(res));
-});
+router.get('/:id', ProjectController.getProject);
 
-// get all projects
-router.get('/', function (req, res) {
-  var user = req.session.passport.user;
-  
-  if (user.accountType === 'Teacher') {
-    Project
-      .findAll({
-        where: {
-          TeacherId: user._id
-        },
-        include: [
-          { 
-            model: Page 
-          }
-        ]
-      })
-      .then(helpers.sendResponse(res));
-  } else {
-    StudentProject
-      .findAll({
-        where: {
-          StudentId: user._id
-        }
-      })
-      .map(function (project) {
-        return Project
-          .findOne({
-            where: {
-              id: project.ProjectId
-            },
-            include: {
-              model: Page
-            }
-          });
-      })
-      .then(helpers.sendResponse(res));
-  }
-});
+/* Gets all projects from user
+ * input  -> {}
+ * output -> [{id, subject, name, teacherId, pages, createdAt, updatedAt}]
+*/
 
-// create a project
-router.post('/', helpers.checkIf('Teacher'), function (req, res) {
-  Promise
-    .all([
-      Project
-        .create({
-          name: req.body.name,
-          subject: req.body.subject
-        }),
+router.get('/', Auth.checkIfLoggedIn, ProjectController.getUserProjects);
 
-      Teacher
-        .findById(req.session.passport.user._id)
-    ])
-    .spread(function (project, teacher) { 
-      return project.setTeacher(teacher);
-    })
-    .then(helpers.sendResponse(res));
-}); 
+/* Creates a project
+ * input  -> {name, subject}
+ * output -> {name, subject, pages}
+*/
 
-// edit a project
-router.put('/:id', helpers.checkIf('Teacher'), function (req, res) {
-  Project
-    .upsert(Utils.extend(req.body, {id: req.params.id}))
-    .then(function () {
-      return Project.findById(req.params.id);
-    })
-    .then(helpers.sendResponse(res));
-}); 
+router.post('/', Auth.checkIf('Teacher'), ProjectController.createProject);
 
-// delete a project
-router.delete('/:id', helpers.checkIf('Teacher'), function (req, res) {
-  Project
-    .findById(req.params.id)
-    .then(function (project) {
-      return project.destroy();
-    })
-    .then(helpers.sendResponse(res));
-})
+/* Edits a project
+ * input  -> {name, subject}
+ * output -> {id, name, subject, TeacherId, createdAt, updatedAt}
+*/
+
+router.put('/:id', Auth.checkIf('Teacher'), ProjectController.editProject); 
+
+/* Deletes a project
+ * input  -> {}
+ * output -> {id, name, subject, TeacherId, createdAt, updatedAt}
+*/
+
+router.delete('/:id', Auth.checkIf('Teacher'), ProjectController.deleteProject);
 
 module.exports = router;
