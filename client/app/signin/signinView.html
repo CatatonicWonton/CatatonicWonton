@@ -1,15 +1,20 @@
 <div class="container well signin-wrap">
-    <form ng-submit="signin(username, password)" role="form">
+    <form name="form" ng-submit="signin(username, password)" role="form">
         <legend>Signin</legend>
 
         <div class="form-group">
                 <label>Username</label>
-                <input type="text" class="form-control" ng-model="username" placeholder="Type here...">
+                <input type="text" class="form-control" ng-model="username" placeholder="Type here..." required>
                 <label>Password</label>
-                <input type="password" class="form-control" ng-model="password" placeholder="Type here...">
+                <input type="password" class="form-control" ng-model="password" placeholder="Type here..." required>
 
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                <button type="submit" class="btn btn-block" ng-disabled="form.$invalid" ng-class="form.$valid && 'btn-primary'">Sign In</button>
+            </div>
+        </div>
+
     </form>
 
 </div>
