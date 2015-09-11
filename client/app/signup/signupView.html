@@ -44,6 +44,15 @@
                 <button type="submit" class="btn btn-block" ng-disabled="form.$invalid" ng-class="form.$valid && 'btn-primary'">Submit</button>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                <div style="text-align: center;" ng-hide="hideAlreadyRegistered">
+                    <br/>
+                    This username is already registered. Want to <a ui-sref='signin'>login</a>?
+                </div>
+            </div>
+        </div>
+        
     </form>
 
 </div>
