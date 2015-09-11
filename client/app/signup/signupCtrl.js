@@ -1,14 +1,17 @@
 angular.module('app')
   .controller('signupCtrl', function($scope, $state, User){
     // create function to handle the request to our api to signin and signup
+    $scope.hideAlreadyRegistered = true;
+
     $scope.signup = function(firstName, lastName, username, password, accountType) {
       User.signup(firstName, lastName, username, password, accountType).then(function(res){
-        // todo: we will eventually check for true, not "success"
-        console.log(username, password);
+        
+        if(res.data === 'Username is already taken!') {
+          $scope.hideAlreadyRegistered = false;
+        }
+
         if(res.data === true) {
           User.signin(username, password).then(function(response){
-            // console.log(response);
-            // response.data.accountType === 'Teacher' ? $state.go('teacherHome') : $state.go('studentHome');
             if (response.data.accountType === 'Teacher') {
               $state.go('teacherHome');
             } else {
@@ -16,6 +19,9 @@ angular.module('app')
             }
           });
         }
+
       });
     };
+
+
   });
