@@ -1,45 +1,49 @@
 <div class="container well form-wrap">
-    <form ng-submit="signup(firstName, lastName, username, password, accountType)" role="form">
+    <form name="form" novalidate ng-submit="signup(firstName, lastName, username, password, accountType)" role="form">
         <legend>Signup</legend>
 
         <div class="form-group">
-            <div class='type-selector'>
-                <div class="row signup-row">
+            <div class='row type-selector'>
+                <!-- <div class="row signup-row"> -->
                     <div class="account-type-wrap col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     Account Type:
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <div class="row">
+                        <!-- <div class="row"> -->
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <label class="btn btn-block btn-success" ng-model="accountType" btn-radio="'Teacher'">Teacher</label>
+                                <label class="btn btn-block btn-success" ng-model="accountType" btn-radio="'Teacher'" required>Teacher</label>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                <label class="btn btn-block btn-success" ng-model="accountType" btn-radio="'Student'">Student</label>  
+                                <label class="btn btn-block btn-success" ng-model="accountType" btn-radio="'Student'" required>Student</label>  
                             </div>
-                        </div>
+                        <!-- </div> -->
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
             <div class="row signup-row">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <label>First Name</label>
-                    <input type="text" class="form-control" ng-model="firstName" placeholder="Type here...">
+                    <input type="text" class="form-control" ng-model="firstName" placeholder="Type here..." required>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                     <label>Last Name</label>
-                    <input type="text" class="form-control" ng-model="lastName" placeholder="Type here...">
+                    <input type="text" class="form-control" ng-model="lastName" placeholder="Type here..." required>
                 </div>
             </div>
             <div class="row signup-row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <label>Username</label>
-                    <input type="text" class="form-control" ng-model="username" placeholder="Type here...">
+                    <input type="text" class="form-control" ng-model="username" placeholder="Type here..." required>
                     <label>Password</label>
-                    <input type="password" class="form-control" ng-model="password" placeholder="Type here...">
+                    <input type="password" class="form-control" ng-model="password" placeholder="Type here..." required>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                <button type="submit" class="btn btn-block" ng-disabled="form.$invalid" ng-class="form.$valid && 'btn-primary'">Submit</button>
+            </div>
+        </div>
     </form>
 
 </div>
