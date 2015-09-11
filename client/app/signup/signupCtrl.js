@@ -7,8 +7,13 @@ angular.module('app')
         console.log(username, password);
         if(res.data === true) {
           User.signin(username, password).then(function(response){
-            console.log(response);
-            response.data.accountType === 'Teacher' ? $state.go('teacherHome') : $state.go('studentHome');
+            // console.log(response);
+            // response.data.accountType === 'Teacher' ? $state.go('teacherHome') : $state.go('studentHome');
+            if (response.data.accountType === 'Teacher') {
+              $state.go('teacherHome');
+            } else {
+              $state.go('studentHome');
+            }
           });
         }
       });

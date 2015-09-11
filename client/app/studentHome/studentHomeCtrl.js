@@ -11,7 +11,7 @@ angular.module('app')
   
     // pass in projectId from the view
     $scope.goToProject = function(projectId) {
-      $state.go('studentProject', {projectId: projectId})
+      $state.go('studentProject', {projectId: projectId});
     };
 
     $scope.getProjects();

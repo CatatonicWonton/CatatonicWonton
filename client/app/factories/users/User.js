@@ -22,6 +22,6 @@ angular.module('app')
     return {
       signup: signup,      
       signin: signin
-    }
-  })
+    };
+  });
   
