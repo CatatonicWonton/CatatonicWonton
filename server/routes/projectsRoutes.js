@@ -5,28 +5,13 @@ var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
 var Promise = require('bluebird');
 var Utils = require('../utilities.js');
+var helpers = require('../helpers.js');
 
 // Models
 var Project = Models.Project; 
 var Page = Models.Page;
 var Teacher = Models.Teacher;
 var StudentProject = Models.StudentProject;
-
-var sendResponse = function (res) {
-  return function (data) {
-    res.status(200).send(data);
-  };
-};
-
-var extend = function () {
-  var object = {};
-  for (var i = 0; i < arguments.length; i++) {
-    for (var prop in arguments[i]) {
-      object[prop] = arguments[i][prop];
-    }
-  }
-  return object;
-};
 
 // get a project
 router.get('/:id', function (req, res) {
@@ -41,42 +26,50 @@ router.get('/:id', function (req, res) {
         }
       ]
     })
-    .then(sendResponse(res));
+    .then(helpers.sendResponse(res));
 });
 
 // get all projects
 router.get('/', function (req, res) {
   var user = req.session.passport.user;
-  console.log(user);
+  
   if (user.accountType === 'Teacher') {
-    Project.findAll({
-      where: {
-        TeacherId: user._id
-      },
-      include: [
-        { 
-          model: Page 
-        }
-      ]
-    })
-    .then(sendResponse(res));
+    Project
+      .findAll({
+        where: {
+          TeacherId: user._id
+        },
+        include: [
+          { 
+            model: Page 
+          }
+        ]
+      })
+      .then(helpers.sendResponse(res));
   } else {
-    StudentProject.findAll({
-      where: {
-        StudentId: user._id
-      },
-      include: [
-        { 
-          model: Page 
+    StudentProject
+      .findAll({
+        where: {
+          StudentId: user._id
         }
-      ]
-    })
-    .then(sendResponse(res));
+      })
+      .map(function (project) {
+        return Project
+          .findOne({
+            where: {
+              id: project.ProjectId
+            },
+            include: {
+              model: Page
+            }
+          });
+      })
+      .then(helpers.sendResponse(res));
   }
 });
 
 // create a project
-router.post('/', Utils.checkIf('Teacher'), function (req, res) {
+router.post('/', helpers.checkIf('Teacher'), function (req, res) {
   Promise
     .all([
       Project
@@ -91,27 +84,27 @@ router.post('/', Utils.checkIf('Teacher'), function (req, res) {
     .spread(function (project, teacher) { 
       return project.setTeacher(teacher);
     })
-    .then(sendResponse(res));
+    .then(helpers.sendResponse(res));
 }); 
 
 // edit a project
-router.put('/:id', Utils.checkIf('Teacher'), function (req, res) {
+router.put('/:id', helpers.checkIf('Teacher'), function (req, res) {
   Project
-    .upsert(extend(req.body, {id: req.params.id}))
+    .upsert(Utils.extend(req.body, {id: req.params.id}))
     .then(function () {
       return Project.findById(req.params.id);
     })
-    .then(sendResponse(res));
+    .then(helpers.sendResponse(res));
 }); 
 
 // delete a project
-router.delete('/:id', Utils.checkIf('Teacher'), function (req, res) {
+router.delete('/:id', helpers.checkIf('Teacher'), function (req, res) {
   Project
     .findById(req.params.id)
     .then(function (project) {
       return project.destroy();
     })
-    .then(sendResponse(res));
+    .then(helpers.sendResponse(res));
 })
 
 module.exports = router;

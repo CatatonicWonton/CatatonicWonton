@@ -4,6 +4,8 @@ var Sequelize = require('Sequelize');
 var sequelize = require('../db.js').database;
 var Models = require('../db.js').Models;
 var Utils = require('../utilities.js');
+var helpers = require('../helpers.js');
+var Promise = require('bluebird');
 
 // MODELS
 var Class = Models.Class;
@@ -12,39 +14,24 @@ var Project = Models.Project;
 var Student = Models.Student;
 var StudentProject = Models.StudentProject;
 
-var sendResponse = function (res) {
-  return function (data) {
-    res.status(200).send(data);
-  };
-};
-
-var extend = function () {
-  var object = {};
-  for (var i = 0; i < arguments.length; i++) {
-    for (var prop in arguments[i]) {
-      object[prop] = arguments[i][prop];
-    }
-  }
-  return object;
-};
-
 // teacher can assign a project to a student
-router.post('/student/:id', Utils.checkIf('Teacher'), function (req, res) {
-  Promise.all([
-    Student
-      .findById(req.params.id),
+router.post('/student/:id', helpers.checkIf('Teacher'), function (req, res) {
+  Promise
+    .all([
+      Student
+        .findById(req.params.id),
 
-    Project
-      .findById(req.body.ProjectId)
-  ])
-  .spread(function (student, project) {
-    return student.addProject(project);
-  })
-  .then(sendResponse(res));
+      Project
+        .findById(req.body.ProjectId)
+    ])
+    .spread(function (student, project) {
+      return student.addProject(project);
+    })
+    .then(helpers.sendResponse(res));
 });
 
 // teacher can assign projects to a class
-router.post('/class/:id', Utils.checkIf('Teacher'), function (req, res) {
+router.post('/class/:id', helpers.checkIf('Teacher'), function (req, res) {
   Class
     .findById(req.params.id)
     .then(function (foundClass) {
@@ -64,7 +51,7 @@ router.post('/class/:id', Utils.checkIf('Teacher'), function (req, res) {
 });
 
 // teacher can unassign a project from a student
-router.delete('/student/:id', Utils.checkIf('Teacher'), function (req, res) {
+router.delete('/student/:id', helpers.checkIf('Teacher'), function (req, res) {
   StudentProject
     .findOne({
       where: {
@@ -75,11 +62,11 @@ router.delete('/student/:id', Utils.checkIf('Teacher'), function (req, res) {
     .then(function (studentProject) {
       return studentProject.destroy();
     })
-    .then(sendResponse(res));
+    .then(helpers.sendResponse(res));
 });
 
 // teacher can unassign projects from a class
-router.delete('/class/:id', Utils.checkIf('Teacher'), function (req, res) {
+router.delete('/class/:id', helpers.checkIf('Teacher'), function (req, res) {
   Class
     .findById(req.params.id)
     .then(function (foundClass) {
@@ -88,14 +75,14 @@ router.delete('/class/:id', Utils.checkIf('Teacher'), function (req, res) {
     .then(function (students) {
       students.forEach(function (student) {
         StudentProject
-        .findOne({
-          where: {
-            StudentId: student.id,
-            ProjectId: req.body.ProjectId  
-          }
-        }).then(function(studentProject) {
-          return studentProject.destroy();
-        })
+          .findOne({
+            where: {
+              StudentId: student.id,
+              ProjectId: req.body.ProjectId  
+            }
+          }).then(function(studentProject) {
+            return studentProject.destroy();
+          })
       })
     });
 });
