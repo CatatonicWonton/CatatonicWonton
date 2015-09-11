@@ -1,3 +1,17 @@
+div.navbar-collapse.collapse {
+    display: block;
+    overflow: hidden;
+    max-height: 0px;
+    -webkit-transition: max-height .5s ease;
+    -moz-transition: max-height .5s ease;
+    -o-transition: max-height .5s ease;
+    transition: max-height .5s ease;
+}
+
+div.navbar-collapse.collapse.in {
+    max-height: 2000px;
+}
+
 .project-tile {
   width: 300px;
   height: 150px;

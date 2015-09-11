@@ -14,6 +14,8 @@
     <link rel='stylesheet' href='app/bower_components/FroalaWysiwygEditor/css/froala_editor.min.css'>
     <link rel='stylesheet' href='app/bower_components/FroalaWysiwygEditor/css/froala_style.min.css'>
 
+    <link rel='stylesheet' href='app/bower_components/angular-snap/angular-snap.css'>
+
     
     <!-- Custom styles -->
     <link rel="stylesheet" type="text/css" href="styles/main.css">
@@ -39,7 +41,12 @@
 
   </head>
   <body ng-app="app">
-
+    <snap-drawers>
+        <div snap-drawer="right">
+            Drawer Content
+        </div>
+    </snap-drawers>
+    <snap-content>
     <!-- <nav>
         <ul>
             <li><a ui-sref='landing'>Landing</a></li>
@@ -55,7 +62,7 @@
     <navbar></navbar>
 
     <ui-view></ui-view>
-
+    </snap-content>
     <!-- dependencies -->
     <script src="app/bower_components/angular/angular.min.js"></script>
     <script src="app/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -86,6 +93,8 @@
     <script src="app/teacherHome/teacherHomeCtrl.js"></script>
     <script src="app/teacherProject/teacherProjectCtrl.js"></script>
     <script src="app/navbar/nav-directive.js"></script>
+    <script src='app/bower_components/angular-snap/angular-snap.js'></script>
+    <script src='app/bower_components/snapjs/snap.js'></script>
 
 
   </body>

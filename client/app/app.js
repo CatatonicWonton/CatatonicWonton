@@ -1,4 +1,4 @@
-angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap'])
+angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'snap'])
 .config(function($urlRouterProvider, $stateProvider) {
 
   $stateProvider
