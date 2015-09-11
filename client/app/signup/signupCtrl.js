@@ -1,3 +1,5 @@
+// CONTROLLER: SIGNUP
+
 angular.module('app')
   .controller('signupCtrl', function($scope, $state, User){
     // create function to handle the request to our api to signin and signup

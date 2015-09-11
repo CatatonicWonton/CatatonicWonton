@@ -1,3 +1,5 @@
+// FACTORY: PROJECT
+
 angular.module('app')
   .factory('Project', function Project($http, $stateParams) {
 

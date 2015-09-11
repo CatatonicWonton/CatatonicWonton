@@ -1,3 +1,5 @@
+// CONTROLLER: TEACHER PROJECT
+
 angular.module('app')
   .controller('teacherProjectCtrl', function teacherProjectCtrl($scope, $sce, Project, User){
 

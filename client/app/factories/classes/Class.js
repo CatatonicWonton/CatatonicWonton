@@ -1,3 +1,5 @@
+// FACTORY: CLASS
+
 angular.module('app')
   .factory('Class', function Class($http, $stateParams) {
 

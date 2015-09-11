@@ -1,3 +1,5 @@
+// CONTROLLER: TEACHER HOME
+
 angular.module('app')
   .controller('teacherHomeCtrl', function teacherHomeCtrl($scope, $state, $modal, Class, Project) {
 
