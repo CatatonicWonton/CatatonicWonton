@@ -59,6 +59,14 @@ module.exports = {
         ]
       })
       .then(helpers.sendResponse(res))
+  },
+  deleteRequest: function (req, res, next) {
+    HelpRequest
+      .findById(req.params.id)
+      .then(function (helpRequest) {
+        return helpRequest.destroy();
+      })
+      .then(helpers.sendResponse(res));
   }
 };
 
