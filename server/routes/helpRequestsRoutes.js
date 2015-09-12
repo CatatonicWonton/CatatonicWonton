@@ -13,15 +13,15 @@ router.post('/', /*Auth.checkIf('Student'),*/ HelpRequestController.addQuestion)
 */
 router.post('/:helpRequestId/:prop', /*Auth.checkIf('Teacher'),*/ HelpRequestController.toggleTrue);
 
+
+
 /* Get all outstanding help requests that haven't been resolved i.e. resolved = false;
  * input  -> {}
- * output -> {helpRequests: [
-                             helpRequest1,
-                             helpRequest2,
-                             helpRequest3, 
-                            ]
-             }
-                    most recent come last
+ * output -> [
+               helpRequest1,
+               helpRequest2,
+               helpRequest3, 
+             ]
 */
 router.get('/', /*Auth.checkIf('Teacher'),*/ HelpRequestController.getUnresolved )
 
