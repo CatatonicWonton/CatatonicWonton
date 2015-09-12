@@ -3,7 +3,10 @@ var router = express.Router();
 var Auth = require('../controllers/authController.js');
 var HelpRequestController = require('../controllers/helpRequestController.js');
 
-// for posting questions /**/
+/* Student submitting a single help request
+ * input  -> {teacherId, question}
+ * output -> {} 
+*/
 router.post('/', /*Auth.checkIf('Student'),*/ HelpRequestController.addQuestion);
 
 
