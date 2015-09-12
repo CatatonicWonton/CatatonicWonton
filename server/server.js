@@ -19,6 +19,7 @@ var projectsRoutes       = require('./routes/projectsRoutes');
 var studentRoutes        = require('./routes/studentRoutes');
 var studentClassRoutes   = require('./routes/studentClassRoutes');
 var studentProjectRoutes = require('./routes/studentProjectRoutes');
+var helpRequestsRoutes   = require('./routes/helpRequestsRoutes');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use('/api/projects', projectsRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/studentClass', studentClassRoutes);
 app.use('/api/studentProject', studentProjectRoutes);
+app.use('/api/helpRequests', helpRequestsRoutes);
 
 app.listen(8000, function () {
   console.log('listening on port 8000');
