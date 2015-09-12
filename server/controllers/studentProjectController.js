@@ -49,7 +49,7 @@ module.exports = {
             return student.addProject(project);
           });
       })
-      .then(helpers.sendResponse(res))
+      .then(helpers.sendResponse(res));
   },
 
   unassignProjectFromStudent: function (req, res) {
