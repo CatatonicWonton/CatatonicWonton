@@ -18,6 +18,10 @@
       <li ng-hide="loggedIn"> <a ui-sref='signin'>Sign In</a></li>
       <li ng-hide="isTeacher"><a ui-sref='studentHome'>studentHome</a></li>
       <li ng-show="isTeacher"><a ui-sref='teacherHome'>teacherHome</a></li>
+      <li><a ui-sref='studentProject'>studentProject</a></li>
+      <li><a ui-sref='helpRequest'>Get Help</a></li>
+      <!-- <li><a ui-sref='teacherClass'>teacherClass</a></li> -->
+      <li><a snap-toggle="right">Toggle Drawer</a></li>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
