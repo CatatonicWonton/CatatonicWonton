@@ -1,6 +1,6 @@
 var Promise = require('bluebird');
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('schoolio', 'root', '');
+var sequelize = new Sequelize('schoolio', 'root', '', {logging:false});
 
 // MODELS
 var Models = {};
@@ -14,11 +14,19 @@ Models.Page     = sequelize.import('./models/Page');
 // JOIN TABLES
 Models.StudentClass   = sequelize.import('./models/StudentClass');
 Models.StudentProject = sequelize.import('./models/StudentProject');
+Models.ClassProject   = sequelize.import('./models/ClassProject');
 
 // Adds Foreign Keys to Join Tables
+
+// Students < -- > Projects
 Models.Student.belongsToMany(Models.Project, {through: 'StudentProject'});
 Models.Project.belongsToMany(Models.Student, {through: 'StudentProject'});
 
+// Classes  < -- > Projects
+Models.Class.belongsToMany(Models.Project, {through: 'ClassProject'});
+Models.Project.belongsToMany(Models.Class, {through: 'ClassProject'});
+
+// Classes  < -- > Students
 Models.Student.belongsToMany(Models.Class, {through: 'StudentClass'});
 Models.Class.belongsToMany(Models.Student, {through: 'StudentClass'});
 
