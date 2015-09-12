@@ -8,8 +8,10 @@ var Class = Models.Class;
 var Teacher = Models.Teacher;
 var Student = Models.Student;
 var StudentClass = Models.StudentClass;
+var Project = Models.Project;
 
 module.exports = {
+  // Get class returns each class with students 
   getClass: function (req, res) {
     Class
       .find({
@@ -19,6 +21,9 @@ module.exports = {
         include: [
           {
             model: Student
+          },
+          {
+            model: Project
           }
         ]
       })

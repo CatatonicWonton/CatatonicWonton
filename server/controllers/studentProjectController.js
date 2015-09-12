@@ -37,6 +37,10 @@ module.exports = {
 
           Project
             .findById(req.body.ProjectId)
+            .then(function(project){
+              project.addClass(foundClass);
+              return project;
+            })
         ])
       })
       .spread(function (students, project) {
@@ -45,7 +49,7 @@ module.exports = {
             return student.addProject(project);
           });
       })
-      .then(helpers.sendResponse(res));
+      .then(helpers.sendResponse(res))
   },
 
   unassignProjectFromStudent: function (req, res) {
