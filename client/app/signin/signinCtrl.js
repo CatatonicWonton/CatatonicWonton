@@ -5,7 +5,6 @@ angular.module('app')
 
     $scope.signin = function(username, password) {
       User.signin(username, password).then(function(res){
-
         User.setUser(res.data);
         $scope.$emit('teacherOrStudent');
         if(res.data.accountType === 'Teacher') {
