@@ -31,15 +31,20 @@
               <h3 class="panel-title">Class: {{class.name}}</h3>
             </div>
             <div class="panel-body">
-                <p><strong>Subject: </strong>{{project.subject}}</p>              
-               <div class="btn-group btn-group-justified">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary" ng-click="goToClass(class.id)">View</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger" ng-click="deleteClass(class.id)">Delete</button>
-                  </div>
-               </div>
+              <p>Projects</p>
+              <ul>
+                <li ng-repeat="project in class.Projects">{{project.name}}</li>
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <div class="btn-group btn-group-justified">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-primary" ng-click="goToClass(class.id)">View</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-danger" ng-click="deleteClass(class.id)">Delete</button>
+                </div>
+              </div>
             </div>
         </div>
     </div>

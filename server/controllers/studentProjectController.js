@@ -40,14 +40,20 @@ module.exports = {
             .then(function(project){
               project.addClass(foundClass);
               return project;
-            })
+            }),
+
+          foundClass
         ])
       })
-      .spread(function (students, project) {
+      .spread(function (students, project, foundClass) {
         return Promise
-          .map(students, function (student) {
-            return student.addProject(project);
-          });
+          .all(
+            Promise
+              .map(students, function (student) {
+                return student.addProject(project);
+              }),
+              foundClass
+          );
       })
       .then(helpers.sendResponse(res));
   },
