@@ -38,6 +38,11 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngA
         templateUrl: "app/teacherProject/teacherProjectView.html",
         controller: "teacherProjectCtrl"
     })
+    .state("helpRequest", {
+        url: "/helpRequest",
+        templateUrl: "app/studentHelpRequest/studentHelpRequestView.html",
+        controller: "studentHelpRequestCtrl"
+    })
     .state("teacherClass", {
         url: "/teacherClass/:classId",
         templateUrl: "app/teacherClass/teacherClassView.html",

@@ -1,7 +1,7 @@
 angular.module('app')
   .controller('studentHelpRequestCtrl', function studentHelpRequestCtrl($scope, $state, HelpRequest){
 
-    $scope.getTeacherId = function();
+    $scope.getTeacherId = function() {};
 
     $scope.submitHelpRequest = function (teacherId, question) {
       HelpRequest.submitHelpRequest(teacherId, question).then(function (data) {
