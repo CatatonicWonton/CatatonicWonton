@@ -35,10 +35,10 @@
             <div class="panel-heading">
               <h3 class="panel-title">Class: {{class.name}}</h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" >
               <p>Projects</p>
               <ul>
-                <li ng-repeat="project in class.Projects">{{project.name}}</li>
+                <li tooltip="Unassign {{project.name}}" tooltip-placement="left" ng-repeat="project in class.Projects"><a class="class-project-link" ng-click="unassignProject(project.id, class.id)">{{project.name}}</a></li>
               </ul>
             </div>
             <div class="panel-footer">
