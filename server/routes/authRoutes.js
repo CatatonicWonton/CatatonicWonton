@@ -24,4 +24,5 @@ router.post('/signup', Auth.createAccount, Auth.sendSuccess);
 
 router.post('/logout', Auth.logout, Auth.sendSuccess);
 
+
 module.exports = router;

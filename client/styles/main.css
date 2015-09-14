@@ -1,79 +1,143 @@
+.floating-help {
+  position: fixed;
+  width: 30px;
+  height: 60px;
+  top: 100px;
+  left: 0px;
+  background-color: blue;
+  z-index: 2; }
+
+.active {
+  background-color: #B4CDCD !important; }
+
+.project-container {
+  /*z-index: 1;*/
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  /*align-items: stretch;*/ }
+  .project-container .project-view {
+    flex: 0 1 960px;
+    /*background-color: #eee;*/
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center; }
+    .project-container .project-view .project-head {
+      flex: 0 0 50px;
+      /*background-color: #2F4F4F;*/
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center; }
+      .project-container .project-view .project-head .name {
+        flex: 1 1 0;
+        /*background-color: blue;*/ }
+        .project-container .project-view .project-head .name h2 {
+          margin: 5px 0 0 0; }
+      .project-container .project-view .project-head .current-page {
+        flex: 1 1 0;
+        background-color: #fsfdsd; }
+    .project-container .project-view .project-pages {
+      flex: 0 0 50px;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center; }
+      .project-container .project-view .project-pages .bar {
+        flex: 1 1 100px;
+        background-color: #2F4F4F;
+        margin: 5px 5px 5px 5px;
+        max-height: 30px;
+        /* only for teacher view */ }
+        .project-container .project-view .project-pages .bar .add-page {
+          flex: 1 1 30px; }
+    .project-container .project-view .project-content {
+      flex: 1 1 0;
+      /*background-color: #DCDCDC;*/
+      overflow: scroll;
+      margin: 2px 0 2px 0;
+      transition: all 0.5s ease-in-out; }
+    .project-container .project-view .project-action-bar {
+      flex: 0 0 30px;
+      /*background-color: red;*/
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end; }
+      .project-container .project-view .project-action-bar .button {
+        flex: 0 0 150px;
+        background-color: gray;
+        margin-left: 5px; }
+
+/* PRIMARY STYLING */
+.navbar {
+  /*margin-bottom: 0px !important;*/
+  height: 7.5% !important; }
+
 .project-tile {
   width: 300px;
   height: 150px;
   margin: 15px;
   border: 2px solid black;
   background-color: white;
-  float:left;
-}
+  float: left; }
 
 .project-tile-title-box {
   width: 100%;
   height: 30px;
-  padding-top: 4px;
-}
+  padding-top: 4px; }
 
 .project-tile-author {
   font-family: Verdana;
-  margin: 10px;
-}
+  margin: 10px; }
 
 .projects-container, .class-container {
-  max-width: 800px;
-}
+  max-width: 800px; }
 
 .Science-box {
-  background-color: #674ea7;
-}
+  background-color: #674ea7; }
 
-.English-box{
-  background-color: #990000;
-}
+.English-box {
+  background-color: #990000; }
 
 .project-tile-title-text {
   color: white;
   font-family: Verdana;
-  margin-left: 8px;
-}
+  margin-left: 8px; }
 
 .plus-add {
   color: #059D8E;
   width: 40px;
   /*text-align: center;*/
-  display: inline-block;
-}
+  display: inline-block; }
 
-.plus-center{
+.plus-center {
   font-size: 25px;
-  text-align: center;
-}
+  text-align: center; }
 
 .plus-add:hover {
   color: #F26101;
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .plus-add:active {
-  color: #313732;
-}
+  color: #313732; }
 
 .modalInput {
-  margin: 10px auto;
-}
+  margin: 10px auto; }
 
 .form-wrap {
-  max-width: 600px;
-}
+  max-width: 600px; }
 
-.type-selector{
-  margin:10px;
-}
+.type-selector {
+  margin: 10px; }
 
-.account-type-wrap{
+.account-type-wrap {
   text-align: right;
-  padding:5px;
-}
+  padding: 5px; }
 
-.signin-wrap{
-  max-width: 400px
-}
+.signin-wrap {
+  max-width: 400px; }
+
+.signup-row {
+  margin-top: 10px; }
+
+/*# sourceMappingURL=main.css.map */

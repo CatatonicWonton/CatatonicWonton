@@ -1,29 +1,43 @@
 angular.module('app')
   .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, Project){
 
-    $scope.project = null;
-    $scope.currentPage = null;
+    $scope.project;
+    $scope.currentPage;
+    $scope.currentIndex;
+    // $scope.needsHelp = false;
 
     // PROJECT
     $scope.getProject = function() {
       Project.getProject().then(function(project){
         $scope.project = project;
-        $scope.currentPage = project.Pages[0];
+        $scope.changePage(0);        
       });
     };
 
-    $scope.changePage = function(pageIndex) {
+    $scope.changePage = function(pageIndex, change) {
+      if(pageIndex >= $scope.project.Pages.length) {
+        pageIndex = 0;
+      } else if(pageIndex < 0) {
+        pageIndex = 0;
+      }
       $scope.currentPage = $scope.project.Pages[pageIndex];
+      $scope.currentIndex = pageIndex;
     };
+
+    $scope.makeActive = function(index) {
+      if($scope.currentIndex === index) {
+        console.log('success', index, $scope.currentIndex);
+        return 'active';
+      }
+    }
 
     $scope.trustify = function(content) {
       return $sce.trustAsHtml(content);
     };
 
-    // EXTRA: student input
-    $scope.answerQuestion = function() {
-
-    };
+    // $scope.openHelp = function() {
+    //   $scope.needsHelp = !$scope.needsHelp;
+    // };
 
     $scope.getProject();
 
