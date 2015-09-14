@@ -4,7 +4,9 @@
 azure.err
 iisnode.yml
 client/app/bower_components/
-main.css
+client/styles/main.css
+client/styles/main.css.map
+
 
 # Icon must ends with two \r.
 Icon
