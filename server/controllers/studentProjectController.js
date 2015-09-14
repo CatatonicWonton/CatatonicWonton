@@ -10,6 +10,8 @@ var Student = Models.Student;
 var Project = Models.Project;
 var StudentClass = Models.StudentClass;
 var StudentProject = Models.StudentProject;
+var ClassProject = Models.ClassProject;
+
 
 module.exports = {
   assignProjectToStudent: function (req, res, next) {
@@ -43,19 +45,22 @@ module.exports = {
             }),
 
           foundClass
-        ])
+        ]);
       })
       .spread(function (students, project, foundClass) {
         return Promise
-          .all(
+          .all([
             Promise
               .map(students, function (student) {
                 return student.addProject(project);
               }),
-              foundClass
-          );
+              foundClass,
+              project
+          ]);
       })
-      .then(helpers.sendResponse(res));
+      .then(function(data){
+        helpers.sendResponse(res)(data);
+      });
   },
 
   unassignProjectFromStudent: function (req, res) {
@@ -73,24 +78,39 @@ module.exports = {
   },
 
   unassignProjectFromClass: function (req, res) {
+    var classid   = req.params.classid,
+        projectid = req.params.projectid;
+    console.log('ProjectId: ', projectid,", classId: ",classid);
     Class
-      .findById(req.params.id)
+      .findById(classid)
       .then(function (foundClass) {
-        return foundClass.getStudents();
+        return Promise.all([
+            foundClass.getStudents(),
+            ClassProject
+              .findOne({
+                where: {
+                  ProjectId: projectid,
+                  ClassId: foundClass.id
+                }
+              })
+              .then(function(classProject){
+                return classProject ? classProject.destroy() : null;
+              }) 
+          ]);
       })
-      .then(function (students) {
+      .spread(function (students) {
         return Promise
           .map(students, function (student) {
             return StudentProject
               .findOne({
                 where: {
                   StudentId: student.id,
-                  ProjectId: req.body.ProjectId
+                  ProjectId: projectid
                 }
               })
               .then(function (studentProject) {
                 return (studentProject) ? studentProject.destroy() : null;
-              })
+              });
           });
       })
       .then(helpers.sendResponse(res));

@@ -52,8 +52,16 @@ angular.module('app')
         ProjectId: projectId
       }).then(function(response) {
         return response.data;
-      })
+      });
     };
+
+    var unassignProject = function(projectId, classId) {
+      var url = '/api/studentProject/class/'+classId+'/'+projectId+'/delete';
+      return $http.get(url)
+        .then(function(response){
+          return response.data;
+        });
+      };
 
     return {
       getProjects: getProjects,
@@ -62,8 +70,9 @@ angular.module('app')
       createPage: createPage, 
       // updatePage: updatePage, 
       createContent: createContent,
-      assignProject: assignProject
-    }
+      assignProject: assignProject,
+      unassignProject: unassignProject
+    };
   });
 
 

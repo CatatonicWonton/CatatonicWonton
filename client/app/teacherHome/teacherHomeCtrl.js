@@ -9,7 +9,7 @@ angular.module('app')
     };
 
     // used as a store for dropdown toggle info, see ng-init in view
-    $scope.dropdowns = {}
+    $scope.dropdowns = {};
 
     $scope.goToProject = function(projectId) {
       $state.go('teacherProject', {
@@ -76,9 +76,35 @@ angular.module('app')
     };
 
 
-    $scope.assignProject = function(classId, projectId) {
+    $scope.assignProject = function(projectId, classId) {
       Project.assignProject(projectId, classId).then(function(response) {
-        console.log('project assigned', response);
+        var project = response[2];
+        var includes = false;
+        $scope.teacherClasses.forEach(function(_class){
+          if(classId === _class.id){
+            _class.Projects.forEach(function(project){
+              if(project.id === projectId) includes = true;
+            });
+            
+            !includes && _class.Projects.push(project);
+          } 
+        });
+      });
+    };
+
+    $scope.unassignProject = function(projectId, classId) {
+      Project.unassignProject(projectId, classId).then(function(response){
+        console.log(response);
+        console.log('unassign complete: response received');
+        $scope.teacherClasses.forEach(function(_class){
+          if(classId = _class.id){
+            var delIndex;
+            _class.Projects.forEach(function(project, index){
+              if(project.id === projectId) delIndex = index;
+            });
+            delIndex !== undefined && _class.Projects.splice(delIndex, 1);
+          }
+        });
       });
     };
 

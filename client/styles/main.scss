@@ -2,6 +2,13 @@
 
 /* PRIMARY STYLING */
 
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+
 .navbar {
   /*margin-bottom: 0px !important;*/
   height: 7.5% !important;
@@ -91,3 +98,13 @@
   margin-top: 10px;
 }
 
+.panel-title.pull-left {
+  padding-top:8px !important;
+}
+
+.class-project-link:hover{
+  color: red;
+  cursor: pointer;
+  text-decoration:none !important;
+  @include transition(color 0.2s);
+}
