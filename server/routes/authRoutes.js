@@ -7,35 +7,18 @@ var passport = require('passport');
  * input  -> {username, password}
  * output -> {id, username, accountType}
 */ 
-
 router.post('/login', passport.authenticate('local'), Auth.sendUserData);
 
 /* Creates account 
  * input  -> {firstName, lastName, username, password, accountType}
  * output -> {true}
 */
-
 router.post('/signup', Auth.createAccount, Auth.sendSuccess);
 
 /* Log's out user and ends session
  * input -> {}
  * output -> {true}
 */
-
 router.post('/logout', Auth.logout, Auth.sendSuccess);
-
-var success = function (req, res, next) {
-  res.status(200).send(true);
-  next();
-};
-
-router.post('/login', passport.authenticate('local'), function (req, res, next) {
-  res.status(200).send(req.session.passport.user);
-});
-
-router.post('/signup', Auth.createAccount, Auth.sendSuccess);
-
-// sign out
-router.post('/logout', Auth.logout);
 
 module.exports = router;

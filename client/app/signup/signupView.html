@@ -1,5 +1,5 @@
 <div class="container well form-wrap">
-    <form name="form" novalidate ng-submit="signup(firstName, lastName, username, password, accountType)" role="form">
+    <form name="form" novalidate ng-submit="signup(firstName, lastName, username, confirmedPassword,password, accountType)" role="form">
         <legend>Signup</legend>
 
         <div class="form-group">
@@ -36,6 +36,8 @@
                     <input type="text" class="form-control" ng-model="username" placeholder="Type here..." required>
                     <label>Password</label>
                     <input type="password" class="form-control" ng-model="password" placeholder="Type here..." required>
+                    <label>Confirm Password</label>
+                    <input type="password" class="form-control" ng-model="confirmedPassword" placeholder="Type here..." required>
                 </div>
             </div>
         </div>
@@ -49,6 +51,14 @@
                 <div style="text-align: center;" ng-hide="hideAlreadyRegistered">
                     <br/>
                     This username is already registered. Want to <a ui-sref='signin'>login</a>?
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+                <div style="text-align: center;" ng-hide="hidePasswordMatch">
+                    <br/>
+                    Passwords do not match.  Please try again.
                 </div>
             </div>
         </div>
