@@ -2,10 +2,12 @@
 <div class="project-container">
   <div class="project-view">
     <div class="project-head">
-      <div class="name">
-        {{project.name}}
+      <div class="name text-left">
+        <h2>{{project.name}}<small> {{currentPage.title}}</small></h2>
       </div>
-      <div class="current-page">{{currentPage.title}}</div>
+      <!-- <div class="current-page">
+        <h2><small>{{currentPage.title}}</small></h2>
+      </div> -->
     </div>
     <div class="project-pages">
       <!-- use ng-repeat to display bar for each project -->
@@ -14,8 +16,6 @@
         ng-repeat="page in project.Pages"
         ng-click="changePage($index)"
         ng-class="makeActive($index)">
-        <!-- {{page}} -->
-        text
       </div>
     </div>
     <div class="project-content">

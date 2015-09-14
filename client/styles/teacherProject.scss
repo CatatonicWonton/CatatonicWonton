@@ -9,7 +9,7 @@
 }
 
 .active {
-  background-color: red !important;
+  background-color: #B4CDCD !important;
 }
 
 .project-container {
@@ -25,7 +25,7 @@
   .project-view {
 
     flex: 0 1 960px;
-    background-color: #eee;
+    /*background-color: #eee;*/
     
     display: flex;
     flex-flow: column wrap;
@@ -34,7 +34,7 @@
     .project-head {
 
       flex: 0 0 50px;
-      background-color: #2F4F4F;
+      /*background-color: #2F4F4F;*/
 
       display: flex;
       flex-flow: row wrap;
@@ -42,7 +42,11 @@
       
       .name {
         flex: 1 1 0;
-        background-color: blue;
+        /*background-color: blue;*/
+
+        h2 {
+          margin: 5px 0 0 0;
+        }
       }
 
       .current-page {
@@ -60,9 +64,9 @@
 
       .bar {
         flex: 1 1 100px;
-        background-color: yellow;
+        background-color: #2F4F4F;
         margin: 5px 5px 5px 5px;
-        max-height: 50px;
+        max-height: 30px;
   
         /* only for teacher view */
         .add-page {
@@ -75,7 +79,7 @@
 
     .project-content {
       flex: 1 1 0;
-      background-color: #DCDCDC;
+      /*background-color: #DCDCDC;*/
       overflow: scroll;
       margin: 2px 0 2px 0;
 
@@ -83,21 +87,18 @@
     }
 
     .project-action-bar {
-      flex: 0 0 50px;
-      background-color: red;
+      flex: 0 0 30px;
+      /*background-color: red;*/
 
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-end;
 
       .button {
-        flex: 1 0 0;
+        flex: 0 0 150px;
         background-color: gray;
+        margin-left: 5px;
       }
     }
   }
-}
-
-.project-content:hover {
-  transition: all 1s ease-in-out;
 }

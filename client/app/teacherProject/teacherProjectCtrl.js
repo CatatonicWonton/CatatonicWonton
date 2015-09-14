@@ -31,6 +31,9 @@ angular.module('app')
     $scope.updatePage = function(pageTitle) { /* todo */ };
 
     $scope.createContent = function(htmlString, pageId) { 
+      console.log('html', htmlString);
+      console.log('pageId', pageId);
+
       Project.createContent(htmlString, pageId).then(function(page){
         angular.forEach($scope.project.Pages, function(currentPage) {
           if(currentPage.id === pageId) {
@@ -48,53 +51,3 @@ angular.module('app')
 
   });
 
-
-
-// ******************************************************************************** //
-        // trash:
-// ******************************************************************************** //
-
-/*
-
-    // model: this is where we store the relevant data for this view
-    $scope.currentProject = projectFactory.projects[userFactory.currentProjectId];
-    $scope.currentIndex = 0;
-    $scope.currentPage = $scope.currentProject.pages[0];
-    $scope.newComponentHtml = '';
-    $scope.isTextEditorVisible = false;
-    $scope.froalaOptions = {
-        placeholder: 'Add text, images, videos, and links here',
-        inlineMode: false
-    }
-
-    $scope.toggleTextEditor = function() {
-      if($scope.isTextEditorVisible) {
-        $scope.isTextEditorVisible = false;
-      }else {
-        $scope.isTextEditorVisible = true;
-      }
-    }
-
-    $scope.addPage = function() {
-      var title = window.prompt('What is the title of this page?')
-      projectFactory.addPage(title);
-    };
-
-    $scope.updatePage = function(index) {
-      var title = window.prompt('What should the title of the page be?')
-      projectFactory.updatePage(title, $scope.currentIndex);
-    }
-
-    $scope.addContentComponent = function(html, index) {
-      projectFactory.addContentComponent(html, $scope.currentIndex);
-      $scope.newComponentHtml = '';
-      $scope.toggleTextEditor();
-    };
-
-    $scope.setCurrentPage = function(index) {
-      $scope.currentIndex = index;
-      $scope.currentPage = $scope.currentProject.pages[index];
-    };
-  });
-
-*/
