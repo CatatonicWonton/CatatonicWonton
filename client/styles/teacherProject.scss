@@ -8,7 +8,7 @@
   z-index: 2;
 }
 
-.active {
+.page-active {
   background-color: #B4CDCD !important;
 }
 
@@ -69,11 +69,17 @@
         max-height: 30px;
   
         /* only for teacher view */
-        .add-page {
-          flex: 1 1 30px;
+
+
+      }
+      .add-page {
+        flex: 0 0 50px;
+        /*background-color: #2F4F4F;*/
+        margin: 5px 5px 5px 5px;
+        max-height: 30px;
+        .icon {
+          margin-top: 7px;
         }
-
-
       }
     }
 
@@ -82,6 +88,7 @@
       /*background-color: #DCDCDC;*/
       overflow: scroll;
       margin: 2px 0 2px 0;
+      padding: 5px 5px 5px 5px;
 
       transition: all 0.5s ease-in-out;
     }

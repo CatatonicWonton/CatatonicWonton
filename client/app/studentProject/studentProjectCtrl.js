@@ -4,7 +4,6 @@ angular.module('app')
     $scope.project;
     $scope.currentPage;
     $scope.currentIndex;
-    // $scope.needsHelp = false;
 
     // PROJECT
     $scope.getProject = function() {
@@ -27,17 +26,13 @@ angular.module('app')
     $scope.makeActive = function(index) {
       if($scope.currentIndex === index) {
         console.log('success', index, $scope.currentIndex);
-        return 'active';
+        return 'page-active';
       }
-    }
+    };
 
     $scope.trustify = function(content) {
       return $sce.trustAsHtml(content);
     };
-
-    // $scope.openHelp = function() {
-    //   $scope.needsHelp = !$scope.needsHelp;
-    // };
 
     $scope.getProject();
 

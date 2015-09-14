@@ -1,10 +1,10 @@
-<div class="container">
+<!-- <div class="container">
   <div class="page-header">
-    <h1>{{project.name}} <small>{{project.subject}}<!--  | {{project.TeacherId}} --></small></h1>
+    <h1>{{project.name}} <small>{{project.subject}}</small></h1>
   </div>
 </div>
-
-<div class="container">
+ -->
+<!-- <div class="container">
   <tabset>
     <tab ng-repeat="page in project.Pages" heading="{{page.title}}" active='page.active'>
       <div class="container">
@@ -28,5 +28,36 @@
       </tab-heading>
     </tab>
   </tabset>
+</div>
+ -->
+<div class="project-container">
+  <div class="project-view">
+    <div class="project-head">
+      <div class="name text-left">
+        <h2>{{project.name}}<small> {{currentPage.title}}</small></h2>
+      </div>
+      <!-- <div class="current-page">
+        <h2><small>{{currentPage.title}}</small></h2>
+      </div> -->
+    </div>
+    <div class="project-pages">
+      <!-- use ng-repeat to display bar for each project -->
+      <div
+        class="bar"
+        ng-repeat="page in project.Pages"
+        ng-click="changePage($index)"
+        ng-class="makeActive($index)">
+      </div>
+      <div class="plus-add add-page text-center" ng-click="createPage()"><i class="fa fa-plus icon"></i></div>
+    </div>
+    <div class="project-content">
+      <textarea froala="froalaOptions" ng-model="currentPage.content"></textarea>
+      <!-- <div ng-bind-html="trustify(currentPage.content)"></div> -->
+    </div>
+    <div class="project-action-bar">
+      <button class="button" ng-click="changePage(currentIndex - 1)">previous</button>
+      <button class="button" ng-click="changePage(currentIndex + 1)">next</button>
+    </div>
+  </div>
 </div>
 
