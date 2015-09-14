@@ -1,5 +1,5 @@
 angular.module('app')
-  .factory('Class', function Class($http, $stateParams) {
+  .factory('Class', function Class($http, $stateParams, User) {
 
     var getClasses = function() {
       return $http.get('/api/class').then(function(response){
@@ -26,11 +26,21 @@ angular.module('app')
       });
     };
 
+    var joinClass = function(classId) {
+      var studentId = User.getUser()._id;
+      return $http.post('api/studentClass/' + classId, {
+        StudentId: studentId
+      }).then(function(response){
+        return response.data;
+      });
+    }
+
     return {
       getClasses: getClasses,
       getClass: getClass,
       createClass: createClass,
-      deleteClass: deleteClass
+      deleteClass: deleteClass,
+      joinClass: joinClass
     };
 
   });

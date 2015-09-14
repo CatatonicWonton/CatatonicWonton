@@ -1,13 +1,30 @@
-<div>
-  Test - studentProjectView
-</div>
-<div>
- <!-- {{project}} -->
-</div>
-<!-- shows titles of each page -->
-<div ng-repeat="page in project.Pages">
-  <h4 ng-click="changePage($index)">{{page.title}}</h4>
+<!-- <div class="floating-help" ng-click="openHelp()">Halp!</div> -->
+<div class="project-container">
+  <div class="project-view">
+    <div class="project-head">
+      <div class="name text-left">
+        <h2>{{project.name}}<small> {{currentPage.title}}</small></h2>
+      </div>
+      <!-- <div class="current-page">
+        <h2><small>{{currentPage.title}}</small></h2>
+      </div> -->
+    </div>
+    <div class="project-pages">
+      <!-- use ng-repeat to display bar for each project -->
+      <div
+        class="bar"
+        ng-repeat="page in project.Pages"
+        ng-click="changePage($index)"
+        ng-class="makeActive($index)">
+      </div>
+    </div>
+    <div class="project-content">
+      <div ng-bind-html="trustify(currentPage.content)"></div>
+    </div>
+    <div class="project-action-bar">
+      <button class="button" ng-click="changePage(currentIndex - 1)">previous</button>
+      <button class="button" ng-click="changePage(currentIndex + 1)">next</button>
+    </div>
+  </div>
 </div>
 
-<!-- show content for current page -->
-<div ng-bind-html="trustify(currentPage.content)"></div>
