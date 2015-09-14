@@ -30,6 +30,6 @@ router.delete('/student/:id', Auth.checkIf('Teacher'), StudentProjectController.
  * output -> [{ProjectId, StudentId, createdAt, updatedAt}]
  */
  
-router.get('/class/:classid/:projectid/delete', Auth.checkIf('Teacher'), StudentProjectController.unassignProjectFromClass);
+router.delete('/class/:classid/:projectid', Auth.checkIf('Teacher'), StudentProjectController.unassignProjectFromClass);
 
 module.exports = router;

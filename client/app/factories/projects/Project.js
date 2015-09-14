@@ -56,8 +56,8 @@ angular.module('app')
     };
 
     var unassignProject = function(projectId, classId) {
-      var url = '/api/studentProject/class/'+classId+'/'+projectId+'/delete';
-      return $http.get(url)
+      var url = '/api/studentProject/class/'+classId+'/'+projectId;
+      return $http.delete(url)
         .then(function(response){
           return response.data;
         });

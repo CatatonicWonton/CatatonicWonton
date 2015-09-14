@@ -10,7 +10,7 @@
               <div class="btn-group pull-right" dropdown ng-init="toggled[project.id] = false" is-open="toggled[project.id]">
                 <button type="button" class="btn btn-assign btn-default"dropdown-toggle>Assign</button>
                 <ul class="dropdown-menu assign-class" role="menu">
-                  <li ng-repeat="class in teacherClasses"><a ng-click="assignProject(class.id, project.id)">{{class.name}}</a></li>
+                  <li ng-repeat="class in teacherClasses"><a ng-click="assignProject(project.id, class.id)">{{class.name}}</a></li>
                 </ul>
               </div>
             </div>
