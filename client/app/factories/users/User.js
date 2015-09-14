@@ -1,6 +1,8 @@
 angular.module('app')
   .factory('User', function User ($http) {
 
+    var user = {};
+
     // todo:
     var signup = function(firstName, lastName, username, password, accountType) {
       return $http.post('/auth/signup', {
@@ -19,9 +21,21 @@ angular.module('app')
       });
     };
 
+    var setUser = function(userData) {
+      user._id = userData._id;
+      user.accountType = userData.accountType;
+      user.username = userData.username;
+    };
+
+    var getUser = function() {
+      return user;
+    }
+
     return {
       signup: signup,      
-      signin: signin
-    };
-  });
+      signin: signin,
+      setUser: setUser,
+      getUser: getUser
+    }
+  })
   

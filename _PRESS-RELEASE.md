@@ -2,6 +2,8 @@
 
   > School.IO helps teachers create and manage individual student learning experiences, and helps kids take charge of their learning by completing challenging projects.
 
+  Web app that enables teachers to create and manage student learning projects and students to take charge of their learning by completing challenging projects.
+
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 

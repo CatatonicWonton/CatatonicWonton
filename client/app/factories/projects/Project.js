@@ -40,12 +40,20 @@ angular.module('app')
     // CONTENT METHODS
     // this creates and/or updates using PUT
     var createContent = function(htmlString, pageId) {
-      var url = 'api/page/' + pageId;
+      var url = '/api/page/' + pageId;
       return $http.put(url, {content: htmlString}).then(function(result){
           return result.data;
       });
     };
 
+    var assignProject = function(projectId, classId) {
+      var url = '/api/studentProject/class/' + classId;
+      return $http.post(url, {
+        ProjectId: projectId
+      }).then(function(response) {
+        return response.data;
+      })
+    };
 
     return {
       getProjects: getProjects,
@@ -53,10 +61,9 @@ angular.module('app')
       getProject: getProject,
       createPage: createPage, 
       // updatePage: updatePage, 
-      createContent: createContent
-    };
-
-
+      createContent: createContent,
+      assignProject: assignProject
+    }
   });
 
 

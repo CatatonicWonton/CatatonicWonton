@@ -1,12 +1,3 @@
-<!-- display basic information at top of view -->
-<!-- <div>
-  <h3>{{project.name}}</h3>
-  <h3>{{project.subject}}</h3>
-  <h3>{{project.author}}</h3>
-</div> -->
-
-<!-- show tabs for each page -->
-
 <div class="container">
   <div class="page-header">
     <h1>{{project.name}} <small>{{project.subject}}<!--  | {{project.TeacherId}} --></small></h1>
@@ -22,9 +13,9 @@
           Add New ContentComponent
         </div>
         <div class="container">
-          <div ng-show="showTextEditor">
-            <textarea froala="froalaOptions" ng-model="page.content"></textarea>
+          <div>
             <button style="font-size:20px" ng-click="createContent(page.content, page.id)">submit</button>
+            <textarea froala="froalaOptions" ng-model="page.content"></textarea>
           </div>
         </div>
         <div ng-bind-html="trustify(page.content)"></div>

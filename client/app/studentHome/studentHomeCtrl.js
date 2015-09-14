@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('studentHomeCtrl', function studentHomeCtrl($scope, $state, Project){
+  .controller('studentHomeCtrl', function studentHomeCtrl($scope, $state, Class, Project){
     
     // PROJECTS
     $scope.getProjects = function() {
@@ -13,6 +13,12 @@ angular.module('app')
     $scope.goToProject = function(projectId) {
       $state.go('studentProject', {projectId: projectId});
     };
+
+    $scope.joinClass = function(classId) {
+      Class.joinClass(classId).then(function(data) {
+        console.log(data, 'should have worked');
+      })
+    }
 
     $scope.getProjects();
 

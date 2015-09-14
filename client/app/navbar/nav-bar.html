@@ -14,23 +14,17 @@
   <div class="collapse navbar-collapse" ng-class="!navBarCollapsed && 'in'" ng-click="navBarCollapsed = true">
     <ul class="nav navbar-nav">
       <li><a ui-sref='landing'>Home</a></li>
-      <li><a ui-sref='signup'>Sign Up</a></li>
-      <li><a ui-sref='signin'>Sign In</a></li>
-      <li><a ui-sref='studentHome'>Home</a></li>
-      <li><a ui-sref='studentProject'>studentProject</a></li>
-      <li><a ui-sref='helpRequest'>Get Help</a></li>
-      <!-- <li><a ui-sref='teacherClass'>teacherClass</a></li> -->
-      <li><a ui-sref='teacherHome'>teacherHome</a></li>
-      <li><a snap-toggle="right">Toggle Drawer</a></li>
+      <li ng-hide="loggedIn"><a ui-sref='signup'>Sign Up</a></li>
+      <li ng-hide="loggedIn"> <a ui-sref='signin'>Sign In</a></li>
+      <li ng-hide="isTeacher"><a ui-sref='studentHome'>studentHome</a></li>
+      <li ng-show="isTeacher"><a ui-sref='teacherHome'>teacherHome</a></li>
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Sign Up</a></li>
+      <li ng-click="logout()"><a>Logout</a></li>
     </ul>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li ng-click="logout()"><a href="#">Logout</a></li>
-    </ul>
+    
 
   </div><!-- /.navbar-collapse -->
 </nav>
