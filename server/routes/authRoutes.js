@@ -24,18 +24,5 @@ router.post('/signup', Auth.createAccount, Auth.sendSuccess);
 
 router.post('/logout', Auth.logout, Auth.sendSuccess);
 
-var success = function (req, res, next) {
-  res.status(200).send(true);
-  next();
-};
-
-router.post('/login', passport.authenticate('local'), function (req, res, next) {
-  res.status(200).send(req.session.passport.user);
-});
-
-router.post('/signup', Auth.createAccount, Auth.sendSuccess);
-
-// sign out
-router.post('/logout', Auth.logout);
 
 module.exports = router;
