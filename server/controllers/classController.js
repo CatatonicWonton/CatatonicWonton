@@ -38,7 +38,12 @@ module.exports = {
         .findAll({
           where: {
             TeacherId: user._id
-          }
+          },
+          include: [
+            {
+              model: Project
+            }
+          ]
         })
         .then(helpers.sendResponse(res));
     } else {

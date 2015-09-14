@@ -6,9 +6,9 @@
   left: 0px;
   background-color: blue;
   z-index: 2; }
-
+/*
 .active {
-  background-color: #B4CDCD !important; }
+  background-color: #B4CDCD !important; }*/
 
 .project-container {
   /*z-index: 1;*/
@@ -139,5 +139,9 @@
 
 .signup-row {
   margin-top: 10px; }
+
+.panel-title.pull-left {
+  padding-top:8px !important;
+}
 
 /*# sourceMappingURL=main.css.map */

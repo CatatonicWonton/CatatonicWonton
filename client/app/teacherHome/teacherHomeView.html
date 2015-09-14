@@ -5,9 +5,14 @@
     <div ng-repeat="project in teacherProjects">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">{{project.name}}</h3>
-              <button ng-click="assignProject(project.id)">Assign</button>
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title pull-left">{{project.name}}</h3>
+              <div class="btn-group pull-right" dropdown ng-init="toggled[project.id] = false" is-open="toggled[project.id]">
+                <button type="button" class="btn btn-assign btn-default"dropdown-toggle>Assign</button>
+                <ul class="dropdown-menu assign-class" role="menu">
+                  <li ng-repeat="class in teacherClasses"><a ng-click="assignProject(class.id, project.id)">{{class.name}}</a></li>
+                </ul>
+              </div>
             </div>
             <div class="panel-body">
                 <p><strong>Subject: </strong>{{project.subject}}</p>
@@ -31,15 +36,20 @@
               <h3 class="panel-title">Class: {{class.name}}</h3>
             </div>
             <div class="panel-body">
-                <p><strong>Subject: </strong>{{project.subject}}</p>              
-               <div class="btn-group btn-group-justified">
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary" ng-click="goToClass(class.id)">View</button>
-                  </div>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-danger" ng-click="deleteClass(class.id)">Delete</button>
-                  </div>
-               </div>
+              <p>Projects</p>
+              <ul>
+                <li ng-repeat="project in class.Projects">{{project.name}}</li>
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <div class="btn-group btn-group-justified">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-primary" ng-click="goToClass(class.id)">View</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-danger" ng-click="deleteClass(class.id)">Delete</button>
+                </div>
+              </div>
             </div>
         </div>
     </div>

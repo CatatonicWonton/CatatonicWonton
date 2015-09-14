@@ -8,6 +8,9 @@ angular.module('app')
       });
     };
 
+    // used as a store for dropdown toggle info, see ng-init in view
+    $scope.dropdowns = {}
+
     $scope.goToProject = function(projectId) {
       $state.go('teacherProject', {
         projectId: projectId
@@ -73,9 +76,7 @@ angular.module('app')
     };
 
 
-    $scope.assignProject = function(projectId) {
-      console.log(projectId);
-      var classId = window.prompt('What is the classId you want to add?');
+    $scope.assignProject = function(classId, projectId) {
       Project.assignProject(projectId, classId).then(function(response) {
         console.log('project assigned', response);
       });
