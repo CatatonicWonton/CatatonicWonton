@@ -74,9 +74,7 @@ module.exports = {
         return newClass.setTeacher(teacher);
       })
       .then(helpers.sendResponse(res))
-      .catch(function (error){
-        helpers.sendError(res, 409)(error);
-      });
+      .catch(helpers.sendError(res, 409));
   },
 
   deleteClass: function (req, res) {

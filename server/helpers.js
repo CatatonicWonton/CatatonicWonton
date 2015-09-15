@@ -36,7 +36,7 @@ module.exports = {
 
   sendError: function (res, errorCode){
     var status = errorCode || 500;
-    return function(data) {
+    return function (data) {
       res.status(status).send(data);
     };
   },
