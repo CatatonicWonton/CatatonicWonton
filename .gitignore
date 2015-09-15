@@ -6,6 +6,7 @@ iisnode.yml
 client/app/bower_components/
 client/styles/main.css
 client/styles/main.css.map
+client/styles/.*
 
 
 # Icon must ends with two \r.
