@@ -73,7 +73,8 @@ module.exports = {
       .spread(function (newClass, teacher) {
         return newClass.setTeacher(teacher);
       })
-      .then(helpers.sendResponse(res));
+      .then(helpers.sendResponse(res))
+      .catch(helpers.sendError(res, 409));
   },
 
   deleteClass: function (req, res) {

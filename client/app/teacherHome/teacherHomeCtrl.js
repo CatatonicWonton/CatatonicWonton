@@ -17,6 +17,19 @@ angular.module('app')
       });
     };
 
+    // holds arrays for each type of alert
+    $scope.alerts = {
+      classAlerts:[]
+    };
+
+    $scope.closeAlert = function(index, alertList){
+      $scope.alerts[alertList].splice(index,1);
+    };
+
+    $scope.addAlert = function(alertList, msgObj){
+      $scope.alerts[alertList].push(msgObj);
+    };
+
     $scope.modalOpen = function(title, inputArray, callback) {
       var modalInstance = $modal.open({
         templateUrl: 'app/teacherHome/newProjectModal.html',
@@ -63,9 +76,16 @@ angular.module('app')
     };
 
     $scope.createClass = function(name) {
-      Class.createClass(name).then(function(classId) {
-        $scope.goToClass(classId);
-      });
+      Class.createClass(name)
+        .then(function(classId) {
+          $scope.goToClass(classId);
+        })
+        .catch(function (error) {
+          console.log("Controller caught the error");
+          if(error.status === 409) {
+            $scope.addAlert('classAlerts', {msg:'Class name already taken. Try another.'});
+          }
+        });
     };
 
     $scope.deleteClass = function(classId) {
