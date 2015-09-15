@@ -29,6 +29,7 @@
 
 <div class="well container class-container">
   <h1>Classes <div class="plus-add" ng-click="modalOpen('Create New Class', ['Name'], createClass)">+</div></h1>
+  <alert ng-repeat="alert in alerts.classAlerts" type="{{alert.type}}" close="closeAlert($index, 'classAlerts')">{{alert.msg}}</alert>
   <div ng-repeat="class in teacherClasses">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default">

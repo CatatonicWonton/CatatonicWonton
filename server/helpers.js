@@ -25,12 +25,19 @@ module.exports = {
         Models.Teacher.findOne({
           where: {username: username}
         })
-      ], 2)
+      ], 2);
   },
 
   sendResponse: function (res) {
     return function (data) {
       res.status(200).send(data);
+    };
+  },
+
+  sendError: function (res, errorCode){
+    var status = errorCode || 500;
+    return function(data) {
+      res.status(status).send(data);
     };
   },
 

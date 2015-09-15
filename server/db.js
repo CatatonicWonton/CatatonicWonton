@@ -1,6 +1,6 @@
 var Promise = require('bluebird');
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('schoolio', 'root', '', {logging:false});
+var sequelize = new Sequelize('schoolio2', 'root', '', {logging:false});
 
 // MODELS
 var Models = {};

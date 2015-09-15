@@ -15,9 +15,15 @@ angular.module('app')
     };
 
     var createClass = function(className) {
-      return $http.post('/api/class/', {name: className}).then(function(response) {
-        return response.data.id;
-      });
+      return $http.post('/api/class/', {name: className})
+        .then(function(response) {
+          return response.data.id;
+        })
+        .catch(function(error) {
+          console.log("Error: ");
+          console.log(error);
+          throw error;
+        });
     };
 
     var deleteClass = function(classId) {
