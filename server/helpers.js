@@ -6,16 +6,6 @@ var Utils = require('./utilities');
 
 module.exports = {
 
-  checkIf: function (model) {
-    return function (req, res, next) {
-      if (req.session.passport.user.accountType === model) { 
-        return next();
-      }
-
-      return res.status(401).send('User must be a ' + model);
-    };
-  },
-
   findUsername: function (username) {
     return Promise
       .some([

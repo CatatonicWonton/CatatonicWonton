@@ -9,8 +9,10 @@ var Student = Models.Student;
 
 module.exports = {
   getStudent: function (req, res, next) {
+    var id = req.params.id;
+
     Student
-      .findById(req.params.id)
+      .findById(id)
       .then(helpers.sendResponse(res));
   },
 
@@ -21,17 +23,21 @@ module.exports = {
   },
 
   editStudent: function (req, res, next) {
+    var id = req.params.id;
+
     Student
-      .upsert(Utils.extend(req.body, {id: req.params.id}))
+      .upsert(Utils.extend(req.body, {id: id}))
       .then(function () {
-        return Student.findById(req.params.id);
+        return Student.findById(id);
       })
       .then(helpers.sendResponse(res));
   },
 
   deleteStudent: function (req, res, next) {
+    var id = req.params.id;
+
     Student
-      .findById(req.params.id)
+      .findById(id)
       .then(function (student) {
         return student.destroy();
       })

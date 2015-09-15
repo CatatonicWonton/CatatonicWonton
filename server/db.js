@@ -1,6 +1,7 @@
+var config = require('./config/config');
 var Promise = require('bluebird');
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('schoolio', 'root', '', {logging:false});
+var sequelize = new Sequelize(config.databaseUrl, 'root', '', {logging: false});
 
 // MODELS
 var Models = {};
@@ -49,10 +50,10 @@ Models.HelpRequest.belongsTo(Models.Student);
 Models.HelpRequest.belongsTo(Models.Teacher);
 
 
-sequelize.sync();
+if (process.env.NODE_ENV !== 'test') sequelize.sync(); // TODO comment
 
 module.exports.Models = Models;
-module.exports.database = sequelize;
+module.exports.sequelize = sequelize;
 
 
 

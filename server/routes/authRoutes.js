@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Auth = require('../controllers/authController.js');
 var passport = require('passport');
+var Models = require('../db.js').Models;
 
 /* Log's in user and establishes session
  * input  -> {username, password}

@@ -5,6 +5,7 @@ var Utils = require('../utilities');
 var helpers = require('../helpers');
 
 module.exports = {
+
   sendSuccess: function (req, res, next) {
     res.status(200).send(true);
     next();
@@ -12,6 +13,11 @@ module.exports = {
 
   checkIf: function (model) {
     return function (req, res, next) {
+      if (process.env.NODE_ENV === 'test') {
+        Utils.setPropertyOn(req, 'session.passport.user', req.body.user);
+        return next();
+      }
+
       if (req.session.passport.user.accountType === model) { 
         return next();
       }
@@ -21,7 +27,8 @@ module.exports = {
   },
 
   checkIfLoggedIn: function (req, res, next) {
-    if (req.session && req.session.passport && req.session.passport.user) {
+    if (process.env.NODE_ENV === 'test' || req.session && req.session.passport && req.session.passport.user) {
+      Utils.setPropertyOn(req, 'session.passport.user', {accountType: 'Teacher', _id: 1});
       return next();
     }
     return res.status(401).send('Must be logged');

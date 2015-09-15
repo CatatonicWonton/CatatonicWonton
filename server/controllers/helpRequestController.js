@@ -47,6 +47,7 @@ module.exports = {
       })
       .then(helpers.sendResponse(res));
   },
+
   getUnresolved: function(req, res, next) {
     HelpRequest
       .findAll({
@@ -60,6 +61,7 @@ module.exports = {
       })
       .then(helpers.sendResponse(res))
   },
+  
   deleteRequest: function (req, res, next) {
     HelpRequest
       .findById(req.params.id)

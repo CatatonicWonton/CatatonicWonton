@@ -1,34 +1,21 @@
 var express = require('express');
-var db = require('./db.js');
 var sequelize = require('sequelize');
+var db = require('./db');
 
-// Auth
+// DEPENDENCIES
 var passport = require('passport');
 var passportMiddleware = require('./passportMiddleware.js');
-
-// middleware
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 
-// ROUTE HANDLER
-var authRoutes           = require('./routes/authRoutes');
-var classRoutes          = require('./routes/classRoutes');
-var pageRoutes           = require('./routes/pageRoutes');
-var projectsRoutes       = require('./routes/projectsRoutes');
-var studentRoutes        = require('./routes/studentRoutes');
-var studentClassRoutes   = require('./routes/studentClassRoutes');
-var studentProjectRoutes = require('./routes/studentProjectRoutes');
-var helpRequestsRoutes   = require('./routes/helpRequestsRoutes');
-
 var app = express();
-
-app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/../client'));
 
-// middleware
+// MIDDLEWARE
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(session({
     secret: 'secret',
@@ -40,7 +27,17 @@ app.use(passport.session());
 
 passportMiddleware(passport);
 
-// Define Routes
+// ROUTE HANDLER
+var authRoutes           = require('./routes/authRoutes');
+var classRoutes          = require('./routes/classRoutes');
+var pageRoutes           = require('./routes/pageRoutes');
+var projectsRoutes       = require('./routes/projectsRoutes');
+var studentRoutes        = require('./routes/studentRoutes');
+var studentClassRoutes   = require('./routes/studentClassRoutes');
+var studentProjectRoutes = require('./routes/studentProjectRoutes');
+var helpRequestsRoutes   = require('./routes/helpRequestsRoutes');
+
+// ROUTES
 app.use('/auth', authRoutes);
 app.use('/api/class', classRoutes);
 app.use('/api/page', pageRoutes);
@@ -50,6 +47,10 @@ app.use('/api/studentClass', studentClassRoutes);
 app.use('/api/studentProject', studentProjectRoutes);
 app.use('/api/helpRequests', helpRequestsRoutes);
 
-app.listen(8000, function () {
-  console.log('listening on port 8000');
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(8000, function () {
+    console.log('Running on port 8000');
+  });
+}
+
+module.exports = app;

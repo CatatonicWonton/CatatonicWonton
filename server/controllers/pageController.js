@@ -9,19 +9,23 @@ var Project = Models.Project;
 
 module.exports = {
   getPage: function (req, res, next) {
+    var id = req.params.id;
+
     Page
-      .findById(req.params.id)
+      .findById(id)
       .then(helpers.sendResponse(res));
   },
 
   addPage: function (req, res, next) {
+    var projectId = req.params.projectId;
+
     Promise
       .all([
         Page
           .create(req.body),
 
         Project
-          .findById(req.params.projectId)
+          .findById(projectId)
       ])
       .spread(function (page, project) {
         return Promise.join(project.addPage(page), function () {
@@ -41,8 +45,10 @@ module.exports = {
   },
 
   deletePage: function (req, res, next) {
+    var id = req.params.id;
+
     Page
-      .findById(req.params.id)
+      .findById(id)
       .then(function (page) {
         return page.destroy();
       })

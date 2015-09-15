@@ -11,12 +11,13 @@ var StudentClass = Models.StudentClass;
 var Project = Models.Project;
 
 module.exports = {
-  // Get class returns each class with students 
   getClass: function (req, res) {
+    var id = req.params.id;
+
     Class
       .find({
         where: {
-          id: req.params.id
+          id: id
         },
         include: [
           {
