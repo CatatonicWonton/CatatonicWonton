@@ -11,10 +11,12 @@ var StudentClass = Models.StudentClass;
 
 module.exports = {
   addStudentToClass: function (req, res) {
+    var id = req.params.id;
+
     Promise
       .all([
         Class
-          .findById(req.params.id),
+          .findById(id),
 
         Student
           .findById(req.body.StudentId)
@@ -26,10 +28,12 @@ module.exports = {
   },
   
   removeStudentFromClass: function (req, res) {
+    var classId = req.params.id;
+
     StudentClass
       .findOne({
         where: {
-          ClassId: req.params.id,
+          ClassId: id,
           StudentId: req.body.StudentId
         }
       })

@@ -11,10 +11,12 @@ var StudentProject = Models.StudentProject;
 
 module.exports = {
   getProject: function (req, res, next) {
+    var id = req.params.id;
+
     Project
       .find({
         where: {
-          id: req.params.id
+          id: id
         },
         include: [
           {
@@ -84,17 +86,21 @@ module.exports = {
   },
 
   editProject: function (req, res, next) {
+    var id = req.params.id;
+
     Project
-      .upsert(Utils.extend(req.body, {id: req.params.id}))
+      .upsert(Utils.extend(req.body, {id: id}))
       .then(function () {
-        return Project.findById(req.params.id);
+        return Project.findById(id);
       })
       .then(helpers.sendResponse(res));
   },
 
   deleteProject: function (req, res, next) {
+    var id = req.params.id;
+
     Project
-      .findById(req.params.id)
+      .findById(id)
       .then(function (project) {
         return project.destroy();
       })

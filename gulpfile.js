@@ -26,7 +26,7 @@ var jshint   = require('gulp-jshint');
 var csslint  = require('gulp-csslint');
 
 var concat   = require('gulp-concat');
-// var rename   = require('gulp-rename');
+var mocha    = require('gulp-mocha');
 var annotate = require('gulp-ng-annotate');
 var uglify   = require('gulp-uglify');
 var minify   = require('gulp-minify');
@@ -53,6 +53,12 @@ gulp.task('jshint', function() {
         .pipe(jshint.reporter('default'))
 });
 
+// SERVER TESTS
+gulp.task('mocha', function () {
+  return gulp.src('server/test/*.js')
+    .pipe(mocha({reporter: 'nyan'}));
+})
+
 // CSS
 gulp.task('csslint', function() {
   gulp.src('client/styles/main.css')
@@ -76,4 +82,4 @@ gulp.task('watch', function() {
 });
 
 // Default Task
-gulp.task('default', ['jshint', 'csslint', 'build', 'watch']);
+gulp.task('default', ['mocha', 'build', 'watch']);

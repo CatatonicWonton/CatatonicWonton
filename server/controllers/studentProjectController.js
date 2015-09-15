@@ -12,13 +12,14 @@ var StudentClass = Models.StudentClass;
 var StudentProject = Models.StudentProject;
 var ClassProject = Models.ClassProject;
 
-
 module.exports = {
   assignProjectToStudent: function (req, res, next) {
+    var id = req.params.id;
+
     Promise
       .all([
         Student
-          .findById(req.params.id),
+          .findById(id),
 
         Project
           .findById(req.body.ProjectId)
@@ -30,8 +31,10 @@ module.exports = {
   },
 
   assignProjectToClass: function (req, res, next) {
+    var id = req.params.id;
+
     Class
-      .findById(req.params.id)
+      .findById(id)
       .then(function (foundClass) {
         return Promise.all([
           foundClass
@@ -64,10 +67,12 @@ module.exports = {
   },
 
   unassignProjectFromStudent: function (req, res) {
+    var id = req.params.id;
+
     StudentProject
       .findOne({
         where: {
-          StudentId: req.params.id,
+          StudentId: id,
           ProjectId: req.body.ProjectId
         }
       })
@@ -80,7 +85,7 @@ module.exports = {
   unassignProjectFromClass: function (req, res) {
     var classid   = req.params.classid,
         projectid = req.params.projectid;
-    console.log('ProjectId: ', projectid,", classId: ",classid);
+
     Class
       .findById(classid)
       .then(function (foundClass) {
