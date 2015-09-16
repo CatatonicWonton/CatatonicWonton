@@ -48,12 +48,27 @@ module.exports = {
         })
         .then(helpers.sendResponse(res));
     } else {
-      StudentClass
-        .findAll({
+      Student
+        .findOne({
           where: {
-            StudentId: user._id
+            id: user._id
           }
         })
+        .then(function(student){
+          return student.getClasses();
+        })
+        .then(helpers.sendResponse(res));
+    }
+  },
+
+  getAllClasses: function (req, res) {
+    var user = req.session.passport.user;
+
+    if(user.accountType !== 'Student') {
+      helpers.sendError(res, 404)('You are not a student');
+    } else {
+      Class
+        .findAll()
         .then(helpers.sendResponse(res));
     }
   },

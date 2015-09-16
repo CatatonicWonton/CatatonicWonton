@@ -7,6 +7,14 @@ angular.module('app')
       });
     };
 
+    var getAllClasses = function() {
+      return $http.get('/api/class/all').then(function(response){
+        return response.data;
+      });
+    };
+
+
+
     var getClass = function() {
       return $http.get('/api/class/' + $stateParams.classId).then(function(response) {
         console.log('Current class:', response.data);
@@ -38,11 +46,14 @@ angular.module('app')
         StudentId: studentId
       }).then(function(response){
         return response.data;
+      }).catch(function(error){
+        throw error;
       });
-    }
+    };
 
     return {
       getClasses: getClasses,
+      getAllClasses: getAllClasses,
       getClass: getClass,
       createClass: createClass,
       deleteClass: deleteClass,

@@ -3,6 +3,14 @@ var router = express.Router();
 var Auth = require('../controllers/authController.js');
 var ClassController = require('../controllers/classController.js');
 
+/* Gets all classes for a student (for the sake of joining)
+ * input  -> {}
+ * output -> {id, name, TeacherId, createdAt, updatedAt}
+*/
+
+router.get('/all', Auth.checkIfLoggedIn, ClassController.getAllClasses);
+
+
 /* Gets a single class
  * input  -> {}
  * output -> {id, name, TeacherId, students, createdAt, updatedAt}
