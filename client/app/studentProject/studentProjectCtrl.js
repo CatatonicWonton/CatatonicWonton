@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, Project, Class, User){
+  .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, Project, Class, User, HelpRequest){
 
     $scope.project;
     $scope.currentPage;
@@ -42,5 +42,22 @@ angular.module('app')
     };
 
     $scope.getProject();
+
+    // Help Requests
+    var helpRequestSocket = HelpRequest.getHelpRequestSocket();
+
+    // send help requests
+    $scope.sendHelpRequest = function() {
+      helpRequestSocket.emit('submitted', {
+        // include the teacher id, student id, question, and ak and res set to false
+      });
+    };
+
+    // listen for updates to the status of thier request
+    helpRequestSocket.forward('updateRequestStatus', $scope);
+    $scope.on('socket:updateRequestStatus', function(ev, data) {
+      // maybe we do something, maybe not
+    });
+
 
   });

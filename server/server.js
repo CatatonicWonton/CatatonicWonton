@@ -1,8 +1,9 @@
 var express = require('express');
 var sequelize = require('sequelize');
 var db = require('./db');
+var http = require('http');
 
-// Socket handlers
+// Socket handler
 var socketHandler = require('./socketHandler');
 
 // Auth
@@ -15,8 +16,8 @@ var session = require('express-session');
 var app = express();
 
 // socket.io
-var server = require('http').Server(app);
-socketHandler(app, server);
+var server = http.Server(app);
+socketHandler(server);
 
 app.use(bodyParser.urlencoded({extended: true}));
 

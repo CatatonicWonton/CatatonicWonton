@@ -1,6 +1,17 @@
 angular.module('app')
   .factory('HelpRequest', function Project($http, $stateParams) {
 
+    // make a socket for help requests
+    // CLASS SOCKET
+    var helpRequestSocket = socketFactory({
+      ioSocket: io.connect('http://127.0.0.1:8000/helpRequest')
+    });
+
+    var getHelpRequestSocket = function() {
+      return helpRequestSocket;
+    };
+
+
     /* Student submitting a single help request */
     var submitHelpRequest = function(teacherId, question) {
       var requestData = {teacherId: teacherId, question: question};
@@ -34,7 +45,8 @@ angular.module('app')
     return {
       submitHelpRequest: submitHelpRequest,
       toggleRequest: toggleRequest,
-      refreshRequests: refreshRequests
+      refreshRequests: refreshRequests,
+      getHelpRequestSocket: getHelpRequestSocket
     };
   });
 
