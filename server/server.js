@@ -2,7 +2,10 @@ var express = require('express');
 var sequelize = require('sequelize');
 var db = require('./db');
 
-// DEPENDENCIES
+// Socket handlers
+var socketHandler = require('./socketHandler');
+
+// Auth
 var passport = require('passport');
 var passportMiddleware = require('./passportMiddleware.js');
 var cookieParser = require('cookie-parser');
@@ -10,6 +13,12 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var app = express();
+
+// socket.io
+var server = require('http').Server(app);
+socketHandler(app, server);
+
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/../client'));
 
@@ -48,7 +57,7 @@ app.use('/api/studentProject', studentProjectRoutes);
 app.use('/api/helpRequests', helpRequestsRoutes);
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(8000, function () {
+  server.listen(8000, function () {
     console.log('Running on port 8000');
   });
 }

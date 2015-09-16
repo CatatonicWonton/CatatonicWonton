@@ -1,5 +1,4 @@
-angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngAnimate'])
-
+angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngAnimate', 'btford.socket-io'])
 .config(function($urlRouterProvider, $stateProvider) {
 
   $stateProvider

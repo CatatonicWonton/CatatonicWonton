@@ -36,6 +36,6 @@ angular.module('app')
       toggleRequest: toggleRequest,
       refreshRequests: refreshRequests
     };
-  };
+  });
 
 

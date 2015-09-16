@@ -1,5 +1,23 @@
 angular.module('app')
-  .factory('Class', function Class($http, $stateParams, User) {
+  .factory('Class', function Class($http, $stateParams, User, socketFactory) {
+
+    // CLASS SOCKET
+    var myIoSocket = io.connect('http://127.0.0.1:8080/classSocket');
+    mySocket = socketFactory({
+      ioSocket: myIoSocket
+    });
+
+    var getClassSocket = function() {
+      return mySocket;
+    };
+
+    var updateStudentStatus = function(project, page) {
+      mySocket.emit('update', {
+        project: project,
+        page: page,
+        studentId: User.getUser()._id
+      });
+    };
 
     var getClasses = function() {
       return $http.get('/api/class').then(function(response){
@@ -57,7 +75,9 @@ angular.module('app')
       getClass: getClass,
       createClass: createClass,
       deleteClass: deleteClass,
-      joinClass: joinClass
+      joinClass: joinClass,
+      getClassSocket: getClassSocket,
+      updateStudentStatus: updateStudentStatus
     };
 
   });
