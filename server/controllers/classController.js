@@ -94,8 +94,10 @@ module.exports = {
   },
 
   deleteClass: function (req, res) {
+    var classId = req.params.id;
+
     Class
-      .findById(req.params.id)
+      .findById(classId)
       .then(function (foundClass) {
         return foundClass.destroy();
       })

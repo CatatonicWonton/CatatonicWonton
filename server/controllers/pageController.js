@@ -36,10 +36,12 @@ module.exports = {
   },
 
   editPage: function (req, res, next) {
+    var pageId = req.params.id;
+
     Page
-      .upsert(Utils.extend(req.body, {id: req.params.id}))
+      .upsert(Utils.extend(req.body, {id: pageId}))
       .then(function () {
-        return Page.findById(req.params.id);
+        return Page.findById(pageId);
       })
       .then(helpers.sendResponse(res));
   },
