@@ -67,7 +67,7 @@ module.exports = {
 
   createProject: function (req, res, next) {
     var user = req.session.passport.user;
-
+    
     Promise
       .all([
         Project

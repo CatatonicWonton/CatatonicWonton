@@ -30,6 +30,7 @@ module.exports = function (passport) {
   ));
 
   passport.serializeUser(function(user, done) {
+    console.log(user.username);
     var sessionUser = {
       _id: user.id,
       accountType: user.accountType,
