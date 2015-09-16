@@ -1,5 +1,4 @@
-var fs = require('fs');
-var status = {};
+var Student = require('./db.js').Models.Student;
 
 var classSocket = function(app, server) {
   var io = require('socket.io')(server);  
@@ -8,7 +7,6 @@ var classSocket = function(app, server) {
   io.of('/classSocket').on('connection', function(socket) {
 
     console.log('this is classSocket connection');
-    socket.emit('working', status);
 
     socket.on('shoot', function(data) {
       status.user = data;
@@ -16,23 +14,24 @@ var classSocket = function(app, server) {
     });
 
     socket.on('update', function(data) {
-      console.log('This data:', data);
+      // update the current user's id
+      // Student
+      //   .upsert({
+      //     id: data.studentId,
+      //     currentProject: data.project,
+      //     currentPage: data.page
+      //   })
+      //   .then(function() {
+      //     Student.findAll({
+      //       where: {
+      //         classId: 1
+      //       }
+      //     }).then(function(status) {
+      //       console.log('Status: ', status)
+      //       socket.emit('teacherUpdate', status);
+      //     })
+      //   })
 
-      // read the current file
-      fs.readFile('/test.txt', function(err, d) {
-        console.log('That data:', d);
-        fs.writeFile('/test', data, function() {
-          console.log('success');
-        });
-      });
-
-      // take the old info and add the ne
-
-      status[data.studentId] =  {
-        project: data.project,
-        page: data.page
-      };
-      socket.emit('teacherUpdate', status);
     })
   });
 

@@ -2,7 +2,7 @@ angular.module('app')
   .factory('Class', function Class($http, $stateParams, User, socketFactory) {
 
     // CLASS SOCKET
-    var myIoSocket = io.connect('http://127.0.0.1:8080/classSocket');
+    var myIoSocket = io.connect('http://127.0.0.1:8000/classSocket');
     mySocket = socketFactory({
       ioSocket: myIoSocket
     });
