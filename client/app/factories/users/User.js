@@ -29,13 +29,13 @@ angular.module('app')
 
     var getUser = function() {
       return user;
-    }
+    };
 
     return {
       signup: signup,      
       signin: signin,
       setUser: setUser,
       getUser: getUser
-    }
-  })
+    };
+  });
   

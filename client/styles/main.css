@@ -7,9 +7,6 @@
   background-color: blue;
   z-index: 2; }
 
-.active {
-  background-color: #B4CDCD !important; }
-
 .page-active {
   background-color: #B4CDCD !important; }
 
@@ -100,7 +97,7 @@
   margin: 10px; }
 
 .projects-container, .class-container {
-  max-width: 800px; }
+  max-width: 1000px; }
 
 .Science-box {
   background-color: #674ea7; }

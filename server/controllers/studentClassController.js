@@ -24,7 +24,16 @@ module.exports = {
       .spread(function (foundClass, student) {
         return foundClass.addStudent(student);
       })
-      .then(helpers.sendResponse(res));
+      .spread(function (studentClass){
+        var foundClass = studentClass[0];
+        return Class.findOne({
+          where: {
+            id: foundClass.ClassId
+          }
+        });
+      })
+      .then(helpers.sendResponse(res))
+      .catch(helpers.sendError(res, 409));
   },
   
   removeStudentFromClass: function (req, res) {
