@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, Project){
+  .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, Project, Class, User){
 
     $scope.project;
     $scope.currentPage;
@@ -21,6 +21,13 @@ angular.module('app')
       }
       $scope.currentPage = $scope.project.Pages[pageIndex];
       $scope.currentIndex = pageIndex;
+      // emit event to update the users current status
+      // Class.updateStudentStatus($scope.project.name, $scope.currentPage.title);
+      Class.getClassSocket().emit('update', {
+        project: $scope.project.name,
+        page: $scope.currentPage.title,
+        studentId: User.getUser()._id
+      })
     };
 
     $scope.makeActive = function(index) {
