@@ -1,5 +1,5 @@
 angular.module('app')
-  .factory('User', function User ($http) {
+  .factory('User', function User ($http, $state) {
 
     var user = {};
 
@@ -11,13 +11,22 @@ angular.module('app')
         username    : username,
         password    : password,
         accountType : accountType
+      }).then(function(res) {
+        return res.data;
       });
     };
 
-    var signin = function(username, password) {
+    var signin = function(username, password, scope) {
       return $http.post('/auth/login', {
         username: username,
         password: password
+      }).then(function(res) {
+        setUser(res.data);
+        if (res.data.accountType === 'Teacher') {
+          $state.go('teacherHome');
+        } else {
+          $state.go('studentHome');
+        }
       });
     };
 

@@ -61,10 +61,10 @@ angular.module('app')
     };
 
     var joinClass = function(classId) {
-      var studentId = User.getUser()._id;
       return $http.post('api/studentClass/' + classId, {
-        StudentId: studentId
+        StudentId: User.getUser()._id
       }).then(function(response){
+        console.log('error');
         return response.data;
       }).catch(function(error){
         throw error;

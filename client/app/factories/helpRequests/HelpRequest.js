@@ -59,13 +59,13 @@ angular.module('app')
     };
 
     return {
-      submitHelpRequest: submitHelpRequest,
-      toggleRequest: toggleRequest,
-      refreshRequests: refreshRequests,
       establishHelpRequestSocket: establishHelpRequestSocket,
       acknowledgeRequest: acknowledgeRequest,
       resolveRequest: resolveRequest,
-      submitHelpRequest: submitHelpRequest
+      submitHelpRequest: submitHelpRequest,
+      submitHelpRequest: submitHelpRequest,
+      toggleRequest: toggleRequest,
+      refreshRequests: refreshRequests
     };
   });
 

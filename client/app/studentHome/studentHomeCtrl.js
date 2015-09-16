@@ -3,6 +3,11 @@ angular.module('app')
     
     // PROJECTS
     $scope.alerts = [];
+    $scope.student = User.getUser();
+    // Drop down toggled status, init as closed
+    $scope.addClassToggle = false;
+
+
 
     $scope.addAlert = function(messageText){
       $scope.alerts.push( { msg: messageText} );
@@ -12,12 +17,6 @@ angular.module('app')
       $scope.alerts.splice(index, 1);
     };
 
-    $scope.student = function(){
-      var name = User.getUser();
-      if(!name.hasOwnProperty('username')) return {username:'Notta Workin'};
-      return name;
-    }();
-
     $scope.getProjects = function() {
       Project.getProjects().then(function(projects){
         console.log(projects);
@@ -25,6 +24,8 @@ angular.module('app')
       });
     };
 
+    $scope.getProjects();
+    
     $scope.getClasses = function() {
       Class.getClasses().then(function(classes){
         console.log("Got all classes");
@@ -33,11 +34,15 @@ angular.module('app')
       });
     };
 
+    $scope.getClasses();
+
     $scope.getAllClasses = function() {
       Class.getAllClasses().then(function(classes){
         $scope.allClasses = classes;
       });
     };
+
+    $scope.getAllClasses();
   
     // pass in projectId from the view
     $scope.goToProject = function(projectId) {
@@ -59,15 +64,7 @@ angular.module('app')
         .catch(function(error){
           $scope.addAlert('Already enrolled');
         });
-
     };
-
-    // Drop down toggled status, init as closed
-    $scope.addClassToggle = false;
-
-    $scope.getProjects();
-    $scope.getClasses();
-    $scope.getAllClasses();
 
   });
 
