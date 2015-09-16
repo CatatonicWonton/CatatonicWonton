@@ -1,6 +1,5 @@
 var Promise = require('bluebird');
 var Models = require('./db').Models;
-var sequelize = require('Sequelize');
 
 module.exports = {
   extend: function () {
