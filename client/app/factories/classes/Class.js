@@ -1,8 +1,8 @@
 angular.module('app')
   .factory('Class', function Class($http, $stateParams, User, socketFactory) {
 
-    // CLASS SOCKET
-    classSocket = socketFactory({
+    // REAL-TIME CLASS SOCKET
+    var classSocket = socketFactory({
       ioSocket: io.connect('http://127.0.0.1:8000/classSocket')
     });
 
@@ -21,6 +21,8 @@ angular.module('app')
       });
     };
 
+    // CLASS FUNCTIONALITY
+
     var getClasses = function() {
       return $http.get('/api/class').then(function(response){
         return response.data;
@@ -32,8 +34,6 @@ angular.module('app')
         return response.data;
       });
     };
-
-
 
     var getClass = function() {
       return $http.get('/api/class/' + $stateParams.classId).then(function(response) {
@@ -72,14 +72,14 @@ angular.module('app')
     };
 
     return {
+      establishClassSocket: establishClassSocket,
+      updateStudentStatus: updateStudentStatus,
       getClasses: getClasses,
       getAllClasses: getAllClasses,
       getClass: getClass,
       createClass: createClass,
       deleteClass: deleteClass,
-      joinClass: joinClass,
-      updateStudentStatus: updateStudentStatus,
-      establishClassSocket: establishClassSocket
+      joinClass: joinClass
     };
 
   });

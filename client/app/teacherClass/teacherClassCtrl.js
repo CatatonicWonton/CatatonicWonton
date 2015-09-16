@@ -1,17 +1,20 @@
 angular.module('app')
   .controller('teacherClassCtrl', function teacherClassCtrl($scope, HelpRequest, User, Class){
     
+    // MODEL
     $scope.user = User.getUser();
-    
-    // get specific class
+
+
+    // Gets specific class
     $scope.getClass = function() {
       Class.getClass().then(function(myClass){
         $scope.teacherClass = myClass;
       });
     };
 
-    // calls when page loads
+    // Get specific class each time page loads
     $scope.getClass();
+
 
 
     // CLASS SOCKETS
