@@ -22,12 +22,7 @@ angular.module('app')
       $scope.currentPage = $scope.project.Pages[pageIndex];
       $scope.currentIndex = pageIndex;
       // emit event to update the users current status
-      // Class.updateStudentStatus($scope.project.name, $scope.currentPage.title);
-      Class.getClassSocket().emit('update', {
-        project: $scope.project.name,
-        page: $scope.currentPage.title,
-        studentId: User.getUser()._id
-      })
+      Class.updateStudentStatus($scope.project.name, $scope.currentPage.title);
     };
 
     $scope.makeActive = function(index) {
@@ -43,21 +38,9 @@ angular.module('app')
 
     $scope.getProject();
 
-    // Help Requests
-    var helpRequestSocket = HelpRequest.getHelpRequestSocket();
-
-    // send help requests
+    // HELP REQUEST SOCKET
     $scope.sendHelpRequest = function() {
-      helpRequestSocket.emit('submitted', {
-        // include the teacher id, student id, question, and ak and res set to false
-      });
+      HelpRequest.submitHelpRequest(/* pass the info you want for the request */);
     };
-
-    // listen for updates to the status of thier request
-    helpRequestSocket.forward('updateRequestStatus', $scope);
-    $scope.on('socket:updateRequestStatus', function(ev, data) {
-      // maybe we do something, maybe not
-    });
-
 
   });

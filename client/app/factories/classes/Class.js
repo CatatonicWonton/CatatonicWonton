@@ -2,17 +2,19 @@ angular.module('app')
   .factory('Class', function Class($http, $stateParams, User, socketFactory) {
 
     // CLASS SOCKET
-    var myIoSocket = io.connect('http://127.0.0.1:8000/classSocket');
-    mySocket = socketFactory({
-      ioSocket: myIoSocket
+    classSocket = socketFactory({
+      ioSocket: io.connect('http://127.0.0.1:8000/classSocket')
     });
 
-    var getClassSocket = function() {
-      return mySocket;
+    var establishClassSocket = function(scope, cb) {
+      classSocket.forward('teacherUpdate', scope);
+      scope.$on('socket:teacherUpdate', function(data) {
+        cb(data);
+      });
     };
 
     var updateStudentStatus = function(project, page) {
-      mySocket.emit('update', {
+      classSocket.emit('update', {
         project: project,
         page: page,
         studentId: User.getUser()._id
@@ -76,8 +78,8 @@ angular.module('app')
       createClass: createClass,
       deleteClass: deleteClass,
       joinClass: joinClass,
-      getClassSocket: getClassSocket,
-      updateStudentStatus: updateStudentStatus
+      updateStudentStatus: updateStudentStatus,
+      establishClassSocket: establishClassSocket
     };
 
   });
