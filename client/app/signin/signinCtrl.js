@@ -4,14 +4,8 @@ angular.module('app')
     $scope.hideWrongPassword = true;
 
     $scope.signin = function(username, password) {
-      User.signin(username, password).then(function(res){
-        User.setUser(res.data);
+      User.signin(username, password).then(function(){
         $scope.$emit('teacherOrStudent');
-        if(res.data.accountType === 'Teacher') {
-          $state.go('teacherHome');
-        }else {
-          $state.go('studentHome');
-        }
       })
       .catch(function(err){
         $scope.hideWrongPassword = false;

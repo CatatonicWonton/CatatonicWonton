@@ -1,44 +1,51 @@
-var fs = require('fs');
-var status = {};
+var Student = require('./db.js').Models.Student;
 
-var classSocket = function(app, server) {
-  var io = require('socket.io')(server);  
+var socketHandler = function(server) {
+  // associate our server with the socket.io library
+  var io = require('socket.io')(server);
+  var classSocket = io.of('/classSocket');
+  var helpRequestSocket = io.of('/helpRequest');
 
-
-  io.of('/classSocket').on('connection', function(socket) {
-
-    console.log('this is classSocket connection');
-    socket.emit('working', status);
-
-    socket.on('shoot', function(data) {
-      status.user = data;
-      socket.emit('working', status);
-    });
-
+  // create namespace for classSocket
+  classSocket.on('connection', function(socket) {
     socket.on('update', function(data) {
-      console.log('This data:', data);
-
-      // read the current file
-      fs.readFile('/test.txt', function(err, d) {
-        console.log('That data:', d);
-        fs.writeFile('/test', data, function() {
-          console.log('success');
-        });
-      });
-
-      // take the old info and add the ne
-
-      status[data.studentId] =  {
-        project: data.project,
-        page: data.page
-      };
-      socket.emit('teacherUpdate', status);
-    })
+      if(data.studentId) {
+        Student
+          .upsert({
+            id: data.studentId,
+            currentProject: data.project,
+            currentPage: data.page
+          })
+          .then(function() {
+            socket.broadcast.emit('teacherUpdate', data);
+            console.log('teacherUpdate emit fired', data);
+          })
+      }
+    });
   });
 
-  // io.of('/helpRequest').on('connection', function() {
+  helpRequestSocket.on('connection', function(socket) {
+    console.log('connected to request handler');
+    // set listener for student submitting questions
+    socket.on('submitted', function(studentInfo) {
+      // ***insert logic from helpRequestController***
+      // write line in help request table with the question, student and teacherId and acknowledge and resolved are equal to false
+      
+      // let teacher know about students question
+      socket.broadcast.emit('teacherHelpRequest', studentInfo);
+    });
 
-  // })
+    // set listener for when a teacher acknowledges request
+    socket.on('acknowledged', function(studentId) {
+      // modify the table set acknowledged equal to true
+    });
+
+    // set listener for when teacher resolves request
+    socket.on('resolved', function(studentId) {
+      // *** use logic from controller***
+      // set resolved to equal
+    })
+  })
 };
 
-module.exports = classSocket;
+module.exports = socketHandler;

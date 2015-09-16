@@ -14,12 +14,12 @@
               <h3 class="panel-title">{{student.firstName | limitTo : 1}} {{student.lastName}}</h3>
             </div>
             <div class="panel-body">
-                <p><strong>Project: </strong></p>
-                <p><strong>Progress: </strong></p>
+                <p><strong>Project: {{student.currentProject}}</strong></p>
+                <p><strong>Progress: {{student.currentPage}} </strong></p>
             </div>
         </div>
     </div>
   </div>
 </div>
-<button ng-click="test()">submit</button>
-<div>{{studentStatus}}</div>
+<button ng-click="acknowledgeRequest(studentId)">acknowldge</button>
+<button ng-click="resolveRequest()">resolve</button>

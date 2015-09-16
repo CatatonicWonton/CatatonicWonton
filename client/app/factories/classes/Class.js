@@ -1,23 +1,27 @@
 angular.module('app')
   .factory('Class', function Class($http, $stateParams, User, socketFactory) {
 
-    // CLASS SOCKET
-    var myIoSocket = io.connect('http://127.0.0.1:8080/classSocket');
-    mySocket = socketFactory({
-      ioSocket: myIoSocket
+    // REAL-TIME CLASS SOCKET
+    var classSocket = socketFactory({
+      ioSocket: io.connect('http://127.0.0.1:8000/classSocket')
     });
 
-    var getClassSocket = function() {
-      return mySocket;
+    var establishClassSocket = function(scope, cb) {
+      classSocket.forward('teacherUpdate', scope);
+      scope.$on('socket:teacherUpdate', function(data) {
+        cb(data);
+      });
     };
 
     var updateStudentStatus = function(project, page) {
-      mySocket.emit('update', {
+      classSocket.emit('update', {
         project: project,
         page: page,
         studentId: User.getUser()._id
       });
     };
+
+    // CLASS FUNCTIONALITY
 
     var getClasses = function() {
       return $http.get('/api/class').then(function(response){
@@ -30,8 +34,6 @@ angular.module('app')
         return response.data;
       });
     };
-
-
 
     var getClass = function() {
       return $http.get('/api/class/' + $stateParams.classId).then(function(response) {
@@ -59,10 +61,10 @@ angular.module('app')
     };
 
     var joinClass = function(classId) {
-      var studentId = User.getUser()._id;
       return $http.post('api/studentClass/' + classId, {
-        StudentId: studentId
+        StudentId: User.getUser()._id
       }).then(function(response){
+        console.log('error');
         return response.data;
       }).catch(function(error){
         throw error;
@@ -70,14 +72,14 @@ angular.module('app')
     };
 
     return {
+      establishClassSocket: establishClassSocket,
+      updateStudentStatus: updateStudentStatus,
       getClasses: getClasses,
       getAllClasses: getAllClasses,
       getClass: getClass,
       createClass: createClass,
       deleteClass: deleteClass,
-      joinClass: joinClass,
-      getClassSocket: getClassSocket,
-      updateStudentStatus: updateStudentStatus
+      joinClass: joinClass
     };
 
   });

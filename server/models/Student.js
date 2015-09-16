@@ -4,6 +4,8 @@ module.exports = function (sequelize, DataTypes) {
     lastName: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    salt: DataTypes.STRING
+    salt: DataTypes.STRING,
+    currentProject: DataTypes.STRING,
+    currentPage: DataTypes.STRING
   });
 };

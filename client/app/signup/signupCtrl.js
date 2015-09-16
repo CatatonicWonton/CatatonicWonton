@@ -10,18 +10,11 @@ angular.module('app')
       } else {
         $scope.hidePasswordMatch = true;
         User.signup(firstName, lastName, username, password, accountType).then(function(res){
-          if(res.data === 'Username is already taken!') {
+          if(res === 'Username is already taken!') {
             $scope.hideAlreadyRegistered = false;
           }
-
-          if(res.data === true) {
-            User.signin(username, password).then(function(response){
-              if (response.data.accountType === 'Teacher') {
-                $state.go('teacherHome');
-              } else {
-                $state.go('studentHome');
-              }
-            });
+          if(res === true) {
+            User.signin(username, password);
           }
         });
       }

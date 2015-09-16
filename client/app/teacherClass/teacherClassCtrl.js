@@ -1,36 +1,42 @@
 angular.module('app')
-  .controller('teacherClassCtrl', function teacherClassCtrl($scope, User, Class){
+  .controller('teacherClassCtrl', function teacherClassCtrl($scope, HelpRequest, User, Class){
     
-    var classSocket = Class.getClassSocket();
-    
-    // classSocket.forward('working', $scope);
-    // $scope.$on('socket:working', function (ev, data) {
-    //   console.log('seems to work!', data);
-    //   $scope.theData = data;
-    // });
-
-    // $scope.test = function() {
-    //   classSocket.emit('shoot', 'Jose');
-    // };
-
-    classSocket.forward('teacherUpdate', $scope);
-    $scope.$on('socket:teacherUpdate', function(ev, data) {
-      console.log('Current class data:', data);
-      $scope.studentStatus = data;
-    });
-
-
-
-
+    // MODEL
     $scope.user = User.getUser();
 
-    // get specific class
+
+    // Gets specific class
     $scope.getClass = function() {
       Class.getClass().then(function(myClass){
         $scope.teacherClass = myClass;
       });
     };
 
+    // Get specific class each time page loads
     $scope.getClass();
+
+
+
+    // CLASS SOCKETS
+    Class.establishClassSocket($scope, function() {
+      $scope.getClass();      
+    });
+
+
+    // HELP REQUEST SOCKETS
+    HelpRequest.establishHelpRequestSocket($scope, function(data) {
+      // what you want to do when you get a help request
+    });
+
+    // send acknowledgement
+    $scope.acknowledgeRequest = function(studentId) {
+      HelpRequest.acknowlegeRequest(studentId);
+    };
+
+    // send resolution
+    $scope.resolveRequest = function(studentId) {
+      HelpRequest.resolveRequest(studentId);
+    };
+
   });
   

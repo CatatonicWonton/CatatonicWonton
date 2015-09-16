@@ -1,5 +1,32 @@
 angular.module('app')
-  .factory('HelpRequest', function Project($http, $stateParams) {
+  .factory('HelpRequest', function Project($http, $stateParams, socketFactory) {
+
+    // make a socket for help requests
+    // CLASS SOCKET
+    var helpRequestSocket = socketFactory({
+      ioSocket: io.connect('http://127.0.0.1:8000/helpRequest')
+    });
+
+    var establishHelpRequestSocket = function(scope, cb) {
+      helpRequestSocket.forward('teacherHelpRequest', scope);
+      scope.$on('socket:teacherHelpRequest', function(data) {
+        cb(data);
+      });
+    };
+
+    var submitHelpRequest = function() {
+      helpRequestSocket.emit('submitted', {
+        // include the teacher id, student id, question, and ak and res set to false
+      });
+    };
+
+    var acknowledgeRequest = function(studentId) {
+      helpRequestSocket.emit('acknowledged', studentId);
+    };
+
+    var resolveRequest = function(studentId) {
+      helpRequestSocket.emit('resolved', studentId);
+    };
 
     /* Student submitting a single help request */
     var submitHelpRequest = function(teacherId, question) {
@@ -32,6 +59,10 @@ angular.module('app')
     };
 
     return {
+      establishHelpRequestSocket: establishHelpRequestSocket,
+      acknowledgeRequest: acknowledgeRequest,
+      resolveRequest: resolveRequest,
+      submitHelpRequest: submitHelpRequest,
       submitHelpRequest: submitHelpRequest,
       toggleRequest: toggleRequest,
       refreshRequests: refreshRequests
