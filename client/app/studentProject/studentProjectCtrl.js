@@ -5,13 +5,15 @@ angular.module('app')
     $scope.project;
     $scope.currentPage;
     $scope.currentIndex;
+    var teacherId;
 
 
     // Gets specific project
     $scope.getProject = function() {
       Project.getProject().then(function(project){
         $scope.project = project;
-        $scope.changePage(0);        
+        $scope.changePage(0);
+        teacherId = project.TeacherId;     
       });
     };
 
@@ -45,8 +47,8 @@ angular.module('app')
 
 
     // Sends help request
-    $scope.sendHelpRequest = function() {
-      HelpRequest.submitHelpRequest(/* pass the info you want for the request */);
+    $scope.sendHelpRequest = function(question) {
+      var userId = User.getUser()._id;
+      HelpRequest.submitHelpRequest(teacherId, userId, question);
     };
-
   });

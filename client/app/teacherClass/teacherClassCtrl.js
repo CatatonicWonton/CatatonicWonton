@@ -4,7 +4,6 @@ angular.module('app')
     // MODEL
     $scope.user = User.getUser();
 
-
     // Gets specific class
     $scope.getClass = function() {
       Class.getClass().then(function(myClass){
@@ -15,8 +14,6 @@ angular.module('app')
     // Get specific class each time page loads
     $scope.getClass();
 
-
-
     // CLASS SOCKETS
     Class.establishClassSocket($scope, function() {
       $scope.getClass();      
@@ -26,6 +23,7 @@ angular.module('app')
     // HELP REQUEST SOCKETS
     HelpRequest.establishHelpRequestSocket($scope, function(data) {
       // what you want to do when you get a help request
+
     });
 
     // send acknowledgement
