@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(session({
     secret: 'secret',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
