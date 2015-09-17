@@ -26,7 +26,7 @@ router.post('/:helpRequestId/:prop', /*Auth.checkIf('Teacher'),*/ HelpRequestCon
                helpRequest3, 
              ]
 */
-router.get('/', /*Auth.checkIf('Teacher'),*/ HelpRequestController.getUnresolved )
+router.get('/', /*Auth.checkIf('Teacher'),*/ HelpRequestController.getUnresolved);
 
 // TODO:
 router.delete('/:id', /*Auth.checkIf('Teacher'),*/ HelpRequestController.deleteRequest);

@@ -1,5 +1,15 @@
-angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngAnimate', 'btford.socket-io'])
-.config(function($urlRouterProvider, $stateProvider) {
+angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngAnimate', 'btford.socket-io', 'ui-notification'])
+.config(function($urlRouterProvider, $stateProvider, NotificationProvider) {
+
+  NotificationProvider.setOptions({
+    delay: 10000,
+    startTop: 20,
+    startRight: 10,
+    verticalSpacing: 20,
+    horizontalSpacing: 20,
+    positionX: 'right',
+    positionY: 'top'
+  });
 
   $stateProvider
     .state("landing", {

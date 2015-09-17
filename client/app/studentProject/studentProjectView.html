@@ -1,6 +1,11 @@
 <!-- <div class="floating-help" ng-click="openHelp()">Halp!</div> -->
 <div class="project-container">
   <div class="project-view">
+    
+    <form name="form" novalidate ng-submit="sendHelpRequest(question)" role="form">
+      <input type="text" class="form-control" ng-model="question" placeholder="Ask your teacher a question..." required>
+    </form>
+    
     <div class="project-head">
       <div class="name text-left">
         <h2>{{project.name}}<small> {{currentPage.title}}</small></h2>
