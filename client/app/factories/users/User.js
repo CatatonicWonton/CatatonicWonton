@@ -11,7 +11,8 @@ angular.module('app')
         username    : username,
         password    : password,
         accountType : accountType
-      }).then(function(res) {
+      })
+      .then(function(res) {
         return res.data;
       });
     };
@@ -20,7 +21,8 @@ angular.module('app')
       return $http.post('/auth/login', {
         username: username,
         password: password
-      }).then(function(res) {
+      })
+      .then(function(res) {
         setUser(res.data);
         if (res.data.accountType === 'Teacher') {
           $state.go('teacherHome');
@@ -40,11 +42,19 @@ angular.module('app')
       return user;
     };
 
+    var getStudent = function(StudentId) {
+      var url = '/api/student/' + StudentId;
+      return $http.get(url).then(function (response) {
+        return response.data;
+      });
+    };
+
     return {
-      signup: signup,      
-      signin: signin,
-      setUser: setUser,
-      getUser: getUser
+                        signup : signup,      
+                        signin : signin,
+                       setUser : setUser,       
+                       getUser : getUser,
+                    getStudent : getStudent
     };
   });
   

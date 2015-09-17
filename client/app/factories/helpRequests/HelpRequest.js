@@ -63,7 +63,7 @@ angular.module('app')
     // Called when teacher receives "new!" socket event
     /* Teacher can get a list of unresolved projects in ascending order by dateCreated */
     var refreshRequests = function() {
-      return $http.get('/api/helpRequests').then(function(response){
+      return $http.get('/api/helpRequests').then(function (response){
         return response.data;
       });
     };

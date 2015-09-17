@@ -45,7 +45,6 @@ angular.module('app')
       return $sce.trustAsHtml(content);
     };
 
-
     // Sends help request
     $scope.sendHelpRequest = function(question) {
       var userId = User.getUser()._id;

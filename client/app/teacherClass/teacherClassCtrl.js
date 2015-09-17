@@ -1,12 +1,12 @@
 angular.module('app')
-  .controller('teacherClassCtrl', function teacherClassCtrl($scope, HelpRequest, User, Class){
+  .controller('teacherClassCtrl', function teacherClassCtrl($scope, HelpRequest, User, Class, Notification){
     
     // MODEL
     $scope.user = User.getUser();
 
     // Gets specific class
     $scope.getClass = function() {
-      Class.getClass().then(function(myClass){
+      Class.getClass().then(function (myClass){
         $scope.teacherClass = myClass;
       });
     };
@@ -19,11 +19,23 @@ angular.module('app')
       $scope.getClass();      
     });
 
-
     // HELP REQUEST SOCKETS
-    HelpRequest.establishHelpRequestSocket($scope, function(data) {
-      // what you want to do when you get a help request
 
+    HelpRequest.establishHelpRequestSocket($scope, function (data) {
+      HelpRequest.refreshRequests().then(function (requests) {
+        var i = requests.length - 1;
+        
+        User.getStudent(requests[i].StudentId).then(function (studentData) {
+        
+          var studentName = studentData.firstName + ' ' + studentData.lastName;
+          
+          Notification.warning({
+            title: studentName,
+            message: requests[i].question,
+          });
+
+        })
+      })
     });
 
     // send acknowledgement
