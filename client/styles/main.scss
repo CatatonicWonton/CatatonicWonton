@@ -11,7 +11,7 @@
 
 .navbar {
   /*margin-bottom: 0px !important;*/
-  height: 7.5% !important;
+  font-size: 16px
 }
 
 .project-tile {
@@ -99,16 +99,38 @@
 }
 
 .class-panel-body {
-  height: 150px
+  height: 200px
 }
 
 .panel-title.pull-left {
   padding-top:8px !important;
 }
 
+.class-project-link{
+  color:#3399FF;
+  font-size:15px;
+  vertical-align: center !important;
+}
+
+.table tbody {
+    tr {
+      $border: 2px solid #f6f6f6;
+      border-top: $border;
+      border-bottom: $border;
+      td.vert-align{
+        vertical-align: middle;
+        p {
+          margin:0px 10px;
+        }
+      }
+    }
+}
+
+
 .class-project-link:hover{
   color: red;
   cursor: pointer;
   text-decoration:none !important;
   @include transition(color 0.2s);
+  background-color: #f6f6f6;
 }

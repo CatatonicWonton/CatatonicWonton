@@ -36,11 +36,18 @@
             <div class="panel-heading">
               <h3 class="panel-title" style="text-align:center">{{class.name}}</h3>
             </div>
-            <div class="panel-body class-panel-body" >
-              <strong>Projects</strong>
-              <ul>
+            <div class="class-panel-body" >
+              <h4 class="container"><strong>Projects</strong></h4>
+              <!-- <ul>
                 <li tooltip="Unassign {{project.name}}" tooltip-placement="left" ng-repeat="project in class.Projects"><a class="class-project-link" ng-click="unassignProject(project.id, class.id)">{{project.name}}</a></li>
-              </ul>
+              </ul> -->
+              <table class='table'>
+                <tbody>
+                  <tr ng-repeat="project in class.Projects">
+                    <td class="class-project-link vert-align" tooltip="Unassign {{project.name}}" tooltip-placement="left"><p ng-click="unassignProject(project.id, class.id)">{{project.name}}<span style="color:#A6A6A6"> ({{project.subject}})</span><p></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div class="panel-footer">
               <div class="btn-group btn-group-justified">
