@@ -5,15 +5,7 @@ angular.module('app')
     $scope.loggedIn = false;
 
     $scope.logout = function() {
-      $http.post('/auth/logout', {}).then(function(response) {
-        User.setUser({
-          _id: '',
-          accountType: '',
-          username: ''
-        });
-        $scope.loggedIn = false;
-        $state.go('signin');
-      });
+      User.logout($scope);
     };
 
     // makes sure the nav bar only shows the appropriate links for the user

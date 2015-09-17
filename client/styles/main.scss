@@ -9,9 +9,72 @@
     transition:         $transition;
 }
 
+.wrapper {
+  height: 750px;
+  background-color: white;
+}
+
+.teaser-container {
+  height: 700px;
+  .teaser {
+    opacity: 1.0;
+    position: relative;
+    top: 500px;
+    left: 45%;
+    width: 10%;  
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: center;
+    .join-btn {
+      /*font-size: 20px !important;*/
+      flex: 1 0 50px;
+      .btn {
+        background-color: transparent;
+        color: red;
+        font-size: 30px;
+      }
+    }
+    .teaser-arrow {
+      flex: 1 0 50px;
+    }
+  }
+}
+
+
+
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1300px;
+    /*height: 100%;*/
+}
+
+img {
+  width: 100%;
+}
+
+.data {
+  background-color: white;
+  padding: 40px 0 40px 0;
+}
+
 .navbar {
   /*margin-bottom: 0px !important;*/
   font-size: 16px
+  height: 7.5% !important;
+  opacity: 0.4;
+  color: red;
 }
 
 .project-tile {
