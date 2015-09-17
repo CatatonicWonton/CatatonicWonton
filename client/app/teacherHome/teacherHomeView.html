@@ -3,7 +3,7 @@
     <h1>Projects <div class="plus-add" ng-click="modalOpen('Create New Project', ['Name', 'Subject', 'Author'], createProject)">+</div></h1>
   </div>
     <div ng-repeat="project in teacherProjects">
-      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+      <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
               <h3 class="panel-title pull-left">{{project.name}}</h3>
@@ -34,10 +34,10 @@
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Class: {{class.name}}</h3>
+              <h3 class="panel-title" style="text-align:center">{{class.name}}</h3>
             </div>
-            <div class="panel-body" >
-              <p>Projects</p>
+            <div class="panel-body class-panel-body" >
+              <strong>Projects</strong>
               <ul>
                 <li tooltip="Unassign {{project.name}}" tooltip-placement="left" ng-repeat="project in class.Projects"><a class="class-project-link" ng-click="unassignProject(project.id, class.id)">{{project.name}}</a></li>
               </ul>
