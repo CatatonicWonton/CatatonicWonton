@@ -2,6 +2,7 @@ var express = require('express');
 var sequelize = require('sequelize');
 var db = require('./db');
 var http = require('http');
+var port = process.env.PORT || 8000;
 
 // Socket handler
 var socketHandler = require('./socketHandler');
@@ -28,9 +29,9 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: false
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -38,14 +39,14 @@ app.use(passport.session());
 passportMiddleware(passport);
 
 // ROUTE HANDLER
-var authRoutes           = require('./routes/authRoutes');
-var classRoutes          = require('./routes/classRoutes');
-var pageRoutes           = require('./routes/pageRoutes');
-var projectsRoutes       = require('./routes/projectsRoutes');
-var studentRoutes        = require('./routes/studentRoutes');
-var studentClassRoutes   = require('./routes/studentClassRoutes');
+var authRoutes = require('./routes/authRoutes');
+var classRoutes = require('./routes/classRoutes');
+var pageRoutes = require('./routes/pageRoutes');
+var projectsRoutes = require('./routes/projectsRoutes');
+var studentRoutes = require('./routes/studentRoutes');
+var studentClassRoutes = require('./routes/studentClassRoutes');
 var studentProjectRoutes = require('./routes/studentProjectRoutes');
-var helpRequestsRoutes   = require('./routes/helpRequestsRoutes');
+var helpRequestsRoutes = require('./routes/helpRequestsRoutes');
 
 // ROUTES
 app.use('/auth', authRoutes);
@@ -57,10 +58,6 @@ app.use('/api/studentClass', studentClassRoutes);
 app.use('/api/studentProject', studentProjectRoutes);
 app.use('/api/helpRequests', helpRequestsRoutes);
 
-if (process.env.NODE_ENV !== 'test') {
-  server.listen(8000, function () {
-    console.log('Running on port 8000');
-  });
-}
+server.listen(port);
 
 module.exports = app;
