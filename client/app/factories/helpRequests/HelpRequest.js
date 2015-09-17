@@ -14,9 +14,14 @@ angular.module('app')
       });
     };
 
-    var submitHelpRequest = function() {
+    var submitHelpRequest = function(teacherId, studentId, question) {
       helpRequestSocket.emit('submitted', {
         // include the teacher id, student id, question, and ak and res set to false
+        studentId: studentId,
+        question: question,
+        teacherId: teacherId,
+        acknowledged: false,
+        resolved: false
       });
     };
 
@@ -28,15 +33,20 @@ angular.module('app')
       helpRequestSocket.emit('resolved', studentId);
     };
 
-    /* Student submitting a single help request */
-    var submitHelpRequest = function(teacherId, question) {
-      var requestData = {teacherId: teacherId, question: question};
 
-      return $http.post('/api/helpRequests', requestData).then(function(response){
-        // TODO: send a socket event to the teacher to GET outstanding requests
-        return response.data;
-      });
-    };
+////// deprecated, above updated for sockets
+
+
+    /* Student submitting a single help request */
+
+// var submitHelpRequest = function(teacherId, question) {
+//   var requestData = {teacherId: teacherId, question: question};
+
+//   return $http.post('/api/helpRequests', requestData).then(function(response){
+//     // TODO: send a socket event to the teacher to GET outstanding requests
+//     return response.data;
+//   });
+// };
 
     /* Teacher can toggle request properties, acknowledged and resolved */
     var toggleRequest = function(helpRequestId, prop) {
