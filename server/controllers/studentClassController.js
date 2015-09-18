@@ -26,16 +26,33 @@ module.exports = {
           .findById(req.body.StudentId)
       ])
       .spread(function (foundClass, student) {
-        console.log("/Adding student: " + student.id + " to class " + foundClass.id);
-        return foundClass.addStudent(student);
+        return Promise
+          .all([
+            foundClass.addStudent(student), 
+            student
+          ]);
       })
-      .spread(function (studentClass){
-        console.log('/Adding student: new student class row -- ',studentClass);
-        var foundClass = studentClass[0];
+      .spread(function (studentClass, student){
+        var foundClass = studentClass[0][0];
         return Class.findOne({
           where: {
             id: foundClass.ClassId
           }
+        })
+        .then(function (_class){
+          console.log('\n\n\nFound _class');
+          return _class.getProjects()
+            .map(function(project){
+              project.addStudent(student);
+            })
+            .then(function(){
+              console.log('Got through adding projects')
+              return _class;
+            });
+        })
+        .catch(function(error){
+          console.log(error);
+          throw error;
         });
       })
       .then(helpers.sendResponse(res))

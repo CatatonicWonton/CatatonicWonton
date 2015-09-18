@@ -11,11 +11,12 @@
     
   </div>
   <div class="well col-xs-12 col-sm-9 col-md-9 col-lg-9">
+    <h3 style="text-align:center" ng-show="studentProjects.length === 0"> No projects. </h3>
     <div ng-repeat="project in studentProjects">
       <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">{{project.name}}</h3>
+              <h3 class="panel-title">{{project.name | limitTo : 12}}<span ng-show="project.name.length >= 12">...</span></h3>
             </div>
             <div class="panel-body">
                 <p><strong>Subject: </strong>{{project.subject}}</p>
@@ -36,6 +37,7 @@
         </div>
         <div class="panel-body">
           <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+          <p style="text-align:center" ng-show="studentClasses.length === 0">No classes.</p>
           <table class="table">
             <tbody>
               <tr ng-repeat="class in studentClasses">

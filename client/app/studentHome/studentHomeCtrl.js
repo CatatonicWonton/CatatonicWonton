@@ -18,7 +18,7 @@ angular.module('app')
     };
 
     $scope.getProjects = function() {
-      Project.getProjects().then(function(projects){
+      return Project.getProjects().then(function(projects){
         console.log(projects);
         $scope.studentProjects = projects;
       });
@@ -53,13 +53,20 @@ angular.module('app')
       var classid = classId;
       Class.joinClass(classId)
         .then(function(data) {
-          var classList = $scope.studentClasses;
-          var include = classList.reduce(function (include, _class){
-            if(include) return true;
-            if(_class.id === classid) return false;
-          }, false);
+          $scope.getProjects()
+            .then(function(){
+              var classList = $scope.studentClasses;
+              var include = classList.reduce(function (include, _class){
+                if(include) return true;
+                if(_class.id === classid) return false;
+              }, false);
 
-          !include && classList.push(data);
+              if(!include) classList.push(data);
+
+            })
+            .catch(function(error){
+              throw error;
+            });
         })
         .catch(function(error){
           $scope.addAlert('Already enrolled');
