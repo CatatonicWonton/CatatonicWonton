@@ -61,14 +61,19 @@ angular.module('app')
     };
 
     var joinClass = function(classId) {
-      return $http.post('api/studentClass/' + classId, {
-        StudentId: User.getUser()._id
-      }).then(function(response){
-        console.log('error');
-        return response.data;
-      }).catch(function(error){
-        throw error;
-      });
+      return User.getUser()
+        .then(function(data){
+          var studentid = data.data._id;
+          console.log('Class.js: studentid: ',studentid);
+          return $http.post('api/studentClass/' + classId, {
+            StudentId: studentid
+          }).then(function(response){
+            console.log('error');
+            return response.data;
+          }).catch(function(error){
+            throw error;
+          });
+        });
     };
 
     return {
