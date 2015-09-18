@@ -8,7 +8,6 @@ var Models = require('../db.js').Models;
  * input  -> {}
  * output -> {id, username, accountType}
 */
-
 router.get('/login', Auth.isAuthenticated, Auth.sendUserData);
 
 /* Log's in user and establishes session

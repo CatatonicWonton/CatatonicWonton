@@ -1,12 +1,25 @@
 var NODE_ENV = process.env.NODE_ENV;
-var databaseUrl;
+var databaseName;
+
+var options = {
+  logging: false,
+  user: 'root',
+  password: ''
+};
 
 if (NODE_ENV === 'production') {
-  databaseUrl = process.env.DATABASE_URL;
+  databaseName = process.env.DATABASE_NAME;
+  options = {
+    host: process.env.RDS_HOSTNAME,
+    user: process.env.RDS_USERNAME,
+    password: process.env.RDS_PASSWORD,
+    port: process.env.RDS_PORT
+  };
 } else if (NODE_ENV === 'test') {
-  databaseUrl = 'schoolioTest';
+  databaseName = 'schoolioTest';
 } else {
-  databaseUrl = 'schoolio';
+  databaseName = 'schoolio';
 }
 
-module.exports.databaseUrl = databaseUrl;
+module.exports.databaseName = databaseName;
+module.exports.options = options;
