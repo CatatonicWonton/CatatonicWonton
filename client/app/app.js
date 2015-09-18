@@ -1,7 +1,7 @@
 angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngAnimate', 'btford.socket-io'])
 .config(function($urlRouterProvider, $stateProvider) {
     function checkIfLoggedIn(authType){
-      return function ($q, $timeout, $http, $location, $rootScope){
+      return function ($q, $timeout, $http, $location, $rootScope, User){
         // url: /auth/login
         var deferred = $q.defer();
 

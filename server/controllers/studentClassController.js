@@ -12,6 +12,10 @@ var StudentClass = Models.StudentClass;
 module.exports = {
   addStudentToClass: function (req, res) {
     var id = req.params.id;
+    console.log('/Adding student: req params');
+    console.log(req.params);
+    console.log('/Adding student: req body');
+    console.log(req.body);
 
     Promise
       .all([
@@ -22,9 +26,11 @@ module.exports = {
           .findById(req.body.StudentId)
       ])
       .spread(function (foundClass, student) {
+        console.log("/Adding student: " + student.id + " to class " + foundClass.id);
         return foundClass.addStudent(student);
       })
       .spread(function (studentClass){
+        console.log('/Adding student: new student class row -- ',studentClass);
         var foundClass = studentClass[0];
         return Class.findOne({
           where: {
