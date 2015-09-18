@@ -1,5 +1,28 @@
 angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngAnimate', 'btford.socket-io'])
 .config(function($urlRouterProvider, $stateProvider) {
+    function checkIfLoggedIn(authType){
+      return function ($q, $timeout, $http, $location, $rootScope){
+        // url: /auth/login
+        var deferred = $q.defer();
+
+        $http.get('/auth/login').success(function(user){
+            if(user.accountType === authType){
+                User.setUser(user);
+                deferred.resolve();
+                console.log('\n\n******* LOGGED IN, success');
+            } else {
+                var redirect = user.accountType.toLowerCase();
+                $location.url('/'+redirect+'Home');
+            }
+        }).error(function(error){
+            console.log('\n\n******* NOT LOGGED IN, error');
+            $location.url('/signin');
+            deferred.reject();
+        });
+
+        return deferred;
+      };
+    }
 
   $stateProvider
     .state("landing", {
@@ -20,7 +43,10 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngA
     .state("studentHome", {
         url: "/studentHome",
         templateUrl: "app/studentHome/studentHomeView.html",
-        controller: "studentHomeCtrl"
+        controller: "studentHomeCtrl",
+        resolve: {
+            loggedin: checkIfLoggedIn('Student')
+        }
     })
     .state("studentProject", {
         url: "/studentProject/:projectId",
@@ -30,7 +56,10 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngA
     .state("teacherHome", {
         url: "/teacherHome",
         templateUrl: "app/teacherHome/teacherHomeView.html",
-        controller: "teacherHomeCtrl"
+        controller: "teacherHomeCtrl",
+        resolve: {
+            loggedin: checkIfLoggedIn('Teacher')
+        }
     })
     .state("teacherProject", {
         url: "/teacherProject/:projectId",
@@ -51,3 +80,4 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngA
   $urlRouterProvider.otherwise("/");
 
 });
+

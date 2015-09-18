@@ -37,7 +37,7 @@ angular.module('app')
     };
 
     var getUser = function() {
-      return user;
+      return $http.get('/auth/login')
     };
 
     return {
