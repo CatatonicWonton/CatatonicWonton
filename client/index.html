@@ -8,15 +8,13 @@
     <script src='app/bower_components/jquery/dist/jquery.min.js'></script>
     <!-- Include Font Awesome. -->
     <link rel='stylesheet' href='app/bower_components/font-awesome/css/font-awesome.css'>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="app/bower_components/nvd3/build/nv.d3.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-    
     <!-- Include Editor style. -->
     <link rel='stylesheet' href='app/FroalaWysiwygEditor/css/froala_content.min.css'>
     <link rel='stylesheet' href='app/FroalaWysiwygEditor/css/froala_editor.css'>
     <link rel='stylesheet' href='app/FroalaWysiwygEditor/css/froala_style.min.css'>
-
     
     <!-- Custom styles -->
     <link rel="stylesheet" type="text/css" href="styles/main.css">
@@ -40,6 +38,10 @@
     <script src="app/FroalaWysiwygEditor/js/plugins/inline_styles.min.js"></script>
     <script src="app/FroalaWysiwygEditor/js/plugins/char_counter.min.js"></script>
     <!-- End Froala -->
+
+    <!-- async for queries -->
+    <script src="app/bower_components/async/dist/async.min.js"></script>
+    
 
   </head>
   <body ng-app="app">
@@ -73,7 +75,8 @@
     <script src='app/bower_components/angular-froala/src/angular-froala.js'></script>
     <script src='app/bower_components/angular-froala/src/froala-sanitize.js'></script>
 
-
+    <!-- Angular Smart Table JavaScript dependency -->
+    <script src='app/bower_components/angular-smart-table/dist/smart-table.min.js'></script>
     
     <!-- ANGULAR COMPONENTS -->
     
@@ -86,7 +89,6 @@
     <script src="app/factories/classes/Class.js"></script>
     <script src="app/factories/helpRequests/HelpRequest.js"></script>
 
-    
     <!-- controllers -->
     <script src="app/landing/landingCtrl.js"></script>
     <script src="app/landing/videoCtrl.js"></script>
@@ -96,6 +98,7 @@
     <script src="app/studentHome/studentHomeCtrl.js"></script>
     <script src="app/studentProject/studentProjectCtrl.js"></script>
     <script src="app/teacherClass/teacherClassCtrl.js"></script>
+    <script src="app/helpRequest/helpRequestCtrl.js"></script>
     <script src="app/teacherHome/teacherHomeCtrl.js"></script>
     <script src="app/teacherProject/teacherProjectCtrl.js"></script>
     

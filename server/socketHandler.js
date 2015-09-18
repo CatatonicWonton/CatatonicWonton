@@ -22,8 +22,8 @@ var socketHandler = function(server) {
             currentPage: data.page
           })
           .then(function() {
-            socket.broadcast.emit('teacherHelpRequest', data);
-            console.log('teacherHelpRequest emit fired', data);
+            socket.broadcast.emit('teacherUpdate', data);
+            console.log('teacherUpdate emit fired', data);
           })
       }
     });
@@ -49,16 +49,26 @@ var socketHandler = function(server) {
       }
     });
 
-    // set listener for when a teacher acknowledges request
-    socket.on('acknowledged', function(studentId) {
-      // modify the table set acknowledged equal to true
+    socket.on('acknowledged', function (studentId, fn) {
+      console.log(studentId, 'is the studentId on line 53');
+      socket.broadcast.emit('teacherIsComing');
+      // fn(studentId);
     });
+    
+    // set listener for when a teacher acknowledges request
+    // socket.on('acknowledged', function(studentId) {
 
-    // set listener for when teacher resolves request
-    socket.on('resolved', function(studentId) {
-      // *** use logic from controller***
-      // set resolved to equal
-    })
+
+    //   // modify the table set acknowledged equal to true
+    //   // socket.broadcast.emit('teacherIsComing');
+    //   // console.log('teacherIsComing emit fired', studentId);
+    // });
+  
+    // // set listener for when teacher resolves request
+    // socket.on('resolved', function(studentId) {
+    //   // *** use logic from controller***
+    //   // set resolved to equal
+    // })
   })
 };
 

@@ -25,28 +25,22 @@ angular.module('app')
       });
     };
 
-    var acknowledgeRequest = function(studentId) {
-      helpRequestSocket.emit('acknowledged', studentId);
+    var establishAcknowledgedSocket = function(scope, cb) {
+      helpRequestSocket.forward('teacherIsComing', scope);
+      scope.$on('socket:teacherIsComing', function(data) {
+        console.log('teacher is coming from helprequest.js on line 31');
+        console.log('data is:', data)
+        cb(data);
+      });
     };
 
-    var resolveRequest = function(studentId) {
-      helpRequestSocket.emit('resolved', studentId);
+    var acknowledge = function(studentId) {
+      helpRequestSocket.emit('acknowledged', {studentId: studentId});
     };
 
-
-////// deprecated, above updated for sockets
-
-
-    /* Student submitting a single help request */
-
-// var submitHelpRequest = function(teacherId, question) {
-//   var requestData = {teacherId: teacherId, question: question};
-
-//   return $http.post('/api/helpRequests', requestData).then(function(response){
-//     // TODO: send a socket event to the teacher to GET outstanding requests
-//     return response.data;
-//   });
-// };
+    // var resolveRequest = function(studentId) {
+    //   helpRequestSocket.emit('resolved', studentId);
+    // };
 
     /* Teacher can toggle request properties, acknowledged and resolved */
     var toggleRequest = function(helpRequestId, prop) {
@@ -70,9 +64,8 @@ angular.module('app')
 
     return {
       establishHelpRequestSocket: establishHelpRequestSocket,
-      acknowledgeRequest: acknowledgeRequest,
-      resolveRequest: resolveRequest,
-      submitHelpRequest: submitHelpRequest,
+      establishAcknowledgedSocket: establishAcknowledgedSocket,
+      acknowledge: acknowledge,
       submitHelpRequest: submitHelpRequest,
       toggleRequest: toggleRequest,
       refreshRequests: refreshRequests

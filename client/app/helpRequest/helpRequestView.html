@@ -1,0 +1,50 @@
+<h3>New Requests</h3>
+<table st-table="questionCollection" class="table table-striped">
+  <thead>
+  <tr>
+    <th>Student Name</th>
+    <th>Question</th>
+    <th>Acknowledge</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="question in questionCollection">
+    <td>{{question.name}}</td>
+    <td>{{question.question}}</td>
+    <td>{{question.acknowledged}}</td>
+    <td>
+      <button type="button" ng-click="acknowledgeRequest(question, questionCollection)" class="btn btn-sm btn-danger">
+        <!-- <i class="glyphicon glyphicon-remove-circle">
+        </i> -->
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
+<br>
+
+<h3>Acknowledged Requests</h3>
+<table st-table="acknowledgedQuestionCollection" class="table table-striped">
+  <thead>
+  <tr>
+    <th>Student Name</th>
+    <th>Question</th>
+    <th>Resolve</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="acknowledgedQuestion in acknowledgedQuestionCollection">
+    <td>{{acknowledgedQuestion.name}}</td>
+    <td>{{acknowledgedQuestion.question}}</td>
+    <td>{{acknowledgedQuestion.resolved}}</td>
+    <td>
+      <button type="button" ng-click="resolveRequest(acknowledgedQuestion, acknowledgedQuestionCollection)" class="btn btn-sm btn-danger">
+        <!-- <i class="glyphicon glyphicon-remove-circle">
+        </i> -->
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -21,32 +21,17 @@ angular.module('app')
 
     // HELP REQUEST SOCKETS
 
-    HelpRequest.establishHelpRequestSocket($scope, function (data) {
+    HelpRequest.establishHelpRequestSocket($scope, function() {
       HelpRequest.refreshRequests().then(function (requests) {
-        var i = requests.length - 1;
-        
-        User.getStudent(requests[i].StudentId).then(function (studentData) {
-        
+        User.getStudent(requests[0].StudentId).then(function (studentData) {
           var studentName = studentData.firstName + ' ' + studentData.lastName;
-          
           Notification.warning({
             title: studentName,
-            message: requests[i].question,
+            message: requests[0].question,
           });
-
         })
       })
     });
-
-    // send acknowledgement
-    $scope.acknowledgeRequest = function(studentId) {
-      HelpRequest.acknowlegeRequest(studentId);
-    };
-
-    // send resolution
-    $scope.resolveRequest = function(studentId) {
-      HelpRequest.resolveRequest(studentId);
-    };
 
   });
   

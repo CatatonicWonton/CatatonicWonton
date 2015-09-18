@@ -1,7 +1,7 @@
 angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngAnimate', 'btford.socket-io', 'ui-notification'])
   .config(function($urlRouterProvider, $stateProvider, NotificationProvider) {
 
-    function checkIfLoggedIn(authType){
+    function checkIfLoggedIn (authType) {
       return function ($q, $timeout, $http, $location, $rootScope, User){
         // url: /auth/login
         var deferred = $q.defer();
@@ -54,10 +54,7 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngA
       .state("studentHome", {
           url: "/studentHome",
           templateUrl: "app/studentHome/studentHomeView.html",
-          controller: "studentHomeCtrl",
-          resolve: {
-              loggedin: checkIfLoggedIn('Student')
-          }
+          controller: "studentHomeCtrl"
       })
       .state("studentProject", {
           url: "/studentProject/:projectId",
@@ -67,10 +64,7 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngA
       .state("teacherHome", {
           url: "/teacherHome",
           templateUrl: "app/teacherHome/teacherHomeView.html",
-          controller: "teacherHomeCtrl",
-          resolve: {
-              loggedin: checkIfLoggedIn('Teacher')
-          }
+          controller: "teacherHomeCtrl"
       })
       .state("teacherProject", {
           url: "/teacherProject/:projectId",
@@ -79,16 +73,14 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngA
       })
       .state("helpRequest", {
           url: "/helpRequest",
-          templateUrl: "app/studentHelpRequest/studentHelpRequestView.html",
-          controller: "studentHelpRequestCtrl"
+          templateUrl: "app/helpRequest/helpRequestView.html",
+          controller: "helpRequestCtrl"
       })
       .state("teacherClass", {
           url: "/teacherClass/:classId",
           templateUrl: "app/teacherClass/teacherClassView.html",
           controller: "teacherClassCtrl"
       });
-
-    $urlRouterProvider.otherwise("/");
 
 });
 

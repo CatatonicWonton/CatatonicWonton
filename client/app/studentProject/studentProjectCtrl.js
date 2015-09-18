@@ -50,4 +50,20 @@ angular.module('app')
       var userId = User.getUser()._id;
       HelpRequest.submitHelpRequest(teacherId, userId, question);
     };
+
+    HelpRequest.establishAcknowledgedSocket($scope, function (data) {
+      console.log('got here');
+    //   console.log('yes');
+    //   // HelpRequest.refreshRequests().then(function (requests) {
+    //   //   User.getStudent(requests[0].StudentId).then(function (studentData) {
+    //   //     var studentName = studentData.firstName + ' ' + studentData.lastName;
+    //   //     Notification.warning({
+    //   //       title: studentName,
+    //   //       message: requests[0].question,
+    //   //     });
+    //   //   })
+    //   // })
+    });
+
+
   });

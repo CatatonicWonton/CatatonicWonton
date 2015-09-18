@@ -56,7 +56,7 @@ module.exports = {
         },
         order: [
           ['acknowledged', 'ASC'],
-          ['createdAt', 'ASC']
+          ['createdAt', 'DESC']
         ]
       })
       .then(helpers.sendResponse(res))
