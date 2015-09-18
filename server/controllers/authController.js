@@ -67,6 +67,14 @@ module.exports = {
     next();
   },
 
+  isAuthenticated: function (req, res, next) {
+    if (req.isAuthenticated()) {
+      next();
+    }
+
+    return res.status(401).send();
+  },
+
   sendUserData: function (req, res, next) {
     res.status(200).send(req.session.passport.user);
   }

@@ -4,6 +4,13 @@ var Auth = require('../controllers/authController.js');
 var passport = require('passport');
 var Models = require('../db.js').Models;
 
+/* Checks if user is logged in
+ * input  -> {}
+ * output -> {id, username, accountType}
+*/
+
+router.get('/login', Auth.isAuthenticated, Auth.sendUserData);
+
 /* Log's in user and establishes session
  * input  -> {username, password}
  * output -> {id, username, accountType}
