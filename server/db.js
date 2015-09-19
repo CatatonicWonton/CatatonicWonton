@@ -1,10 +1,10 @@
 var config = require('./config/config');
 var Promise = require('bluebird');
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize(config.databaseUrl, 'root', '', {logging: false});
+var sequelize = new Sequelize(config.databaseName, config.options);
 
 // MODELS
-var Models = {};
+var Models         = {};
 Models.Class       = sequelize.import('./models/Class');
 Models.Teacher     = sequelize.import('./models/Teacher');
 Models.Student     = sequelize.import('./models/Student');
