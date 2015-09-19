@@ -15,6 +15,7 @@ angular.module('app')
     };
 
     var submitHelpRequest = function(teacherId, studentId, question, projectName) {
+      console.log('here');
       helpRequestSocket.emit('submitted', {
         // include the teacher id, student id, question, and ak and res set to false
         studentId: studentId,

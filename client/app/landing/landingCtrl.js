@@ -43,7 +43,7 @@ angular.module('app')
              y: 5
          },
          {
-             key: "Avacodo",
+             key: "Avocado",
              y: 2
          },
          {

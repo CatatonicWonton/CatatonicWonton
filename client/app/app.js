@@ -82,5 +82,7 @@ angular.module('app', ['ui.router', 'ngSanitize', 'froala', 'ui.bootstrap', 'ngA
           controller: "teacherClassCtrl"
       });
 
+    $urlRouterProvider.otherwise('/');
+
 });
 

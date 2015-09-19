@@ -43,7 +43,7 @@ angular.module('app')
         });
         $rootScope.$emit('toggleVideo');
         scope.loggedIn = false;
-        $state.go('signin');
+        $state.go('landing');
       });
     }
 
@@ -55,6 +55,14 @@ angular.module('app')
 
     var getUser = function() {
       return $http.get('/auth/login');
+    };
+
+    var getUserObj = function() {
+      return user;
+    };
+
+    var getUserId = function() {
+      return user._id;
     };
 
     var getStudent = function(StudentId) {
@@ -70,6 +78,8 @@ angular.module('app')
       logout: logout,
       setUser: setUser,
       getUser: getUser,
+      getUserId: getUserId,
+      getUserObj: getUserObj,
       getStudent: getStudent
     };
   });

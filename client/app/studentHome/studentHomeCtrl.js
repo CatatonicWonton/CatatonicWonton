@@ -3,7 +3,7 @@ angular.module('app')
     
     // PROJECTS
     $scope.alerts = [];
-    $scope.student = User.getUser();
+    $scope.student = User.getUserObj();
     // Drop down toggled status, init as closed
     $scope.addClassToggle = false;
 

@@ -39,23 +39,13 @@ gulp.task('install', shell.task([
   'bower install'
 ]));
 
-gulp.task('startServer', function () {
+gulp.task('nodemon', function () {
   nodemon({
     script: 'server/server.js'
   , ext: 'js html'
   , env: { 'NODE_ENV': 'development' }
   })
 });
-
-
-// gulp.task('compileSass', function () {
-//   sass.render({
-//     file: 'client/styles/main.scss',
-//     outFile: 'client/styles/main.css'
-//   }, function(err, result) {
-//     console.log(err, result);
-//   });
-// });
 
 gulp.task('sass', function () {
   gulp.src('client/styles/main.scss')
@@ -100,7 +90,10 @@ gulp.task('build', function() {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('client/**', ['jshint', 'csslint', 'build']);
+    gulp.watch('client/**', ['jshint', 'csslint', 'build', 'sass:watch']);
+});
+
+gulp.task('run', ['nodemon', 'sass:watch']
 });
 
 // Default Task

@@ -17,7 +17,7 @@ angular.module('app')
       classSocket.emit('update', {
         project: project,
         page: page,
-        studentId: User.getUser()._id
+        studentId: User.getUserId()
       });
     };
 
@@ -64,7 +64,7 @@ angular.module('app')
       return User.getUser()
         .then(function(data){
           var studentid = data.data._id;
-          console.log('Class.js: studentid: ',studentid);
+          console.log('Class.js: studentid: ', studentid);
           return $http.post('api/studentClass/' + classId, {
             StudentId: studentid
           }).then(function(response){

@@ -52,8 +52,9 @@ angular.module('app')
 
     // Sends help request
     $scope.sendHelpRequest = function(question) {
-      var userId = User.getUser()._id;
+      var userId = User.getUserId();
       HelpRequest.submitHelpRequest(teacherId, userId, question, projectName);
+      console.log('here');
     };
 
     $scope.modalOpen = function(questionArr, callback) {
@@ -82,7 +83,7 @@ angular.module('app')
 
     HelpRequest.establishAcknowledgedSocket($scope, function (data) {
       HelpRequest.getMostRecentlyUpdated().then(function (helpRequest) {
-        var thisUser = User.getUser()._id
+        var thisUser = User.getUserId();
         if(thisUser === helpRequest.StudentId) {
           Notification.success(
             'Your teacher has seen your question and will be with you shortly.'

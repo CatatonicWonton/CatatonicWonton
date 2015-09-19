@@ -33,6 +33,9 @@ var socketHandler = function(server) {
     console.log('connected to request handler');
     // set listener for student submitting questions
     socket.on('submitted', function(submission) {
+      console.log('received "submitted" on server side');
+      console.log('submission:', submission);
+
       if(submission.studentId) {
         HelpRequest
           .create({

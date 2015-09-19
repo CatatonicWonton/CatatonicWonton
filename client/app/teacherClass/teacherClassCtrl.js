@@ -2,7 +2,7 @@ angular.module('app')
   .controller('teacherClassCtrl', function teacherClassCtrl($scope, HelpRequest, User, Class, Notification){
     
     // MODEL
-    $scope.user = User.getUser();
+    $scope.user = User.getUserObj();
 
     // Gets specific class
     $scope.getClass = function() {
