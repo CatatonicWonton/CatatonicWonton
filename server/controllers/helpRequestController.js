@@ -2,6 +2,7 @@ var Models  = require('../db.js').Models;
 var Promise = require('bluebird');
 var Utils   = require('../utilities.js');
 var helpers = require('../helpers.js');
+var sequelize = require('sequelize')
 
 // MODELS
 var Teacher     = Models.Teacher;
@@ -10,8 +11,8 @@ var HelpRequest = Models.HelpRequest;
 
 module.exports = {
   addQuestion: function(req, res, next) {
-    // var student = req.session.passport.user;
-    var _studentId = req.body.studentId;
+    var student = req.session.passport.user;
+    // var _studentId = req.body.studentId;
 
     // create function in angular to store teacherId
     // send in the id of the teacher from the client
@@ -61,7 +62,18 @@ module.exports = {
       })
       .then(helpers.sendResponse(res))
   },
-  
+
+  getLatest: function(req, res, next) {
+    HelpRequest
+      .findOne({
+        order: [
+          ['updatedAt', 'DESC']
+          // 'updatedAt'
+        ]
+      })
+      .then(helpers.sendResponse(res))
+  },
+
   deleteRequest: function (req, res, next) {
     HelpRequest
       .findById(req.params.id)

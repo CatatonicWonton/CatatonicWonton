@@ -38,6 +38,7 @@ var socketHandler = function(server) {
           .create({
             StudentId: submission.studentId,
             TeacherId: submission.teacherId,
+            projectName: submission.projectName,
             question: submission.question,
             acknowledged: false,
             resolved: false
@@ -49,10 +50,8 @@ var socketHandler = function(server) {
       }
     });
 
-    socket.on('acknowledged', function (studentId, fn) {
-      console.log(studentId, 'is the studentId on line 53');
+    socket.on('acknowledged', function (question) {
       socket.broadcast.emit('teacherIsComing');
-      // fn(studentId);
     });
     
     // set listener for when a teacher acknowledges request

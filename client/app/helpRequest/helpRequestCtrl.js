@@ -5,6 +5,7 @@ angular.module('app').controller('helpRequestCtrl', function helpRequestCtrl($sc
         studentId: studentData.id,
         name: studentData.firstName + ' ' + studentData.lastName,
         question: requests[i].question,
+        projectName: requests[i].projectName,
         resolved: requests[i].resolved,
         acknowledged: requests[i].acknowledged,
         _id: requests[i].id
@@ -57,7 +58,7 @@ angular.module('app').controller('helpRequestCtrl', function helpRequestCtrl($sc
       });
 
       // send acknowledgement socket to student
-      HelpRequest.acknowledge(question.studentId);
+      HelpRequest.acknowledge(question);
 
     };
 

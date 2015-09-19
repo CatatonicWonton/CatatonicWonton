@@ -14,11 +14,12 @@ angular.module('app')
       });
     };
 
-    var submitHelpRequest = function(teacherId, studentId, question) {
+    var submitHelpRequest = function(teacherId, studentId, question, projectName) {
       helpRequestSocket.emit('submitted', {
         // include the teacher id, student id, question, and ak and res set to false
         studentId: studentId,
         question: question,
+        projectName: projectName,
         teacherId: teacherId,
         acknowledged: false,
         resolved: false
@@ -28,14 +29,12 @@ angular.module('app')
     var establishAcknowledgedSocket = function(scope, cb) {
       helpRequestSocket.forward('teacherIsComing', scope);
       scope.$on('socket:teacherIsComing', function(data) {
-        console.log('teacher is coming from helprequest.js on line 31');
-        console.log('data is:', data)
         cb(data);
       });
     };
 
-    var acknowledge = function(studentId) {
-      helpRequestSocket.emit('acknowledged', {studentId: studentId});
+    var acknowledge = function(question) {
+      helpRequestSocket.emit('acknowledged', {question: question});
     };
 
     // var resolveRequest = function(studentId) {
@@ -54,10 +53,15 @@ angular.module('app')
       });
     };
 
-    // Called when teacher receives "new!" socket event
     /* Teacher can get a list of unresolved projects in ascending order by dateCreated */
     var refreshRequests = function() {
       return $http.get('/api/helpRequests').then(function (response){
+        return response.data;
+      });
+    };
+
+    var getMostRecentlyUpdated = function() {
+      return $http.get('/api/helpRequests/recentlyUpdated').then(function (response) {
         return response.data;
       });
     };
@@ -68,7 +72,8 @@ angular.module('app')
       acknowledge: acknowledge,
       submitHelpRequest: submitHelpRequest,
       toggleRequest: toggleRequest,
-      refreshRequests: refreshRequests
+      refreshRequests: refreshRequests,
+      getMostRecentlyUpdated: getMostRecentlyUpdated,
     };
   });
 

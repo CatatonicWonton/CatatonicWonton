@@ -1,19 +1,24 @@
 angular.module('app')
-  .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, Project, Class, User, HelpRequest){
+  .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, $modal, Project, Class, User, HelpRequest, Notification){
 
     // MODEL
     $scope.project;
     $scope.currentPage;
     $scope.currentIndex;
+    
     var teacherId;
-
+    var projectName;
 
     // Gets specific project
     $scope.getProject = function() {
       Project.getProject().then(function(project){
+        
         $scope.project = project;
         $scope.changePage(0);
+
+        projectName = project.name;
         teacherId = project.TeacherId;     
+        // projectName = project.projectName;     
       });
     };
 
@@ -48,22 +53,41 @@ angular.module('app')
     // Sends help request
     $scope.sendHelpRequest = function(question) {
       var userId = User.getUser()._id;
-      HelpRequest.submitHelpRequest(teacherId, userId, question);
+      HelpRequest.submitHelpRequest(teacherId, userId, question, projectName);
+    };
+
+    $scope.modalOpen = function(questionArr, callback) {
+      var modalInstance = $modal.open({
+        templateUrl: 'app/studentProject/newQuestionModal.html',
+        controller: function($scope, $modalInstance) {
+          $scope.questionArr = questionArr;
+          $scope.storage = [];
+
+          $scope.ok = function() {
+            $modalInstance.close($scope.storage);
+          };
+
+          $scope.cancel = function() {
+            $modalInstance.dismiss('cancel');
+          };
+        }
+      });
+
+      modalInstance.result.then(function(argsArray) {
+        callback.apply(null, argsArray);
+      }, function() {
+        console.log('Modal dismissed at: ' + new Date());
+      });
     };
 
     HelpRequest.establishAcknowledgedSocket($scope, function (data) {
-      console.log('got here');
-    //   console.log('yes');
-    //   // HelpRequest.refreshRequests().then(function (requests) {
-    //   //   User.getStudent(requests[0].StudentId).then(function (studentData) {
-    //   //     var studentName = studentData.firstName + ' ' + studentData.lastName;
-    //   //     Notification.warning({
-    //   //       title: studentName,
-    //   //       message: requests[0].question,
-    //   //     });
-    //   //   })
-    //   // })
+      HelpRequest.getMostRecentlyUpdated().then(function (helpRequest) {
+        var thisUser = User.getUser()._id
+        if(thisUser === helpRequest.StudentId) {
+          Notification.success(
+            'Your teacher has seen your question and will be with you shortly.'
+          );  
+        }        
+      })
     });
-
-
   });

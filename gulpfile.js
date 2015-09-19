@@ -30,8 +30,10 @@ var mocha    = require('gulp-mocha');
 var annotate = require('gulp-ng-annotate');
 var uglify   = require('gulp-uglify');
 var minify   = require('gulp-minify');
- 
+var sass     = require('node-sass');
 // Install dependencies
+
+
 gulp.task('install', shell.task([
   'npm install',
   'bower install'
@@ -45,6 +47,16 @@ gulp.task('startServer', function () {
   })
 });
 
+
+gulp.task('compileSass', function () {
+  sass.render({
+    file: 'client/styles/main.scss',
+    outFile: 'client/styles/main.css'
+  }, function(err, result) {
+    console.log(err, result);
+  });
+});
+ 
 // JS HINT
 // todo: add server code as well
 gulp.task('jshint', function() {

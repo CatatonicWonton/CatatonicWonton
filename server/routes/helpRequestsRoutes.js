@@ -28,6 +28,8 @@ router.post('/:helpRequestId/:prop', /*Auth.checkIf('Teacher'),*/ HelpRequestCon
 */
 router.get('/', /*Auth.checkIf('Teacher'),*/ HelpRequestController.getUnresolved);
 
+router.get('/recentlyUpdated', /*Auth.checkIf('Teacher'),*/ HelpRequestController.getLatest);
+
 // TODO:
 router.delete('/:id', /*Auth.checkIf('Teacher'),*/ HelpRequestController.deleteRequest);
 

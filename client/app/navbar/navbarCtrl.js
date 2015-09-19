@@ -1,8 +1,10 @@
 angular.module('app')
-  .controller('navbarCtrl', function($scope, $state, $http, $rootScope, User) {
+  .controller('navbarCtrl', function ($scope, $state, $http, $rootScope, User, HelpRequest) {
     
     $scope.navBarCollapsed = true;    
     $scope.loggedIn = false;
+    $scope.helpRequestTotal;
+
 
     $scope.logout = function() {
       User.logout($scope);
@@ -22,5 +24,6 @@ angular.module('app')
     $scope.setNavbar();
     $rootScope.$on('$stateChangeStart', $scope.setNavbar);
     $rootScope.$on('teacherOrStudent', $scope.setNavbar);
+
 
 });

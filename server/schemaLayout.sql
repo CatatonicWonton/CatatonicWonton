@@ -30,6 +30,7 @@ CREATE TABLE `Question` (
 CREATE TABLE `Project` (
 	`name` TEXT NOT NULL,
 	`subject` TEXT NOT NULL,
+	`projectName` TEXT NOT NULL,
 	`teacherId` TEXT NOT NULL,
 	`id` TEXT NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (`id`)

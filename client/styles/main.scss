@@ -1,4 +1,5 @@
 @import 'teacherProject';
+@import '../app/bower_components/bootstrap-sass/assets/stylesheets/_bootstrap';
 
 /* PRIMARY STYLING */
 
@@ -189,11 +190,23 @@ img {
     }
 }
 
-
 .class-project-link:hover{
   color: red;
   cursor: pointer;
   text-decoration:none !important;
   @include transition(color 0.2s);
   background-color: #f6f6f6;
+}
+
+.help-request-table{
+  color:#3399FF;
+  font-size:15px;
+  vertical-align: center !important;
+}
+
+.help-request-table:hover{
+  cursor: pointer;
+  text-decoration:none !important;
+  @include transition(color 0.2s);
+  background-color: #8F8F8F;
 }

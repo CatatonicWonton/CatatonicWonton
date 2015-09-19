@@ -1,50 +1,37 @@
-<h3>New Requests</h3>
-<table st-table="questionCollection" class="table table-striped">
-  <thead>
-  <tr>
-    <th>Student Name</th>
-    <th>Question</th>
-    <th>Acknowledge</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="question in questionCollection">
-    <td>{{question.name}}</td>
-    <td>{{question.question}}</td>
-    <td>{{question.acknowledged}}</td>
-    <td>
-      <button type="button" ng-click="acknowledgeRequest(question, questionCollection)" class="btn btn-sm btn-danger">
-        <!-- <i class="glyphicon glyphicon-remove-circle">
-        </i> -->
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="container">
+  <h3>New Requests</h3>
+  <table st-table="questionCollection" class="table well">
+    <thead>
+    <tr>
+      <th class="col-md-2 col-sm-2 col-xs-2">Student Name</th>
+      <th class="col-md-2 col-sm-2 col-xs-2">Project</th>
+      <th class="col-md-6 col-sm-6 col-xs-6">Question</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="help-request-table" ng-repeat="question in questionCollection" ng-click="acknowledgeRequest(question, questionCollection)">
+      <td>{{question.name}}</td>
+      <td>{{question.projectName}}</td>
+      <td>{{question.question}}</td>
+    </tr>
+    </tbody>
+  </table>
 
-<br>
-<br>
-
-<h3>Acknowledged Requests</h3>
-<table st-table="acknowledgedQuestionCollection" class="table table-striped">
-  <thead>
-  <tr>
-    <th>Student Name</th>
-    <th>Question</th>
-    <th>Resolve</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="acknowledgedQuestion in acknowledgedQuestionCollection">
-    <td>{{acknowledgedQuestion.name}}</td>
-    <td>{{acknowledgedQuestion.question}}</td>
-    <td>{{acknowledgedQuestion.resolved}}</td>
-    <td>
-      <button type="button" ng-click="resolveRequest(acknowledgedQuestion, acknowledgedQuestionCollection)" class="btn btn-sm btn-danger">
-        <!-- <i class="glyphicon glyphicon-remove-circle">
-        </i> -->
-      </button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+  <h3>Acknowledged Requests</h3>
+  <table st-table="acknowledgedQuestionCollection" class="table well">
+    <thead>
+    <tr>
+      <th class="col-md-2 col-sm-2 col-xs-2">Student Name</th>
+      <th class="col-md-2 col-sm-2 col-xs-2">Project</th>
+      <th class="col-md-6 col-sm-6 col-xs-6">Question</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="help-request-table" ng-repeat="acknowledgedQuestion in acknowledgedQuestionCollection" ng-click="resolveRequest(acknowledgedQuestion, acknowledgedQuestionCollection)">
+      <td>{{acknowledgedQuestion.name}}</td>
+      <td>{{question.projectName}}</td>
+      <td>{{acknowledgedQuestion.question}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
