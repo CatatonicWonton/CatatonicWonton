@@ -70,7 +70,7 @@ angular.module('app')
       logout: logout,
       setUser: setUser,
       getUser: getUser,
-      getStudent getStudent
+      getStudent: getStudent
     };
   });
   

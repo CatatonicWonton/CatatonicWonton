@@ -1,7 +1,7 @@
 var config = require('./config/config');
 var Promise = require('bluebird');
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize(config.databaseName, config.options);
+var sequelize = new Sequelize(config.databaseName, 'root', '', {logging: false});
 
 // MODELS
 var Models         = {};

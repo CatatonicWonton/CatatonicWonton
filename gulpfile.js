@@ -30,7 +30,7 @@ var mocha    = require('gulp-mocha');
 var annotate = require('gulp-ng-annotate');
 var uglify   = require('gulp-uglify');
 var minify   = require('gulp-minify');
-var sass     = require('node-sass');
+var sass     = require('gulp-sass');
 // Install dependencies
 
 
@@ -48,13 +48,23 @@ gulp.task('startServer', function () {
 });
 
 
-gulp.task('compileSass', function () {
-  sass.render({
-    file: 'client/styles/main.scss',
-    outFile: 'client/styles/main.css'
-  }, function(err, result) {
-    console.log(err, result);
-  });
+// gulp.task('compileSass', function () {
+//   sass.render({
+//     file: 'client/styles/main.scss',
+//     outFile: 'client/styles/main.css'
+//   }, function(err, result) {
+//     console.log(err, result);
+//   });
+// });
+
+gulp.task('sass', function () {
+  gulp.src('client/styles/main.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('client/styles'));
+});
+ 
+gulp.task('sass:watch', function () {
+  gulp.watch('client/styles/main.scss', ['sass']);
 });
  
 // JS HINT
