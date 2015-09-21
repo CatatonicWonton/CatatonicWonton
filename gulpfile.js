@@ -30,14 +30,16 @@ var mocha    = require('gulp-mocha');
 var annotate = require('gulp-ng-annotate');
 var uglify   = require('gulp-uglify');
 var minify   = require('gulp-minify');
- 
+var sass     = require('gulp-sass');
 // Install dependencies
+
+
 gulp.task('install', shell.task([
   'npm install',
   'bower install'
 ]));
 
-gulp.task('startServer', function () {
+gulp.task('nodemon', function () {
   nodemon({
     script: 'server/server.js'
   , ext: 'js html'
@@ -45,6 +47,16 @@ gulp.task('startServer', function () {
   })
 });
 
+gulp.task('sass', function () {
+  gulp.src('client/styles/main.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('client/styles'));
+});
+ 
+gulp.task('sass:watch', function () {
+  gulp.watch('client/styles/main.scss', ['sass']);
+});
+ 
 // JS HINT
 // todo: add server code as well
 gulp.task('jshint', function() {
@@ -78,7 +90,10 @@ gulp.task('build', function() {
 
 // Watch Files For Changes
 gulp.task('watch', function() {
-    gulp.watch('client/**', ['jshint', 'csslint', 'build']);
+    gulp.watch('client/**', ['jshint', 'csslint', 'build', 'sass:watch']);
+});
+
+gulp.task('run', ['nodemon', 'sass:watch']
 });
 
 // Default Task

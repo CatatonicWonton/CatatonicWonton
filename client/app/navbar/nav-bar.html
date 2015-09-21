@@ -9,24 +9,30 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#"><strong>Test School</strong></a>
+    <a class="navbar-brand" ui-sref="landing"><strong>Schoolio</strong></a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" ng-class="!navBarCollapsed && 'in'" ng-click="navBarCollapsed = true">
+  <div class="collapse navbar-collapse" ng-class="!navBarCollapsed" ng-click="navBarCollapsed = true">
     <ul class="nav navbar-nav">
-      <li><a ui-sref='landing'>Home</a></li>
-      <li ng-hide="loggedIn"><a ui-sref='signup'>Sign Up</a></li>
-      <li ng-hide="loggedIn"><a ui-sref='signin'>Sign In</a></li>
-      <li ng-show="loggedIn"><a ng-hide="isTeacher" ui-sref='studentHome'>studentHome</a></li>
-      <li ng-show="loggedIn"><a ng-show="isTeacher" ui-sref='teacherHome'>teacherHome</a></li>
+      <!-- <li><a ui-sref='landing'>Home</a></li> -->
+      <!-- <li ng-hide="loggedIn"><a ui-sref='signup'>Sign Up</a></li> -->
+      <!-- <li ng-hide="loggedIn"><a ui-sref='signin'>Sign In</a></li> -->
+      <li ng-show="loggedIn"><a ng-hide="isTeacher" ui-sref='studentHome'>Student Dashboard</a></li>
+      <li ng-show="loggedIn"><a ng-show="isTeacher" ui-sref='teacherHome'>Teacher Dashboard</a></li>
+      <li ng-show="loggedIn"><a ng-show="isTeacher" ui-sref='helpRequest'>Student Help Requests</a></li>
     </ul>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li ng-click="logout()"><a>Logout</a></li>
+    <ul ng-hide="loggedIn" class="nav navbar-nav navbar-right">
+      <li>
+        <a ui-sref='signin'>Sign In</a>
+      </li>
     </ul>
 
-    
-
+    <ul ng-show="loggedIn" class="nav navbar-nav navbar-right" style="cursor: pointer">
+      <li ng-click="logout()">
+        <a>Logout</a>
+      </li>
+    </ul>
   </div><!-- /.navbar-collapse -->
 </nav>

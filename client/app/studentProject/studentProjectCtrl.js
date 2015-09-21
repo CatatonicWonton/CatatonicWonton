@@ -1,17 +1,24 @@
 angular.module('app')
-  .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, Project, Class, User, HelpRequest){
+  .controller('studentProjectCtrl', function studentProjectCtrl($scope, $sce, $modal, Project, Class, User, HelpRequest, Notification){
 
     // MODEL
     $scope.project;
     $scope.currentPage;
     $scope.currentIndex;
-
+    
+    var teacherId;
+    var projectName;
 
     // Gets specific project
     $scope.getProject = function() {
       Project.getProject().then(function(project){
+        
         $scope.project = project;
-        $scope.changePage(0);        
+        $scope.changePage(0);
+
+        projectName = project.name;
+        teacherId = project.TeacherId;     
+        // projectName = project.projectName;     
       });
     };
 
@@ -43,10 +50,45 @@ angular.module('app')
       return $sce.trustAsHtml(content);
     };
 
-
     // Sends help request
-    $scope.sendHelpRequest = function() {
-      HelpRequest.submitHelpRequest(/* pass the info you want for the request */);
+    $scope.sendHelpRequest = function(question) {
+      var userId = User.getUserId();
+      HelpRequest.submitHelpRequest(teacherId, userId, question, projectName);
+      console.log('here');
     };
 
+    $scope.modalOpen = function(questionArr, callback) {
+      var modalInstance = $modal.open({
+        templateUrl: 'app/studentProject/newQuestionModal.html',
+        controller: function($scope, $modalInstance) {
+          $scope.questionArr = questionArr;
+          $scope.storage = [];
+
+          $scope.ok = function() {
+            $modalInstance.close($scope.storage);
+          };
+
+          $scope.cancel = function() {
+            $modalInstance.dismiss('cancel');
+          };
+        }
+      });
+
+      modalInstance.result.then(function(argsArray) {
+        callback.apply(null, argsArray);
+      }, function() {
+        console.log('Modal dismissed at: ' + new Date());
+      });
+    };
+
+    HelpRequest.establishAcknowledgedSocket($scope, function (data) {
+      HelpRequest.getMostRecentlyUpdated().then(function (helpRequest) {
+        var thisUser = User.getUserId();
+        if(thisUser === helpRequest.StudentId) {
+          Notification.success(
+            'Your teacher has seen your question and will be with you shortly.'
+          );  
+        }        
+      })
+    });
   });

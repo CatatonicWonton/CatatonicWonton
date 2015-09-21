@@ -11,7 +11,8 @@ angular.module('app')
         username    : username,
         password    : password,
         accountType : accountType
-      }).then(function(res) {
+      })
+      .then(function(res) {
         return res.data;
       });
     };
@@ -20,7 +21,8 @@ angular.module('app')
       return $http.post('/auth/login', {
         username: username,
         password: password
-      }).then(function(res) {
+      })
+      .then(function(res) {
         setUser(res.data);
         $rootScope.$emit('teacherOrStudent');
         $rootScope.$emit('toggleVideo');
@@ -41,7 +43,7 @@ angular.module('app')
         });
         $rootScope.$emit('toggleVideo');
         scope.loggedIn = false;
-        $state.go('signin');
+        $state.go('landing');
       });
     }
 
@@ -55,12 +57,30 @@ angular.module('app')
       return $http.get('/auth/login');
     };
 
+    var getUserObj = function() {
+      return user;
+    };
+
+    var getUserId = function() {
+      return user._id;
+    };
+
+    var getStudent = function(StudentId) {
+      var url = '/api/student/' + StudentId;
+      return $http.get(url).then(function (response) {
+        return response.data;
+      });
+    };
+
     return {
       signup: signup,      
       signin: signin,
+      logout: logout,
       setUser: setUser,
       getUser: getUser,
-      logout: logout
+      getUserId: getUserId,
+      getUserObj: getUserObj,
+      getStudent: getStudent
     };
   });
   

@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h3 class="modal-title">Submit a Help Request</h3>
+</div>
+<form name="form" novalidate ng-submit="ok()">
+    <div class="modal-body">    
+        <div class="form-group">
+            <!-- <div class="modalInput">
+                <input type="text" class="form-control" placeholder="Type here..." ng-model='question'>
+            </div> -->
+            <div class="modalInput" ng-repeat="question in questionArr">
+                <input type="text" class="form-control" placeholder="Type here..." ng-model='storage[$index]'>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

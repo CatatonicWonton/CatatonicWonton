@@ -1,16 +1,19 @@
 <!-- <div class="floating-help" ng-click="openHelp()">Halp!</div> -->
 <div class="project-container">
   <div class="project-view">
+    
+    <div class="container">
+      <button ng-click="modalOpen(['question'], sendHelpRequest)" type="button" class="pull-right btn btn-success">
+        <i class="fa fa-question-circle fa-2x"></i>
+      </button>
+    </div>
+        
     <div class="project-head">
       <div class="name text-left">
         <h2>{{project.name}}<small> {{currentPage.title}}</small></h2>
       </div>
-      <!-- <div class="current-page">
-        <h2><small>{{currentPage.title}}</small></h2>
-      </div> -->
     </div>
     <div class="project-pages">
-      <!-- use ng-repeat to display bar for each project -->
       <div
         class="bar"
         ng-repeat="page in project.Pages"
