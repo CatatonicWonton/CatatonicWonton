@@ -1,7 +1,8 @@
 var config = require('./config/config');
 var Promise = require('bluebird');
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize(config.databaseName, 'root', '', {logging: false});
+var DATABASE_URL = process.env.DATABASE_URL || 'schoolio';
+var sequelize = new Sequelize(DATABASE_URL, 'root', '', {logging: false});  
 
 // MODELS
 var Models         = {};
