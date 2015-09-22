@@ -40,6 +40,8 @@
     "node-sass": "^3.3.3",
     "passport": "^0.3.0",
     "passport-local": "^1.0.0",
+    "pg": "^4.4.2",
+    "pg-hstore": "^2.3.2",
     "protractor": "^2.1.0",
     "sequelize": "^3.6.0",
     "shelljs": "^0.2.6",
