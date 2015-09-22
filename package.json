@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "an ed-tech spa",
   "scripts": {
-    "start": "node server/server.js",
     "test": "mocha server/test"
   },
   "repository": {
@@ -12,6 +11,9 @@
   },
   "author": "Jeff Plourd, Adnan Pirzada, Mychael Zuniga, Devon Koch",
   "license": "MIT",
+  "engines": {
+    "node": "^0.12.2"
+  },
   "bugs": {
     "url": "https://github.com/CatatonicWonton/CatatonicWonton/issues"
   },
