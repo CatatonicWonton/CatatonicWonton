@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "an ed-tech spa",
   "scripts": {
-    "test": "mocha server/test"
+    "test": "mocha server/test",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
