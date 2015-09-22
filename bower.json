@@ -18,7 +18,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.5",
+    "angular": "1.4.5",
     "angular-animate": "~1.4.5",
     "angular-bootstrap": "~0.13.4",
     "angular-froala": "~1.2.8",
