@@ -41,7 +41,9 @@ gulp.task('install', shell.task([
 
 gulp.task('nodemon', function () {
   nodemon({
-    script: 'server/server.js'
+    script: 'server/server.js',
+    ext: 'js html',
+    env: { 'NODE_ENV': 'development' }
   })
 });
 
