@@ -8,6 +8,7 @@ angular.module('app')
     $scope.getClass = function() {
       Class.getClass().then(function (myClass){
         $scope.teacherClass = myClass;
+        console.log(myClass);
       });
     };
 
@@ -16,7 +17,8 @@ angular.module('app')
 
     // CLASS SOCKETS
     Class.establishClassSocket($scope, function() {
-      $scope.getClass();      
+      $scope.getClass();
+      console.log('returns class socket');    
     });
 
     // HELP REQUEST SOCKETS
