@@ -202,3 +202,20 @@ img {
   @include transition(color 0.2s);
   background-color: #8F8F8F;
 }
+
+#custom-message {
+  position:relative;
+  z-index:1;
+  font-family: sans-serif; 
+  text-align: center;   
+  color: green;
+}
+
+#custom-message #vid-title {
+  font-weight: bold;
+  font-size: 10em;
+}
+
+#custom-message #vid-slogan {
+  font-size: 5em;
+}
