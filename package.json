@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/CatatonicWonton/CatatonicWonton#readme",
   "dependencies": {
-    "bcrypt": "^0.8.5",
+    "bcrypt": "*",
     "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
     "bower": "^1.5.2",

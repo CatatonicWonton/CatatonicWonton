@@ -35,28 +35,17 @@ var sass     = require('gulp-sass');
 
 
 // Install dependencies
-gulp.task('install', shell.task([
-  'bower install'
-]));
+// gulp.task('install', shell.task([
+//   'bower install'
+// ]));
 
-gulp.task('nodemon', function () {
-  nodemon({
-    script: 'server/server.js'
-  })
-});
-
-gulp.task('sass', function () {
-  gulp.src('client/styles/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('client/styles'));
-});
  
 // JS HINT
 // todo: add server code as well
 gulp.task('jshint', function() {
     return gulp.src(['client/app/**/*.js', '!client/app/bower_components/**'])
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'))
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'))
 });
 
 // SERVER TESTS
@@ -73,7 +62,20 @@ gulp.task('csslint', function() {
 });
 
 gulp.task('bower', function() {
-  return bower();
+  return bower()
+    .pipe(gulp.dest('client/app/bower_components'));
+});
+
+gulp.task('sass', ['bower'], function () {
+  gulp.src('client/styles/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('client/styles'));
+});
+
+gulp.task('nodemon', function () {
+  nodemon({
+    script: 'server/server.js'
+  })
 });
 
 // Concatenate & Minify
