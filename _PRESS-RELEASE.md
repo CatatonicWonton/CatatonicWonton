@@ -1,30 +1,26 @@
- ## School.IO ##
-
-  > School.IO helps teachers create and manage individual student learning experiences, and helps kids take charge of their learning by completing challenging projects.
-
-  Web app that enables teachers to create and manage student learning projects and students to take charge of their learning by completing challenging projects.
+ ## Schoolio ##
+Schoolio is a tool for catering to different learning levels in a traditionally stagnant educational environment.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-
-  Imagine a classroom where students learned relevant content and skills while developing the ability to set goals and manage projects. Imagine a teacher who could create and guide his/her students through engaging learning projects and provide feedback and help in real-time. School.IO is learning management system allowing teachers to create custom, step-by-step projects containing dynamic content, such as videos, questions, and coding sandboxes. 
-
+Schoolio is human-centered design approach to facilitating a custom learning environment in a traditionally content stagnant classroom.  Teachers can architect tailored project-based curriculum with our multi-faceted wysiwyg editor with text, photo, and video.  After assigning a project to a class, teachers provide feedback through our real-time help request system while students complete work.  While using Schoolio, students automatically broadcast their progress, enabling the teacher to gain a holistic view of current class progress.
 
 ## Problem ##
-  > Describe the problem your product solves.
-
+There exists a plethora of EdTech products that fail to solve universal issues in today's classrooms.  In addition to the fact that students, especially in elementary school, come from a wide variety of backgrounds with resulting skill levels, the attention said students receive varies tremendously based on a number of factors.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+Teachers can manage entire classes, individual students, and projects from a single platform while offering individual help to students from help request based push notifications.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+"I wish I had this when I was growing up." -Devon Koch
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+Visit our website and Sign Up! It's that simple.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+"I update projects on @Schoolio regularly so students can learn at their ideal pace." Mr. Smith
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+Check out our app and have a great school year!
+
+Thanks,
+The Schoolio Team
