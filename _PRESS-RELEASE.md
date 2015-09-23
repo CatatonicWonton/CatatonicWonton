@@ -1,4 +1,4 @@
-## Schoolio ##
+### Schoolio ###
 Schoolio is a tool for catering to different learning levels in a traditionally stagnant educational environment.
 
 ## Summary ##
