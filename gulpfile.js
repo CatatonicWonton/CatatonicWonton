@@ -51,6 +51,12 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('client/styles'));
 });
  
+gulp.task('sass:watch', function () {
+  gulp.watch('client/styles/main.scss', ['sass']);
+});
+
+
+
 // JS HINT
 // todo: add server code as well
 gulp.task('jshint', function() {
