@@ -14,7 +14,7 @@ angular.module('app')
 
     // Get specific class each time page loads
     $scope.getClass();
-
+    console.log('teacherClassCtrl ran');
     // CLASS SOCKETS
     Class.establishClassSocket($scope, function() {
       $scope.getClass();
