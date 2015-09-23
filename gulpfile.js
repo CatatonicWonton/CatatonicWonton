@@ -88,5 +88,5 @@ gulp.task('watch', function() {
 
 
 // Default Task
-gulp.task('default', ['bower', 'sass', 'nodemon']);
-// gulp.task('default', ['bower', 'sass']);
+// gulp.task('default', ['bower', 'sass', 'nodemon']);
+gulp.task('default', ['bower', 'sass']);
