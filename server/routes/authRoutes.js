@@ -14,13 +14,13 @@ router.get('/login', Auth.isAuthenticated, Auth.sendUserData);
  * input  -> {username, password}
  * output -> {id, username, accountType}
 */ 
-router.post('/login', function (req, res, next) {console.log('login in called');next()},passport.authenticate('local'), Auth.sendUserData);
+router.post('/login', passport.authenticate('local'), Auth.sendUserData);
 
 /* Creates account 
  * input  -> {firstName, lastName, username, password, accountType}
  * output -> {true}
 */
-router.post('/signup', function (req, res, next) {console.log('sign up called');next()}, Auth.createAccount, Auth.sendSuccess);
+router.post('/signup', Auth.createAccount, Auth.sendSuccess);
 
 /* Log's out user and ends session
  * input -> {}
