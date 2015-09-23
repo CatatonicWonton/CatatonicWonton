@@ -21,6 +21,7 @@ var gulp = require('gulp');
 // Include Our Plugins
 var nodemon  = require('gulp-nodemon');
 var shell    = require('gulp-shell');
+var bower    = require('gulp-bower');
 
 var jshint   = require('gulp-jshint');
 var csslint  = require('gulp-csslint');
@@ -31,30 +32,23 @@ var annotate = require('gulp-ng-annotate');
 var uglify   = require('gulp-uglify');
 var minify   = require('gulp-minify');
 var sass     = require('gulp-sass');
+
+
 // Install dependencies
-
-
 gulp.task('install', shell.task([
-  'npm install',
   'bower install'
 ]));
 
 gulp.task('nodemon', function () {
   nodemon({
     script: 'server/server.js'
-  , ext: 'js html'
-  , env: { 'NODE_ENV': 'development' }
   })
 });
 
 gulp.task('sass', function () {
-  gulp.src('client/styles/main.scss')
+  gulp.src('client/styles/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('client/styles'));
-});
- 
-gulp.task('sass:watch', function () {
-  gulp.watch('client/styles/main.scss', ['sass']);
 });
  
 // JS HINT
@@ -78,6 +72,10 @@ gulp.task('csslint', function() {
     .pipe(csslint.reporter())
 });
 
+gulp.task('bower', function() {
+  return bower();
+});
+
 // Concatenate & Minify
 gulp.task('build', function() {
   return gulp.src(['client/app/**/*.js', '!client/app/**/*Spec.js', '!client/app/bower_components/**'])
@@ -93,8 +91,5 @@ gulp.task('watch', function() {
     gulp.watch('client/**', ['jshint', 'csslint', 'build', 'sass:watch']);
 });
 
-gulp.task('run', ['nodemon', 'sass:watch']
-});
-
 // Default Task
-gulp.task('default', ['mocha', 'build', 'watch']);
+gulp.task('default', ['bower', 'sass', 'nodemon']);
