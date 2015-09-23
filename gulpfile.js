@@ -3,7 +3,7 @@
 installation
   -npm and bower install
   -TODO: database setup (extra)
-TODO: testing
+testing
   -front-end testing
   -back-end testing
 build
@@ -90,6 +90,8 @@ gulp.task('build', function() {
 gulp.task('watch', function() {
     gulp.watch('client/**', ['jshint', 'csslint', 'build', 'sass:watch']);
 });
+
+gulp.task('start', ['sass', 'nodemon', 'sass:watch']);
 
 // Default Task
 gulp.task('default', ['bower', 'sass', 'nodemon']);
