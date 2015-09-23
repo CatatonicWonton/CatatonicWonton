@@ -20,7 +20,6 @@ var gulp = require('gulp');
 
 // Include Our Plugins
 var nodemon  = require('gulp-nodemon');
-var shell    = require('gulp-shell');
 var bower    = require('gulp-bower');
 
 var jshint   = require('gulp-jshint');
@@ -33,13 +32,6 @@ var uglify   = require('gulp-uglify');
 var minify   = require('gulp-minify');
 var sass     = require('gulp-sass');
 
-
-// Install dependencies
-// gulp.task('install', shell.task([
-//   'bower install'
-// ]));
-
- 
 // JS HINT
 // todo: add server code as well
 gulp.task('jshint', function() {
@@ -78,6 +70,7 @@ gulp.task('nodemon', function () {
   })
 });
 
+
 // Concatenate & Minify
 gulp.task('build', function() {
   return gulp.src(['client/app/**/*.js', '!client/app/**/*Spec.js', '!client/app/bower_components/**'])
@@ -92,6 +85,7 @@ gulp.task('build', function() {
 gulp.task('watch', function() {
     gulp.watch('client/**', ['jshint', 'csslint', 'build', 'sass:watch']);
 });
+
 
 // Default Task
 gulp.task('default', ['bower', 'sass', 'nodemon']);
