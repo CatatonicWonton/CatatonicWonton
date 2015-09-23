@@ -22,14 +22,14 @@ var gulp = require('gulp');
 var nodemon  = require('gulp-nodemon');
 var bower    = require('gulp-bower');
 
-var jshint   = require('gulp-jshint');
-var csslint  = require('gulp-csslint');
+// var jshint   = require('gulp-jshint');
+// var csslint  = require('gulp-csslint');
 
-var concat   = require('gulp-concat');
-var mocha    = require('gulp-mocha');
-var annotate = require('gulp-ng-annotate');
-var uglify   = require('gulp-uglify');
-var minify   = require('gulp-minify');
+// var concat   = require('gulp-concat');
+// var mocha    = require('gulp-mocha');
+// var annotate = require('gulp-ng-annotate');
+// var uglify   = require('gulp-uglify');
+// var minify   = require('gulp-minify');
 var sass     = require('gulp-sass');
 
 // JS HINT
