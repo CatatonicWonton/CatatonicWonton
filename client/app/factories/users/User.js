@@ -23,7 +23,9 @@ angular.module('app')
         password: password
       })
       .then(function(res) {
+        setUser(res.data);
         $rootScope.$emit('teacherOrStudent');
+        $rootScope.$emit('toggleVideo');
         if (res.data.accountType === 'Teacher') {
           $state.go('teacherHome');
         } else {
@@ -39,6 +41,7 @@ angular.module('app')
           accountType: '',
           username: ''
         });
+        $rootScope.$emit('toggleVideo');
         scope.loggedIn = false;
         $state.go('landing');
       });
@@ -62,10 +65,6 @@ angular.module('app')
       return user._id;
     };
 
-    var getUserType = function() {
-      return user.accountType;
-    };
-
     var getStudent = function(StudentId) {
       var url = '/api/student/' + StudentId;
       return $http.get(url).then(function (response) {
@@ -80,7 +79,6 @@ angular.module('app')
       setUser: setUser,
       getUser: getUser,
       getUserId: getUserId,
-      getUserType: getUserType,
       getUserObj: getUserObj,
       getStudent: getStudent
     };
