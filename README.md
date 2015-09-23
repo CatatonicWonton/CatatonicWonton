@@ -1,6 +1,6 @@
 # Schoolio
 
-A tool for catering different learning levels in a traditionally stagnant educational environment.  Built with Angular, Node/Express, and MySQL.
+A tool for catering to different learning levels in a traditionally stagnant educational environment.  Built with Angular, Node/Express, and MySQL.
 
 [Sign Up for Schoolio here!](https://infinite-ocean-1179.herokuapp.com/#/signup)
 
