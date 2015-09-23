@@ -4,7 +4,7 @@ angular.module('app')
     // make a socket for help requests
     // CLASS SOCKET
     var helpRequestSocket = socketFactory({
-      ioSocket: io.connect('http://infinite-ocean-1179.herokuapp.com/helpRequest')
+      ioSocket: io.connect('https://infinite-ocean-1179.herokuapp.com/helpRequest')
     });
 
     var establishHelpRequestSocket = function(scope, cb) {

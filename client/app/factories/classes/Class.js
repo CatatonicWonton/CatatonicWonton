@@ -3,7 +3,7 @@ angular.module('app')
 
     // REAL-TIME CLASS SOCKET
     var classSocket = socketFactory({
-      ioSocket: io.connect('http://infinite-ocean-1179.herokuapp.com/classSocket')
+      ioSocket: io.connect('https://infinite-ocean-1179.herokuapp.com/classSocket')
     });
 
     var establishClassSocket = function(scope, cb) {
