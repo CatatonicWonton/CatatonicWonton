@@ -1,10 +1,12 @@
 angular.module('app')
   .factory('HelpRequest', function Project($http, $stateParams, socketFactory) {
 
+    var domain = window.location.origin;
+
     // make a socket for help requests
     // CLASS SOCKET
     var helpRequestSocket = socketFactory({
-      ioSocket: io.connect('http://localhost:8000/helpRequest')
+      ioSocket: io.connect(domain + '/helpRequest')
     });
 
     var establishHelpRequestSocket = function(scope, cb) {
