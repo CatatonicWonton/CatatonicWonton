@@ -9,7 +9,7 @@ A tool for catering to different learning levels in a traditionally stagnant edu
   - __Product Owner__: Jeff Plourd ([@jeffplourd](https://github.com/jeffplourd))
   - __Scrum Master__: Devon Koch ([@devonkoch](https://github.com/devonkoch))
   - __Development Team__:
-    - Mychael Zuniga ([@MychaelZ](https://github.com/MychaelZ))
+    - __Lead Engineer__: Mychael Zuniga ([@MychaelZ](https://github.com/MychaelZ))
     - Adnan Pirzada ([@adpirz](https://github.com/adpirz))
 
 ## Table of Contents
