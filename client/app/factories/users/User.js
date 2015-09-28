@@ -3,6 +3,12 @@ angular.module('app')
 
     var user = {};
 
+    var persistNav = function() {
+      return $http.get('/auth/login').then(function (user) {
+        setUser(user.data);
+      });      
+    };
+
     // todo:
     var signup = function(firstName, lastName, username, password, accountType) {
       return $http.post('/auth/signup', {
@@ -36,12 +42,12 @@ angular.module('app')
     var logout = function(scope) {
       $http.post('/auth/logout', {}).then(function() {
         setUser({
-          _id: '',
-          accountType: '',
-          username: ''
+          _id: undefined,
+          accountType: undefined,
+          username: undefined
         });
-        $rootScope.$emit('toggleVideo');
         scope.loggedIn = false;
+        $rootScope.$emit('teacherOrStudent');
         $state.go('landing');
       });
     }
@@ -77,6 +83,7 @@ angular.module('app')
       logout: logout,
       setUser: setUser,
       getUser: getUser,
+      persistNav: persistNav,
       getUserId: getUserId,
       getUserObj: getUserObj,
       getStudent: getStudent
