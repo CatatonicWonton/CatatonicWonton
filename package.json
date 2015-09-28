@@ -43,7 +43,7 @@
     "gulp-util": "^3.0.6",
     "http-server": "^0.6.1",
     "jasmine-core": "^2.3.4",
-    "karma": "~0.12",
+    "karma": "~0.12", 
     "karma-chrome-launcher": "^0.1.12",
     "karma-firefox-launcher": "^0.1.6",
     "mysql": "^2.9.0",
