@@ -12,10 +12,6 @@ var StudentClass = Models.StudentClass;
 module.exports = {
   addStudentToClass: function (req, res) {
     var id = req.params.id;
-    console.log('/Adding student: req params');
-    console.log(req.params);
-    console.log('/Adding student: req body');
-    console.log(req.body);
 
     Promise
       .all([
@@ -40,18 +36,15 @@ module.exports = {
           }
         })
         .then(function (_class){
-          console.log('\n\n\nFound _class');
           return _class.getProjects()
             .map(function(project){
               project.addStudent(student);
             })
             .then(function(){
-              console.log('Got through adding projects')
               return _class;
             });
         })
         .catch(function(error){
-          console.log(error);
           throw error;
         });
       })

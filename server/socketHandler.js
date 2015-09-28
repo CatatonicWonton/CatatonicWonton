@@ -23,14 +23,12 @@ var socketHandler = function(server) {
           })
           .then(function() {
             socket.broadcast.emit('teacherUpdate', data);
-            console.log('teacherUpdate emit fired', data);
           })
       }
     });
   });
 
   helpRequestSocket.on('connection', function(socket) {
-    console.log('connected to request handler');
     // set listener for student submitting questions
     socket.on('submitted', function(submission) {
       if(submission.studentId) {
@@ -45,7 +43,6 @@ var socketHandler = function(server) {
           })
           .then(function() {
             socket.broadcast.emit('teacherHelpRequest', submission);
-            console.log('teacherHelpRequest emit fired', submission);
           });
       }
     });

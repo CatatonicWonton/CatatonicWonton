@@ -48,7 +48,7 @@ Initialize MySQL database:
 ```sh
 mysql.server start
 mysql -u root
-CREATE DATABASE Schoolio;
+CREATE DATABASE schoolio;
 ```
 
 From within the root directory:
