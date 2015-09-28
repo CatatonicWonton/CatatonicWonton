@@ -14,7 +14,7 @@ Teachers can manage entire classes, individual students, and projects from a sin
 "I wish I had this when I was growing up." -Devon Koch
 
 ## How to Get Started ##
-Visit our website and Sign Up! It's that simple.
+Visit our website and [Sign Up!](https://github.com/invincible-elevator/sumo-chicken/issues) It's that simple.
 
 ## Customer Quote ##
 "I update projects on @Schoolio regularly so students can learn at their ideal pace." Mr. Smith
