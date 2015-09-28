@@ -25,13 +25,15 @@ angular.module('app')
 
     HelpRequest.establishHelpRequestSocket($scope, function() {
       HelpRequest.refreshRequests().then(function (requests) {
-        User.getStudent(requests[0].StudentId).then(function (studentData) {
-          var studentName = studentData.firstName + ' ' + studentData.lastName;
-          Notification.warning({
-            title: studentName,
-            message: requests[0].question,
-          });
-        })
+        if(User.getUserId() === requests[0].TeacherId) {
+          User.getStudent(requests[0].StudentId).then(function (studentData) {
+            var studentName = studentData.firstName + ' ' + studentData.lastName;
+            Notification.warning({
+              title: studentName,
+              message: requests[0].question,
+            });
+          })
+        }
       })
     });
 
