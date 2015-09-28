@@ -1,4 +1,3 @@
-var config = require('./config/config');
 var Promise = require('bluebird');
 var Sequelize = require('sequelize');
 var sequelize;
