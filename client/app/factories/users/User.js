@@ -77,6 +77,11 @@ angular.module('app')
       });
     };
 
+    // add global variable
+    window.getUserData = function () {
+      console.dir(user);
+    };
+
     return {
       signup: signup,      
       signin: signin,
