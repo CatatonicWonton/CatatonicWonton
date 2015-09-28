@@ -43,22 +43,29 @@ If you have any suggestions, please submit an [issue](https://github.com/Cataton
 
 ### Installing Dependencies
 
+Initialize MySQL database:
+
+```sh
+mysql.server start
+mysql -u root
+CREATE DATABASE Schoolio;
+```
+
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
+gulp
 ```
 
 ### Running the app
 
-The server uses port 8080 or the PORT environment variable.
+The server uses port 8000 or the PORT environment variable.
 
 From within the root directory:
 
 ```sh
-gulp start
+npm start
 ```
 
 ### Roadmap
