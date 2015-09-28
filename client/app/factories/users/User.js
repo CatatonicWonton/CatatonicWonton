@@ -24,7 +24,6 @@ angular.module('app')
       })
       .then(function(res) {
         $rootScope.$emit('teacherOrStudent');
-        $rootScope.$emit('toggleVideo');
         if (res.data.accountType === 'Teacher') {
           $state.go('teacherHome');
         } else {
