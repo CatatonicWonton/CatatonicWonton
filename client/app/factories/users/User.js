@@ -23,6 +23,7 @@ angular.module('app')
         password: password
       })
       .then(function(res) {
+        setUser(res.data);
         $rootScope.$emit('teacherOrStudent');
         if (res.data.accountType === 'Teacher') {
           $state.go('teacherHome');
