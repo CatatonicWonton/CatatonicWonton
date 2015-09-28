@@ -2,7 +2,7 @@
 
 A tool for catering to different learning levels in a traditionally stagnant educational environment.  Built with Angular, Node/Express, and MySQL.
 
-[Sign Up for Schoolio here!](https://infinite-ocean-1179.herokuapp.com/#/signup)
+[Sign Up for Schoolio here!](http://www.schoolio.xyz/#/signup)
 
 ## Team
 
@@ -24,7 +24,7 @@ A tool for catering to different learning levels in a traditionally stagnant edu
 
 ## Usage
 
-Feel free to run your instance of Schoolio! Our official deployment is [here](https://infinite-ocean-1179.herokuapp.com/).
+Feel free to run your instance of Schoolio! Our official deployment is [here](http://www.schoolio.xyz/).
 
 We'd love to see what you build on top of our app.
 
