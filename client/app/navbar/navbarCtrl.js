@@ -26,7 +26,7 @@ angular.module('app')
     };
 
 
-    User.persistNav().then($scope.setNavbar);
+    User.pageLoad().then($scope.setNavbar);
 
     $rootScope.$on('$stateChangeStart', $scope.setNavbar);
     $rootScope.$on('teacherOrStudent', $scope.setNavbar);
