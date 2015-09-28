@@ -3,10 +3,10 @@ angular.module('app')
 
     var user = {};
 
-    var persistNav = function() {
+    var pageLoad = function() {
       return $http.get('/auth/login').then(function (user) {
         setUser(user.data);
-      });      
+      });
     };
 
     // todo:
@@ -83,7 +83,7 @@ angular.module('app')
       logout: logout,
       setUser: setUser,
       getUser: getUser,
-      persistNav: persistNav,
+      pageLoad: pageLoad,
       getUserId: getUserId,
       getUserObj: getUserObj,
       getStudent: getStudent
