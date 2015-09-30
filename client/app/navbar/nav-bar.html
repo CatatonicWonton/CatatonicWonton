@@ -1,6 +1,4 @@
 <nav ng-controller="navbarCtrl" class="navbar navbar-default" role="navigation">
-  
-
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" ng-click="navBarCollapsed = !navBarCollapsed" data-target=".navbar-ex1-collapse">
@@ -15,24 +13,9 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" ng-class="!navBarCollapsed && 'in'" ng-click="navBarCollapsed = true">
     <ul class="nav navbar-nav">
-<<<<<<< HEAD
-      <!-- <li><a ui-sref='landing'>Home</a></li> -->
-      <!-- <li ng-hide="loggedIn"><a ui-sref='signup'>Sign Up</a></li> -->
-      <!-- <li ng-hide="loggedIn"><a ui-sref='signin'>Sign In</a></li> -->
       <li ng-show="loggedIn"><a ng-hide="isTeacher" ui-sref='studentHome'>Student Dashboard</a></li>
       <li ng-show="loggedIn"><a ng-show="isTeacher" ui-sref='teacherHome'>Teacher Dashboard</a></li>
       <li ng-show="loggedIn"><a ng-show="isTeacher" ui-sref='helpRequest'>Student Help Requests</a></li>
-=======
-      <li><a ui-sref='landing'>Home</a></li>
-      <li><a ui-sref='signup'>Sign Up</a></li>
-      <li><a ui-sref='signin'>Sign In</a></li>
-      <li><a ui-sref='studentHome'>Home</a></li>
-      <li><a ui-sref='studentProject'>studentProject</a></li>
-      <li><a ui-sref='helpRequest'>Get Help</a></li>
-      <!-- <li><a ui-sref='teacherClass'>teacherClass</a></li> -->
-      <li><a ui-sref='teacherHome'>teacherHome</a></li>
-      <li><a snap-toggle="right">Toggle Drawer</a></li>
->>>>>>> created studentHelpRequest controller and view
     </ul>
 
     <ul ng-hide="loggedIn" class="nav navbar-nav navbar-right">
@@ -46,5 +29,5 @@
         <a>Logout</a>
       </li>
     </ul>
-  </div><!-- /.navbar-collapse -->
+  </div>
 </nav>
