@@ -1,10 +1,12 @@
 angular.module('app')
   .factory('HelpRequest', function Project($http, $stateParams, socketFactory) {
 
+    var domain = window.location.origin;
+
     // make a socket for help requests
     // CLASS SOCKET
     var helpRequestSocket = socketFactory({
-      ioSocket: io.connect('http://infinite-ocean-1179.herokuapp.com/helpRequest')
+      ioSocket: io.connect(domain + '/helpRequest')
     });
 
     var establishHelpRequestSocket = function(scope, cb) {
@@ -15,7 +17,7 @@ angular.module('app')
     };
 
     var submitHelpRequest = function(teacherId, studentId, question, projectName) {
-      console.log('here');
+
       helpRequestSocket.emit('submitted', {
         // include the teacher id, student id, question, and ak and res set to false
         studentId: studentId,

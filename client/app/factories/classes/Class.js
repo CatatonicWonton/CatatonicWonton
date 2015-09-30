@@ -1,9 +1,10 @@
 angular.module('app')
   .factory('Class', function Class($http, $stateParams, User, socketFactory) {
 
+    var domain = window.location.origin;
     // REAL-TIME CLASS SOCKET
     var classSocket = socketFactory({
-      ioSocket: io.connect('http://infinite-ocean-1179.herokuapp.com/classSocket')
+      ioSocket: io.connect(domain + '/classSocket')
     });
 
     var establishClassSocket = function(scope, cb) {

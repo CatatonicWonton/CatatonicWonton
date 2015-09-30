@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "0.12"
 before_install:
-  - mysql -e "create database IF NOT EXISTS schoolioTest;" -uroot
+  - mysql -e "create database IF NOT EXISTS schoolioTest;" -u root
 before_script:
   - npm install -g gulp
 script: gulp
