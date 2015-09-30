@@ -23,13 +23,16 @@ angular.module('app').controller('helpRequestCtrl', function helpRequestCtrl($sc
     HelpRequest.refreshRequests().then(function (requests) {      
       for(var i in requests) {
         (function (index) {
-          User.getStudent(requests[index].StudentId).then(function (studentData) {
-            if(requests[index].acknowledged) {
-              addRowAsync(studentData, index, requests, $scope.acknowledgedQuestionCollection);
-            } else {
-              addRowAsync(studentData, index, requests, $scope.questionCollection);
-            }
-          });
+          var teacherId = requests[index].TeacherId;
+          if(User.getUserId() === teacherId) {
+            User.getStudent(requests[index].StudentId).then(function (studentData) {
+              if(requests[index].acknowledged) {
+                addRowAsync(studentData, index, requests, $scope.acknowledgedQuestionCollection);
+              } else {
+                addRowAsync(studentData, index, requests, $scope.questionCollection);
+              }
+            });
+          }
         })(i);
       }
     });
@@ -37,9 +40,11 @@ angular.module('app').controller('helpRequestCtrl', function helpRequestCtrl($sc
     // requests that come in via sockets
     HelpRequest.establishHelpRequestSocket($scope, function() {
       HelpRequest.refreshRequests().then(function (requests) {
-        User.getStudent(requests[0].StudentId).then(function (studentData) {
-          addRowAsync(studentData, 0, requests, $scope.questionCollection);
-        })
+        if(User.getUserId() === requests[0].TeacherId) {
+          User.getStudent(requests[0].StudentId).then(function (studentData) {
+            addRowAsync(studentData, 0, requests, $scope.questionCollection);
+          })
+        }
       })
     });
     

@@ -58,6 +58,8 @@ app.use('/api/studentClass', studentClassRoutes);
 app.use('/api/studentProject', studentProjectRoutes);
 app.use('/api/helpRequests', helpRequestsRoutes);
 
-server.listen(port);
+server.listen(port, function() {
+  console.log('server listening', port);
+});
 
 module.exports = app;

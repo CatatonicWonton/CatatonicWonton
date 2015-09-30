@@ -54,7 +54,6 @@ angular.module('app')
     $scope.sendHelpRequest = function(question) {
       var userId = User.getUserId();
       HelpRequest.submitHelpRequest(teacherId, userId, question, projectName);
-      console.log('here');
     };
 
     $scope.modalOpen = function(questionArr, callback) {

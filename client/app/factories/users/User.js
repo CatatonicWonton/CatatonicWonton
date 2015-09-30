@@ -3,6 +3,12 @@ angular.module('app')
 
     var user = {};
 
+    var pageLoad = function() {
+      return $http.get('/auth/login').then(function (user) {
+        setUser(user.data);
+      });
+    };
+
     // todo:
     var signup = function(firstName, lastName, username, password, accountType) {
       return $http.post('/auth/signup', {
@@ -23,6 +29,7 @@ angular.module('app')
         password: password
       })
       .then(function(res) {
+        setUser(res.data);
         $rootScope.$emit('teacherOrStudent');
         if (res.data.accountType === 'Teacher') {
           $state.go('teacherHome');
@@ -35,11 +42,12 @@ angular.module('app')
     var logout = function(scope) {
       $http.post('/auth/logout', {}).then(function() {
         setUser({
-          _id: '',
-          accountType: '',
-          username: ''
+          _id: undefined,
+          accountType: undefined,
+          username: undefined
         });
         scope.loggedIn = false;
+        $rootScope.$emit('teacherOrStudent');
         $state.go('landing');
       });
     }
@@ -69,12 +77,18 @@ angular.module('app')
       });
     };
 
+    // add global variable
+    window.getUserData = function () {
+      console.dir(user);
+    };
+
     return {
       signup: signup,      
       signin: signin,
       logout: logout,
       setUser: setUser,
       getUser: getUser,
+      pageLoad: pageLoad,
       getUserId: getUserId,
       getUserObj: getUserObj,
       getStudent: getStudent
