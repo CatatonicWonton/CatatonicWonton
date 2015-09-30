@@ -23,19 +23,14 @@ var socketHandler = function(server) {
           })
           .then(function() {
             socket.broadcast.emit('teacherUpdate', data);
-            console.log('teacherUpdate emit fired', data);
           })
       }
     });
   });
 
   helpRequestSocket.on('connection', function(socket) {
-    console.log('connected to request handler');
     // set listener for student submitting questions
     socket.on('submitted', function(submission) {
-      console.log('received "submitted" on server side');
-      console.log('submission:', submission);
-
       if(submission.studentId) {
         HelpRequest
           .create({
@@ -48,7 +43,6 @@ var socketHandler = function(server) {
           })
           .then(function() {
             socket.broadcast.emit('teacherHelpRequest', submission);
-            console.log('teacherHelpRequest emit fired', submission);
           });
       }
     });
@@ -56,21 +50,6 @@ var socketHandler = function(server) {
     socket.on('acknowledged', function (question) {
       socket.broadcast.emit('teacherIsComing');
     });
-    
-    // set listener for when a teacher acknowledges request
-    // socket.on('acknowledged', function(studentId) {
-
-
-    //   // modify the table set acknowledged equal to true
-    //   // socket.broadcast.emit('teacherIsComing');
-    //   // console.log('teacherIsComing emit fired', studentId);
-    // });
-  
-    // // set listener for when teacher resolves request
-    // socket.on('resolved', function(studentId) {
-    //   // *** use logic from controller***
-    //   // set resolved to equal
-    // })
   })
 };
 
